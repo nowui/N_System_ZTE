@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>ZTE SECURITY CLOUD</title>
+    	<link rel="stylesheet" href="/css/app.css">
+        <script src="/js/angular.min.js"></script>
+        <script src="/js/jquery-2.1.4.min.js"></script>
+        <script src="/js/jquery.easing.min.js"></script>
+        <script src="/js/jquery.easing.compatibility.js"></script>
+        <script src="/js/echarts-all.js"></script>
+        <script src="/js/app.js"></script>
+        <!--<script src='http://support.supermap.com.cn:8090/iserver/iClient/forJavaScript/libs/SuperMap.Include.js'></script>-->
+        <script type="text/javascript">
+            var map, layer;
+            function init(){
+                /*map = new SuperMap.Map("map", { controls:[
+                    new SuperMap.Control.Navigation({
+                        dragPanOptions:{
+                            enableKinetic:true
+                        }
+                    })]
+                });
+
+                layer = new SuperMap.Layer.CloudLayer();
+
+                map.addLayers([layer]);
+
+                map.setCenter(new SuperMap.LonLat(11339634.286396, 4588716.5813769), 4.5);*/
+            }
+        </script>
+    </head>
+    <body ng-app="App" ng-controller="Controller" onload="init()">
+        <div id="map"></div>
+        <div id="header">
+        	<div id="weather_icon"><img src="/image/weather.png" ></div>
+        	<div id="temperature">{{temperature}}</div>
+        	<div id="weather_data">
+				<div id="wind">CLEAR TO OVERCAST</div>
+				<div id="location">BEIJING</div>
+        	</div>
+        	<div id="time">{{time}}</div>
+        	<div id="date">
+        		<div class="day">{{day}}</div>
+        		<div class="week">{{week}}</div>
+        	</div>
+        </div>
+        <div id="public" ng-class="{true: 'public_active', false: 'public_normal'}[isPublicActive]">
+        	<div class="title">PUBLIC SAFETY AND SECURITY INDEX</div>
+        	<div id="public_chart"></div>
+        	<div id="public_button_0" ng-class="{true: 'public_button_0_active', false: 'public_button_0_normal'}[isPublicButtonActive == 0]" ng-click="clickPublic0()">
+        		<div>serious</div>
+        	</div>
+        	<div id="public_button_1" ng-class="{true: 'public_button_1_active', false: 'public_button_1_normal'}[isPublicButtonActive == 1]" ng-click="clickPublic1()">
+        		<div>ordinary</div>
+        	</div>
+        	<div id="public_button_2" ng-class="{true: 'public_button_2_active', false: 'public_button_2_normal'}[isPublicButtonActive == 2]" ng-click="clickPublic2()">
+        		<div>considerable</div>
+        	</div>
+        	<div id="public_button_3" ng-class="{true: 'public_button_3_active', false: 'public_button_3_normal'}[isPublicButtonActive == 3]" ng-click="clickPublic3()">
+        		<div>tremendous devastating</div>
+        	</div>
+        </div>
+        <div id="city" ng-class="{true: 'city_active', false: 'city_normal'}[isCityActive]">
+        	<div class="title">CITY SECURITY INDEX</div>
+        	<div id="city_chart"></div>
+        	<div id="city_button_0" ng-class="{true: 'city_button_0_active', false: 'city_button_0_normal'}[isCityButtonActive == 0]" ng-click="clickCity0()">
+        		<div>annual</div>
+        	</div>
+        	<div id="city_button_1" ng-class="{true: 'city_button_1_active', false: 'city_button_1_normal'}[isCityButtonActive == 1]" ng-click="clickCity1()">
+        		<div>quarterly</div>
+        	</div>
+        	<div id="city_button_2" ng-class="{true: 'city_button_2_active', false: 'city_button_2_normal'}[isCityButtonActive == 2]" ng-click="clickCity2()">
+        		<div>monthly</div>
+        	</div>
+        	<div id="city_button_3" ng-class="{true: 'city_button_3_active', false: 'city_button_3_normal'}[isCityButtonActive == 3]" ng-click="clickCity3()">
+        		<div>weekly</div>
+        	</div>
+        </div>
+        <div id="emergency" ng-class="{true: 'emergency_active', false: 'emergency_normal'}[isEmergencyActive]">
+        	<div class="title">EMERGENCY RESOURCES</div>
+        	<div style="height: 50px;"></div>
+        	<div id="emergency_button_0" ng-class="{true: 'emergency_button_0_active', false: 'emergency_button_0_normal'}[isEmergencyButtonActive == 0]" ng-click="clickEmergency0()">
+        		<div>police<br/>strength</div>
+        	</div>
+        	<div id="emergency_button_1" ng-class="{true: 'emergency_button_1_active', false: 'emergency_button_1_normal'}[isEmergencyButtonActive == 1]" ng-click="clickEmergency1()">
+        		<div>the primary agency</div>
+        	</div>
+        	<div id="emergency_button_2" ng-class="{true: 'emergency_button_2_active', false: 'emergency_button_2_normal'}[isEmergencyButtonActive == 2]" ng-click="clickEmergency2()">
+        		<div>supporting agency</div>
+        	</div>
+        	<div id="emergency_button_3" ng-class="{true: 'emergency_button_3_active', false: 'emergency_button_3_normal'}[isEmergencyButtonActive == 3]" ng-click="clickEmergency3()">
+        		<div>The Oil and Hazardous Materials</div>
+        	</div>
+        	<div id="emergency_button_4" ng-class="{true: 'emergency_button_4_active', false: 'emergency_button_4_normal'}[isEmergencyButtonActive == 4]" ng-click="clickEmergency4()">
+        		<div>surveillance unit</div>
+        	</div>
+        	<div id="emergency_button_5" ng-class="{true: 'emergency_button_5_active', false: 'emergency_button_5_normal'}[isEmergencyButtonActive == 5]" ng-click="clickEmergency5()">
+        		<div>the life-saving assistance</div>
+        	</div>
+        	<div id="emergency_button_6" ng-class="{true: 'emergency_button_6_active', false: 'emergency_button_6_normal'}[isEmergencyButtonActive == 6]" ng-click="clickEmergency6()">
+        		<div>mass<br/>care</div>
+        	</div>
+        	<div id="emergency_button_7" ng-class="{true: 'emergency_button_7_active', false: 'emergency_button_7_normal'}[isEmergencyButtonActive == 7]" ng-click="clickEmergency7()">
+        		<div> relief goods & resource support</div>
+        	</div>
+        	<div id="emergency_button_8" ng-class="{true: 'emergency_button_8_active', false: 'emergency_button_8_normal'}[isEmergencyButtonActive == 8]" ng-click="clickEmergency8()">
+        		<div>emergency agencies</div>
+        	</div>
+        	<div id="emergency_button_9" ng-class="{true: 'emergency_button_9_active', false: 'emergency_button_9_normal'}[isEmergencyButtonActive == 9]" ng-click="clickEmergency9()">
+        		<div>The scenario commander center</div>
+        	</div>
+        </div>
+        <div id="event">
+        	<div class="title">EVENT BRIEFING</div>
+        </div>
+        <div id="prediction" ng-click="clickPrediction()">PREDICTION</div>
+        <div id="footer"></div>
+    </body>
+</html>
+<script>
+var app = angular.module("App", [])
+	.controller('Controller', function($scope, $http, $timeout) {
+		$scope.temperature = "7~12℃";
+
+		$scope.isPublicActive = false;
+		$scope.isPublicButtonActive = 0;
+
+		$scope.isEmergencyActive = false;
+		$scope.isEmergencyButtonActive = 0;
+
+		$scope.isCityActive = false;
+		$scope.isCityButtonActive = 0;
+
+		var checkDatetime = function() {
+			var date = new Date();
+			var year = date.getFullYear();
+			var month = date.getMonth();
+			var day = date.getDate();
+			var week = date.getDay();
+			var hour = date.getHours();
+			var minute = date.getMinutes();
+			var second = date.getSeconds();
+
+			month++;
+			if(month < 10) {
+				month = "0" + month;
+			}
+
+			if(day < 10) {
+				day = "0" + day;
+			}
+
+			if(hour < 10) {
+				hour = "0" + hour;
+			}
+
+			if(minute < 10) {
+				minute = "0" + minute;
+			}
+
+			$scope.day = year + "." + month + "." + day;
+			switch(week) {
+				case 1:
+					$scope.week = "MONDAY";
+					break;
+				case 2:
+					$scope.week = "TUESDAY";
+					break;
+				case 3:
+					$scope.week = "WEDNESDAY";
+					break;
+				case 4:
+					$scope.week = "THURSDAY";
+					break;
+				case 5:
+					$scope.week = "FRIDAY";
+					break;
+				case 6:
+					$scope.week = "SATURDAY";
+					break;
+				case 0:
+					$scope.week = "SUNDAY";
+					break;
+			}
+			$scope.time = hour + ":" + minute;
+
+			$timeout(function() {
+	            checkDatetime();
+	        }, 1000);
+		}
+
+		checkDatetime();
+
+		/*$http.jsonp('http://api.k780.com:88/?app=weather.today&weaid=1&&appkey=10003&sign=b59bc3ef6191eb9f747dd4e83c99f2a4&format=json&jsoncallback=JSON_CALLBACK').success(function(data) {
+			$scope.temperature = data.result.temperature;
+		});*/
+
+		var public_chart = echarts.init(document.getElementById('public_chart'), theme);
+
+		var setPublicOption = function(color) {
+			var public_chart_option = {
+			    polar : [
+			        {
+			            indicator : [
+			                { text : 'public health and medical service' },
+			                { text : 'social security' },
+			                { text : 'accident disaster' },
+			                { text : 'Natural disaster' }
+			            ],
+			            radius : 75
+			        }
+			    ],
+			    calculable : false,
+			    series : [
+			        {
+			            name: 'radar',
+			            type: 'radar',
+			            data: (function (){
+			                var res = [];
+			                var len = 0;
+			                res.push({
+		                        name: 'data' + len,
+				                itemStyle:{
+					            	normal:{color: color}
+					            },
+		                        value: [
+		                            Math.round(Math.random()*100),
+		                            Math.round(Math.random()*100),
+		                            Math.round(Math.random()*100),
+		                            Math.round(Math.random()*100)
+		                        ]
+		                    });
+			                return res;
+			            })()
+			        }
+			    ]
+			};
+
+			public_chart.setOption(public_chart_option);
+		}
+
+		setPublicOption("#2950f8");
+
+		$scope.clickPublic0 = function() {
+			$scope.isPublicActive = true;
+			$scope.isPublicButtonActive = 0;
+
+			$scope.isCityActive = false;
+
+			$scope.isEmergencyActive = false;
+
+		    setPublicOption("#2950f8");
+		}
+
+		$scope.clickPublic1 = function() {
+			$scope.isPublicActive = true;
+			$scope.isPublicButtonActive = 1;
+
+			$scope.isCityActive = false;
+
+			$scope.isEmergencyActive = false;
+
+		    setPublicOption("#9414b9");
+		}
+
+		$scope.clickPublic2 = function() {
+			$scope.isPublicActive = true;
+			$scope.isPublicButtonActive = 2;
+
+			$scope.isCityActive = false;
+
+			$scope.isEmergencyActive = false;
+
+		    setPublicOption("#bf6210");
+		}
+
+		$scope.clickPublic3 = function() {
+			$scope.isPublicActive = true;
+			$scope.isPublicButtonActive = 3;
+
+			$scope.isCityActive = false;
+
+		    setPublicOption("#a80c10");
+		}
+
+		var city_chart = echarts.init(document.getElementById('city_chart'), theme);
+
+		var setCityOption = function(color, data) {
+			var city_chart_option = {
+			    grid: {
+			    	borderWidth: 0,
+			    	x: 130,
+			    	y: 30,
+			    	y2: 20
+			    },
+			    xAxis : [
+			        {
+			            type : 'value',
+			            show: false
+			        }
+			    ],
+			    yAxis : [
+			        {
+			            type : 'category',
+			            axisLine: {show: false},
+			            splitLine: {show: false},
+			            data : ['police strength', 'risk control', 'firefighting', 'transportation', 'medical care service', 'government affairs', 'army']
+			        }
+			    ],
+			    series : [
+			        {
+			            name:'2011年',
+			            type:'bar',
+				                itemStyle:{
+					            	normal:{color: color}
+					            },
+			            data: data
+			        }
+			    ]
+			};
+
+			city_chart.setOption(city_chart_option);
+		}
+
+		setCityOption("#2950f8", [58203, 43489, 39034, 14970, 21744, 38203, 23489]);
+
+		$scope.clickCity0 = function() {
+			$scope.isPublicActive = false;
+
+			$scope.isCityActive = true;
+			$scope.isCityButtonActive = 0;
+
+			$scope.isEmergencyActive = false;
+
+		    setCityOption("#2950f8", [58203, 43489, 39034, 14970, 21744, 38203, 23489]);
+		}
+
+		$scope.clickCity1 = function() {
+			$scope.isPublicActive = false;
+
+			$scope.isCityActive = true;
+			$scope.isCityButtonActive = 1;
+
+			$scope.isEmergencyActive = false;
+
+		    setCityOption("#9414b9", [38203, 13489, 29034, 54970, 31744, 18203, 33489]);
+		}
+
+		$scope.clickCity2 = function() {
+			$scope.isPublicActive = false;
+
+			$scope.isCityActive = true;
+			$scope.isCityButtonActive = 2;
+
+			$scope.isEmergencyActive = false;
+
+		    setCityOption("#bf6210", [28203, 33489, 49034, 34970, 11744, 58203, 13489]);
+		}
+
+		$scope.clickCity3 = function() {
+			$scope.isPublicActive = false;
+
+			$scope.isCityActive = true;
+			$scope.isCityButtonActive = 3;
+
+			$scope.isEmergencyActive = false;
+
+		    setCityOption("#a80c10", [18203, 23489, 29034, 14970, 31744, 18203, 23489]);
+		}
+
+		$scope.clickEmergency0 = function() {
+			$scope.isPublicActive = false;
+			$scope.isCityActive = false;
+
+			$scope.isEmergencyActive = true;
+			$scope.isEmergencyButtonActive = 0;
+		}
+
+		$scope.clickEmergency1 = function() {
+			$scope.isPublicActive = false;
+			$scope.isCityActive = false;
+
+			$scope.isEmergencyActive = true;
+			$scope.isEmergencyButtonActive = 1;
+		}
+
+		$scope.clickEmergency2 = function() {
+			$scope.isPublicActive = false;
+			$scope.isCityActive = false;
+
+			$scope.isEmergencyActive = true;
+			$scope.isEmergencyButtonActive = 2;
+		}
+
+		$scope.clickEmergency3 = function() {
+			$scope.isPublicActive = false;
+			$scope.isCityActive = false;
+
+			$scope.isEmergencyActive = true;
+			$scope.isEmergencyButtonActive = 3;
+		}
+
+		$scope.clickEmergency4 = function() {
+			$scope.isPublicActive = false;
+			$scope.isCityActive = false;
+
+			$scope.isEmergencyActive = true;
+			$scope.isEmergencyButtonActive = 4;
+		}
+
+		$scope.clickEmergency5 = function() {
+			$scope.isPublicActive = false;
+			$scope.isCityActive = false;
+
+			$scope.isEmergencyActive = true;
+			$scope.isEmergencyButtonActive = 5;
+		}
+
+		$scope.clickEmergency6 = function() {
+			$scope.isPublicActive = false;
+			$scope.isCityActive = false;
+
+			$scope.isEmergencyActive = true;
+			$scope.isEmergencyButtonActive = 6;
+		}
+
+		$scope.clickEmergency7 = function() {
+			$scope.isPublicActive = false;
+			$scope.isCityActive = false;
+
+			$scope.isEmergencyActive = true;
+			$scope.isEmergencyButtonActive = 7;
+		}
+
+		$scope.clickEmergency8 = function() {
+			$scope.isPublicActive = false;
+			$scope.isCityActive = false;
+
+			$scope.isEmergencyActive = true;
+			$scope.isEmergencyButtonActive = 8;
+		}
+
+		$scope.clickEmergency9 = function() {
+			$scope.isPublicActive = false;
+			$scope.isCityActive = false;
+
+			$scope.isEmergencyActive = true;
+			$scope.isEmergencyButtonActive = 9;
+		}
+
+		$scope.clickPrediction = function() {
+			$("#prediction").animate({
+				bottom: "-97px"
+			});
+		}
+
+
+	});
+</script>
