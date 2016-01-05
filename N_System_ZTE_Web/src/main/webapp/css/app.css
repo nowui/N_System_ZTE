@@ -21,6 +21,7 @@ body {
     height: 103px;
     background-image: url("/image/header_background.png");
     background-repeat: no-repeat;
+    cursor: pointer;
 }
 #weather_icon {
 	float: left;
@@ -529,16 +530,59 @@ body {
 	font-size: 12px;
 	text-align: center;
 }
-#event {
+#development {
     position: absolute;
-    width: 337px;
-    height: 892px;
+    width: 422px;
+    height: 306px;
     top: 120px;
-    right: 15px;
-    background-image: url("/image/event_background.png");
-    background-repeat: no-repeat;
-    padding-top: 9px;
+    left: -422px;
+    //left: 722px;
+    padding-top: 8px;
     padding-left: 14px;
+}
+.development_normal {
+    background-image: url("/image/development_background.png");
+    background-repeat: no-repeat;
+}
+.development_active {
+    background-image: url("/image/development_background_active.png");
+    background-repeat: no-repeat;
+}
+#rescue {
+    position: absolute;
+    width: 422px;
+    height: 283px;
+    top: 450px;
+    left: -422px;
+    //left: 722px;
+    padding-top: 8px;
+    padding-left: 14px;
+}
+.rescue_normal {
+    background-image: url("/image/rescue_background.png");
+    background-repeat: no-repeat;
+}
+.rescue_active {
+    background-image: url("/image/rescue_background_active.png");
+    background-repeat: no-repeat;
+}
+#trend {
+    position: absolute;
+    width: 422px;
+    height: 269px;
+    top: 755px;
+    left: -422px;
+    //left: 722px;
+    padding-top: 8px;
+    padding-left: 14px;
+}
+.trend_normal {
+    background-image: url("/image/trend_background.png");
+    background-repeat: no-repeat;
+}
+.trend_active {
+    background-image: url("/image/trend_background_active.png");
+    background-repeat: no-repeat;
 }
 #prediction {
     position: absolute;
@@ -546,12 +590,109 @@ body {
     height: 97px;
     bottom: 70px;
     left: 47%;
+	line-height: 110px;
+	font-size: 14px;
+    cursor: pointer;
+}
+.prediction_normal {
     background-image: url("/image/prediction_background.png");
+    background-repeat: no-repeat;
+	text-align: center;
+}
+.prediction_active {
+    background-image: url("/image/prediction_background_active.png");
+    background-repeat: no-repeat;
+	text-align: center;
+}
+#prediction_detail {
+    position: absolute;
+    width: 1065px;
+    height: 269px;
+    bottom: -269px;
+    bottom: 70px;
+    left: 470px;
+    background-image: url("/image/prediction_detail_background.png");
     background-repeat: no-repeat;
 	text-align: center;
 	line-height: 110px;
 	font-size: 14px;
     cursor: pointer;
+}
+#event {
+    position: absolute;
+    width: 337px;
+    height: 892px;
+    top: 120px;
+    right: 15px;
+    padding-top: 9px;
+    padding-left: 14px;
+}
+.event_normal {
+    background-image: url("/image/event_background.png");
+    background-repeat: no-repeat;
+}
+.event_active {
+    background-image: url("/image/event_background_active.png");
+    background-repeat: no-repeat;
+}
+#event_list {
+	margin-top: 47px;
+    width: 313px;
+	height: 790px;
+	overflow-y: scroll;
+	scrollbar-track-color:#F7F7F7;
+	scrollbar-arrow-color:#666666;
+	scrollbar-3dlight-color:#EAEAEA;
+    cursor: pointer;
+}
+.event_item {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-left: 30px;
+	padding-left: 30px;
+    line-height: 30px;
+    font-size: 13px;
+    border-left:1px solid #052b3c;
+    border-bottom:1px solid #052b3c;
+}
+.event_item .number {
+    font-size: 18px;
+}
+#plan {
+    position: absolute;
+    width: 337px;
+    height: 556px;
+    top: 120px;
+    right: -337px;
+    //right: 715px;
+    padding-top: 8px;
+    padding-left: 14px;
+}
+.plan_normal {
+    background-image: url("/image/plan_background.png");
+    background-repeat: no-repeat;
+}
+.plan_active {
+    background-image: url("/image/plan_background_active.png");
+    background-repeat: no-repeat;
+}
+#tracking {
+    position: absolute;
+    width: 337px;
+    height: 315px;
+    top: 709px;
+    right: -337px;
+    //right: 715px;
+    padding-top: 8px;
+    padding-left: 14px;
+}
+.tracking_normal {
+    background-image: url("/image/tracking_background.png");
+    background-repeat: no-repeat;
+}
+.tracking_active {
+    background-image: url("/image/tracking_background_active.png");
+    background-repeat: no-repeat;
 }
 #footer {
     position: absolute;
@@ -560,4 +701,19 @@ body {
     bottom: 0px;
     background-image: url("/image/footer_background.png");
     background-repeat: no-repeat;
+}
+
+::-webkit-scrollbar {
+    height: 10px;
+    width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    //background: #fff;
+    -webkit-border-radius: 1ex;
+    -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+
+::-webkit-scrollbar-corner {
+    background: #000;
 }

@@ -10,11 +10,11 @@
         <script src="/js/jquery.easing.compatibility.js"></script>
         <script src="/js/echarts-all.js"></script>
         <script src="/js/app.js"></script>
-        <!--<script src='http://support.supermap.com.cn:8090/iserver/iClient/forJavaScript/libs/SuperMap.Include.js'></script>-->
+        <!--<script src='http://support.supermap.com.cn:8090/iserver/iClient/forJavaScript/libs/SuperMap.Include.js'></script>
         <script type="text/javascript">
             var map, layer;
             function init(){
-                /*map = new SuperMap.Map("map", { controls:[
+                map = new SuperMap.Map("map", { controls:[
                     new SuperMap.Control.Navigation({
                         dragPanOptions:{
                             enableKinetic:true
@@ -26,13 +26,14 @@
 
                 map.addLayers([layer]);
 
-                map.setCenter(new SuperMap.LonLat(11339634.286396, 4588716.5813769), 4.5);*/
+                map.setCenter(new SuperMap.LonLat(11339634.286396, 4588716.5813769), 4.5);
             }
-        </script>
+        </script>-->
     </head>
     <body ng-app="App" ng-controller="Controller" onload="init()">
-        <div id="map"></div>
-        <div id="header">
+        <!--<div id="map"></div>
+        <div style="width: 100%; height: 100%; background: #091524; opacity:0.7; position: absolute; pointer-events:none;"></div>-->
+        <div id="header" ng-click="clickHeader()">
         	<div id="weather_icon"><img src="/image/weather.png" ></div>
         	<div id="temperature">{{temperature}}</div>
         	<div id="weather_data">
@@ -45,7 +46,7 @@
         		<div class="week">{{week}}</div>
         	</div>
         </div>
-        <div id="public" ng-class="{true: 'public_active', false: 'public_normal'}[isPublicActive]">
+        <div id="public" ng-class="{true: 'public_active', false: 'public_normal'}[isPublicActive]" ng-mouseenter="isPublicActive = true" ng-mouseleave="isPublicActive = false">
         	<div class="title">PUBLIC SAFETY AND SECURITY INDEX</div>
         	<div id="public_chart"></div>
         	<div id="public_button_0" ng-class="{true: 'public_button_0_active', false: 'public_button_0_normal'}[isPublicButtonActive == 0]" ng-click="clickPublic0()">
@@ -61,7 +62,7 @@
         		<div>tremendous devastating</div>
         	</div>
         </div>
-        <div id="city" ng-class="{true: 'city_active', false: 'city_normal'}[isCityActive]">
+        <div id="city" ng-class="{true: 'city_active', false: 'city_normal'}[isCityActive]" ng-mouseenter="isCityActive = true" ng-mouseleave="isCityActive = false">
         	<div class="title">CITY SECURITY INDEX</div>
         	<div id="city_chart"></div>
         	<div id="city_button_0" ng-class="{true: 'city_button_0_active', false: 'city_button_0_normal'}[isCityButtonActive == 0]" ng-click="clickCity0()">
@@ -77,7 +78,7 @@
         		<div>weekly</div>
         	</div>
         </div>
-        <div id="emergency" ng-class="{true: 'emergency_active', false: 'emergency_normal'}[isEmergencyActive]">
+        <div id="emergency" ng-class="{true: 'emergency_active', false: 'emergency_normal'}[isEmergencyActive]" ng-mouseenter="isEmergencyActive = true" ng-mouseleave="isEmergencyActive = false">
         	<div class="title">EMERGENCY RESOURCES</div>
         	<div style="height: 50px;"></div>
         	<div id="emergency_button_0" ng-class="{true: 'emergency_button_0_active', false: 'emergency_button_0_normal'}[isEmergencyButtonActive == 0]" ng-click="clickEmergency0()">
@@ -111,16 +112,118 @@
         		<div>The scenario commander center</div>
         	</div>
         </div>
-        <div id="event">
-        	<div class="title">EVENT BRIEFING</div>
+        <div id="development" ng-class="{true: 'development_active', false: 'development_normal'}[isDevelopmentActive]" ng-mouseenter="isDevelopmentActive = true" ng-mouseleave="isDevelopmentActive = false">
+        	<div class="title">LATEST DEVELOPMENTS</div>
         </div>
-        <div id="prediction" ng-click="clickPrediction()">PREDICTION</div>
+        <div id="rescue" ng-class="{true: 'rescue_active', false: 'rescue_normal'}[isRescueActive]" ng-mouseenter="isRescueActive = true" ng-mouseleave="isRescueActive = false">
+        	<div class="title">THE OPTIMAL TIME FOR RESCUE</div>
+        </div>
+        <div id="trend" ng-class="{true: 'trend_active', false: 'trend_normal'}[isTrendActive]" ng-mouseenter="isTrendActive = true" ng-mouseleave="isTrendActive = false">
+        	<div class="title">EVENT TTEND</div>
+        </div>
+        <div id="event" ng-class="{true: 'event_active', false: 'event_normal'}[isEventActive]" ng-mouseenter="isEventActive = true" ng-mouseleave="isEventActive = false">
+        	<div class="title">EVENT BRIEFING</div>
+        	<div id="event_list">
+        		<div class="event_item" ng-click="clickEvent()">
+        			<div class="number">NO.01 road accident</div>
+        			<div>2015.12.25  12.30</div>
+        			<div><img src="/image/event_list_image.png"/></div>
+        			<div>Location: N22°12.13”°23 N22°12.13”°23</div>
+        			<div>Event name: pile-ups</div>
+        			<div>Events: sanhuan traffic paralysis</div>
+        			<div>Processing units: futian district fu bao team</div>
+        			<div>Processing: processing</div>
+        			<div>Loss of anticipation: 5 casualties, direct economic loss of 20 million yuan</div>
+        		</div>
+        		<div class="event_item">
+        			<div class="number">NO.01 road accident</div>
+        			<div>2015.12.25  12.30</div>
+        			<div><img src="/image/event_list_image.png"/></div>
+        			<div>Location: N22°12.13”°23 N22°12.13”°23</div>
+        			<div>Event name: pile-ups</div>
+        			<div>Events: sanhuan traffic paralysis</div>
+        			<div>Processing units: futian district fu bao team</div>
+        			<div>Processing: processing</div>
+        			<div>Loss of anticipation: 5 casualties, direct economic loss of 20 million yuan</div>
+        		</div>
+        		<div class="event_item">
+        			<div class="number">NO.01 road accident</div>
+        			<div>2015.12.25  12.30</div>
+        			<div><img src="/image/event_list_image.png"/></div>
+        			<div>Location: N22°12.13”°23 N22°12.13”°23</div>
+        			<div>Event name: pile-ups</div>
+        			<div>Events: sanhuan traffic paralysis</div>
+        			<div>Processing units: futian district fu bao team</div>
+        			<div>Processing: processing</div>
+        			<div>Loss of anticipation: 5 casualties, direct economic loss of 20 million yuan</div>
+        		</div>
+        		<div class="event_item">
+        			<div class="number">NO.01 road accident</div>
+        			<div>2015.12.25  12.30</div>
+        			<div><img src="/image/event_list_image.png"/></div>
+        			<div>Location: N22°12.13”°23 N22°12.13”°23</div>
+        			<div>Event name: pile-ups</div>
+        			<div>Events: sanhuan traffic paralysis</div>
+        			<div>Processing units: futian district fu bao team</div>
+        			<div>Processing: processing</div>
+        			<div>Loss of anticipation: 5 casualties, direct economic loss of 20 million yuan</div>
+        		</div>
+        		<div class="event_item">
+        			<div class="number">NO.01 road accident</div>
+        			<div>2015.12.25  12.30</div>
+        			<div><img src="/image/event_list_image.png"/></div>
+        			<div>Location: N22°12.13”°23 N22°12.13”°23</div>
+        			<div>Event name: pile-ups</div>
+        			<div>Events: sanhuan traffic paralysis</div>
+        			<div>Processing units: futian district fu bao team</div>
+        			<div>Processing: processing</div>
+        			<div>Loss of anticipation: 5 casualties, direct economic loss of 20 million yuan</div>
+        		</div>
+        	</div>
+        </div>
+        <div id="plan" ng-class="{true: 'plan_active', false: 'plan_normal'}[isPlanActive]" ng-mouseenter="isPlanActive = true" ng-mouseleave="isPlanActive = false">
+        	<div class="title">DISPOSAL PLAN</div>
+        </div>
+        <div id="tracking" ng-class="{true: 'tracking_active', false: 'tracking_normal'}[isTrackingActive]" ng-mouseenter="isTrackingActive = true" ng-mouseleave="isTrackingActive = false">
+        	<div class="title">EVENT TRACKING</div>
+        </div>
+        <div id="prediction" ng-click="clickPrediction()" ng-class="{true: 'prediction_active', false: 'prediction_normal'}[isPredictionActive]" ng-mouseenter="isPredictionActive = true" ng-mouseleave="isPredictionActive = false">PREDICTION</div>
+        <div id="prediction_detail" ng-click="clickPredictionDetail()"></div>
         <div id="footer"></div>
     </body>
 </html>
 <script>
 var app = angular.module("App", [])
 	.controller('Controller', function($scope, $http, $timeout) {
+		new Image().src = '/image/public_background_active.png';
+		new Image().src = '/image/public_button_0_active.png';
+		new Image().src = '/image/public_button_1_active.png';
+		new Image().src = '/image/public_button_2_active.png';
+		new Image().src = '/image/public_button_3_active.png';
+		new Image().src = '/image/city_background_active.png';
+		new Image().src = '/image/city_button_0_active.png';
+		new Image().src = '/image/city_button_1_active.png';
+		new Image().src = '/image/city_button_2_active.png';
+		new Image().src = '/image/city_button_3_active.png';
+		new Image().src = '/image/emergency_background_active.png';
+		new Image().src = '/image/emergency_button_0_active.png';
+		new Image().src = '/image/emergency_button_1_active.png';
+		new Image().src = '/image/emergency_button_2_active.png';
+		new Image().src = '/image/emergency_button_3_active.png';
+		new Image().src = '/image/emergency_button_4_active.png';
+		new Image().src = '/image/emergency_button_5_active.png';
+		new Image().src = '/image/emergency_button_6_active.png';
+		new Image().src = '/image/emergency_button_7_active.png';
+		new Image().src = '/image/emergency_button_8_active.png';
+		new Image().src = '/image/emergency_button_9_active.png';
+		new Image().src = '/image/development_background_active.png';
+		new Image().src = '/image/rescue_background_active.png';
+		new Image().src = '/image/trend_background_active.png';
+		new Image().src = '/image/prediction_background_active.png';
+		new Image().src = '/image/event_background_active.png';
+		new Image().src = '/image/plan_background_active.png';
+		new Image().src = '/image/tracking_background_active.png';
+
 		$scope.temperature = "7~12℃";
 
 		$scope.isPublicActive = false;
@@ -131,6 +234,20 @@ var app = angular.module("App", [])
 
 		$scope.isCityActive = false;
 		$scope.isCityButtonActive = 0;
+
+		$scope.isDevelopmentActive = false;
+
+		$scope.isRescueActive = false;
+
+		$scope.isTrendActive = false;
+
+		$scope.isPlanActive = false;
+
+		$scope.isTrackingActive = false;
+
+		$scope.isPredictionActive = false;
+
+		$scope.isEventActive = false;
 
 		var checkDatetime = function() {
 			var date = new Date();
@@ -216,7 +333,7 @@ var app = angular.module("App", [])
 			        {
 			            name: 'radar',
 			            type: 'radar',
-			            data: (function (){
+			            data: (function () {
 			                var res = [];
 			                var len = 0;
 			                res.push({
@@ -238,48 +355,31 @@ var app = angular.module("App", [])
 			};
 
 			public_chart.setOption(public_chart_option);
+			//public_chart.setOption(public_chart_option, true);
 		}
 
 		setPublicOption("#2950f8");
 
 		$scope.clickPublic0 = function() {
-			$scope.isPublicActive = true;
 			$scope.isPublicButtonActive = 0;
-
-			$scope.isCityActive = false;
-
-			$scope.isEmergencyActive = false;
 
 		    setPublicOption("#2950f8");
 		}
 
 		$scope.clickPublic1 = function() {
-			$scope.isPublicActive = true;
 			$scope.isPublicButtonActive = 1;
-
-			$scope.isCityActive = false;
-
-			$scope.isEmergencyActive = false;
 
 		    setPublicOption("#9414b9");
 		}
 
 		$scope.clickPublic2 = function() {
-			$scope.isPublicActive = true;
 			$scope.isPublicButtonActive = 2;
-
-			$scope.isCityActive = false;
-
-			$scope.isEmergencyActive = false;
 
 		    setPublicOption("#bf6210");
 		}
 
 		$scope.clickPublic3 = function() {
-			$scope.isPublicActive = true;
 			$scope.isPublicButtonActive = 3;
-
-			$scope.isCityActive = false;
 
 		    setPublicOption("#a80c10");
 		}
@@ -313,7 +413,7 @@ var app = angular.module("App", [])
 			            name:'2011年',
 			            type:'bar',
 				                itemStyle:{
-					            	normal:{color: color}
+					            	normal: {color: color}
 					            },
 			            data: data
 			        }
@@ -326,132 +426,173 @@ var app = angular.module("App", [])
 		setCityOption("#2950f8", [58203, 43489, 39034, 14970, 21744, 38203, 23489]);
 
 		$scope.clickCity0 = function() {
-			$scope.isPublicActive = false;
-
-			$scope.isCityActive = true;
 			$scope.isCityButtonActive = 0;
-
-			$scope.isEmergencyActive = false;
 
 		    setCityOption("#2950f8", [58203, 43489, 39034, 14970, 21744, 38203, 23489]);
 		}
 
 		$scope.clickCity1 = function() {
-			$scope.isPublicActive = false;
-
-			$scope.isCityActive = true;
 			$scope.isCityButtonActive = 1;
-
-			$scope.isEmergencyActive = false;
 
 		    setCityOption("#9414b9", [38203, 13489, 29034, 54970, 31744, 18203, 33489]);
 		}
 
 		$scope.clickCity2 = function() {
-			$scope.isPublicActive = false;
-
-			$scope.isCityActive = true;
 			$scope.isCityButtonActive = 2;
-
-			$scope.isEmergencyActive = false;
 
 		    setCityOption("#bf6210", [28203, 33489, 49034, 34970, 11744, 58203, 13489]);
 		}
 
 		$scope.clickCity3 = function() {
-			$scope.isPublicActive = false;
-
-			$scope.isCityActive = true;
 			$scope.isCityButtonActive = 3;
-
-			$scope.isEmergencyActive = false;
 
 		    setCityOption("#a80c10", [18203, 23489, 29034, 14970, 31744, 18203, 23489]);
 		}
 
 		$scope.clickEmergency0 = function() {
-			$scope.isPublicActive = false;
-			$scope.isCityActive = false;
-
-			$scope.isEmergencyActive = true;
 			$scope.isEmergencyButtonActive = 0;
 		}
 
 		$scope.clickEmergency1 = function() {
-			$scope.isPublicActive = false;
-			$scope.isCityActive = false;
-
-			$scope.isEmergencyActive = true;
 			$scope.isEmergencyButtonActive = 1;
 		}
 
 		$scope.clickEmergency2 = function() {
-			$scope.isPublicActive = false;
-			$scope.isCityActive = false;
-
-			$scope.isEmergencyActive = true;
 			$scope.isEmergencyButtonActive = 2;
 		}
 
 		$scope.clickEmergency3 = function() {
-			$scope.isPublicActive = false;
-			$scope.isCityActive = false;
-
-			$scope.isEmergencyActive = true;
 			$scope.isEmergencyButtonActive = 3;
 		}
 
 		$scope.clickEmergency4 = function() {
-			$scope.isPublicActive = false;
-			$scope.isCityActive = false;
-
-			$scope.isEmergencyActive = true;
 			$scope.isEmergencyButtonActive = 4;
 		}
 
 		$scope.clickEmergency5 = function() {
-			$scope.isPublicActive = false;
-			$scope.isCityActive = false;
-
-			$scope.isEmergencyActive = true;
 			$scope.isEmergencyButtonActive = 5;
 		}
 
 		$scope.clickEmergency6 = function() {
-			$scope.isPublicActive = false;
-			$scope.isCityActive = false;
-
-			$scope.isEmergencyActive = true;
 			$scope.isEmergencyButtonActive = 6;
 		}
 
 		$scope.clickEmergency7 = function() {
-			$scope.isPublicActive = false;
-			$scope.isCityActive = false;
-
-			$scope.isEmergencyActive = true;
 			$scope.isEmergencyButtonActive = 7;
 		}
 
 		$scope.clickEmergency8 = function() {
-			$scope.isPublicActive = false;
-			$scope.isCityActive = false;
-
-			$scope.isEmergencyActive = true;
 			$scope.isEmergencyButtonActive = 8;
 		}
 
 		$scope.clickEmergency9 = function() {
-			$scope.isPublicActive = false;
-			$scope.isCityActive = false;
-
-			$scope.isEmergencyActive = true;
 			$scope.isEmergencyButtonActive = 9;
 		}
 
 		$scope.clickPrediction = function() {
 			$("#prediction").animate({
 				bottom: "-97px"
+			});
+
+			$("#prediction_detail").animate({
+				bottom: "68px"
+			});
+		}
+
+		$scope.clickPredictionDetail = function() {
+			$("#prediction").animate({
+				bottom: "70px"
+			});
+
+			$("#prediction_detail").animate({
+				bottom: "-269px"
+			});
+		}
+
+		$scope.clickHeader = function() {
+			$("#prediction").animate({
+				bottom: "70px"
+			});
+
+			$("#prediction_detail").animate({
+				bottom: "-269px"
+			});
+
+			$("#development").animate({
+				left: "-422px"
+			}, 1000);
+
+			$("#rescue").animate({
+				left: "-422px"
+			}, 1000);
+
+			$("#trend").animate({
+				left: "-422px"
+			}, 1000, function() {
+				$("#public").animate({
+					left: "30px"
+				}, 1000);
+
+				$("#city").animate({
+					left: "30px"
+				}, 1000);
+
+				$("#emergency").animate({
+					left: "30px"
+				}, 1000);
+			});
+
+
+			$("#plan").animate({
+				right: "-357px"
+			}, 1000);
+
+			$("#tracking").animate({
+				right: "-357px"
+			}, 1000, function() {
+				$("#event").animate({
+					right: "15px"
+				}, 1000);
+			});
+		}
+
+		$scope.clickEvent = function() {
+			$("#public").animate({
+				left: "-422px"
+			}, 1000);
+
+			$("#city").animate({
+				left: "-422px"
+			}, 1000);
+
+			$("#emergency").animate({
+				left: "-422px"
+			}, 1000, function() {
+				$("#development").animate({
+					left: "30px"
+				}, 1000);
+
+				$("#rescue").animate({
+					left: "30px"
+				}, 1000);
+
+				$("#trend").animate({
+					left: "30px"
+				}, 1000);
+			});
+
+
+
+			$("#event").animate({
+				right: "-357px"
+			}, 1000, function() {
+				$("#plan").animate({
+					right: "15px"
+				}, 1000);
+
+				$("#tracking").animate({
+					right: "15px"
+				}, 1000);
 			});
 		}
 
