@@ -10,29 +10,123 @@
         <script src="/js/jquery.easing.compatibility.js"></script>
         <script src="/js/echarts-all.js"></script>
         <script src="/js/app.js"></script>
-        <!--<script src='http://support.supermap.com.cn:8090/iserver/iClient/forJavaScript/libs/SuperMap.Include.js'></script>
+        <script src='http://10.45.26.42:8090/iserver/iClient/forJavaScript/libs/SuperMap.Include.js'></script>
+        <!--<script src='http://support.supermap.com.cn:8090/iserver/iClient/forJavaScript/libs/SuperMap.Include.js'></script>-->
+		<script type="text" id="cartoCssStr">
+		/*此处定义不同的颜色变量，在后面可以重复用这些颜色值*/
+
+		@waterColor:rgb(2,16,25);
+		@roadColora:rgb(18,117,142);
+		@roadColorb:rgb(0,0,0);
+		@railwayColora:rgb(0,0,0);
+		@railwayColorb:rgb(0,0,0);
+		@vegetationColor:rgb(2,16,25);
+		@continentColor:rgb(8,48,75);
+		@provinceLineColor:rgb(30,30,30);
+
+
+		#China_Railway_L__China400::a{
+
+		/*每一段的长度为15px,间隔也是15px*/
+		line-color:@railwayColora;
+		line-width:1.5;
+		}
+		#China_Railway_L__China400::b{
+
+		/*每一段的长度为15px,间隔也是15px*/
+		line-dasharray:18,18;
+		line-color:@railwayColorb;
+		line-width:1.5;
+		}
+		/*底下的地图背景图层*/
+
+		#World_Division__China400{
+		polygon-fill:@waterColor;
+		}
+
+		/*中国除外的其他国家的图层*/
+
+		#World_Continent__China400{
+		polygon-fill:@continentColor;
+			line-width:1;
+			line-color:@continentColor;
+		}
+		#China_Province_R__China400{
+			polygon-fill:@continentColor;
+			line-color:rgba(0,0,0,0);
+		}
+
+		#China_Road_L__China400::one{
+			line-color:@roadColora;
+			line-width:4;
+		}
+		#China_Road_L__China400::two{
+			line-color:@roadColorb;
+			line-width:1;
+		}
+
+		#China_Road_L__China400__1::a{
+			line-color:@roadColora;
+			line-width:4;
+		}
+		#China_Road_L__China400__1::b{
+			line-color:@roadColorb;
+			line-width:1;
+		}
+
+		#China_Hyd_R__China400{
+			polygon-fill:@waterColor;
+			line-color:@waterColor;
+		}
+
+		#China_Vegetation_R__China400{
+			polygon-fill:@vegetationColor;
+			line-color:@vegetationColor;
+		}
+		#China_Hydside_R__China400{
+			polygon-fill:@waterColor;
+			line-color:@waterColor;
+		}
+
+		#China_Provinces_L__China400{
+			line-dasharray:10,10;
+			line-color:@provinceLineColor;
+			line-width:1;
+		}
+
+		#World_Division__China400{
+			polygon-fill:@waterColor;
+		}
+
+		#Hydside_Area_pl__Hydside::symbol0{
+			polygon-fill:@waterColor;
+			line-color:@waterColor;
+		}
+		</script>
         <script type="text/javascript">
             var map, layer;
             function init(){
                 map = new SuperMap.Map("map", { controls:[
                     new SuperMap.Control.Navigation({
                         dragPanOptions:{
-                            enableKinetic:true
+                            enableKinetic: true
                         }
                     })]
                 });
 
-                layer = new SuperMap.Layer.CloudLayer();
+				cartoCss=document.getElementById("cartoCssStr").text;
+				layer = new SuperMap.Layer.TiledVectorLayer("China", "http://10.45.26.42:8090/iserver/services/map-china400/rest/maps/China", {cacheEnabled:true}, {useLocalStorage:true, cartoCss:cartoCss});
+				//layer = new SuperMap.Layer.TiledVectorLayer("China", "http://support.supermap.com.cn:8090/iserver/services/map-china400/rest/maps/China", {cacheEnabled:true}, {useLocalStorage:true, cartoCss:cartoCss});
+				layer.events.on({"layerInitialized": function(){
+                	map.addLayers([layer]);
 
-                map.addLayers([layer]);
-
-                map.setCenter(new SuperMap.LonLat(11339634.286396, 4588716.5813769), 4.5);
+                	map.setCenter(new SuperMap.LonLat(11339634.286396, 4588716.5813769), 4.5);
+				}});
             }
-        </script>-->
+        </script>
     </head>
     <body ng-app="App" ng-controller="Controller" onload="init()">
-        <!--<div id="map"></div>
-        <div style="width: 100%; height: 100%; background: #091524; opacity:0.7; position: absolute; pointer-events:none;"></div>-->
+        <div id="map"></div>
         <div id="header" ng-click="clickHeader()">
         	<div id="weather_icon"><img src="/image/weather.png" ></div>
         	<div id="temperature">{{temperature}}</div>
@@ -188,7 +282,15 @@
         	<div class="title">EVENT TRACKING</div>
         </div>
         <div id="prediction" ng-click="clickPrediction()" ng-class="{true: 'prediction_active', false: 'prediction_normal'}[isPredictionActive]" ng-mouseenter="isPredictionActive = true" ng-mouseleave="isPredictionActive = false">PREDICTION</div>
-        <div id="prediction_detail" ng-click="clickPredictionDetail()"></div>
+        <div id="prediction_detail" ng-click="clickPredictionDetail()">
+        	<div id="prediction_detail_button_0" ng-class="{true: 'prediction_detail_button_0_active', false: 'prediction_detail_button_0_normal'}[isPredictionDetailButton0Active]"></div>
+        	<div id="prediction_detail_button_1" ng-class="{true: 'prediction_detail_button_1_active', false: 'prediction_detail_button_1_normal'}[isPredictionDetailButton1Active]"></div>
+        	<div id="prediction_detail_button_2" ng-class="{true: 'prediction_detail_button_2_active', false: 'prediction_detail_button_2_normal'}[isPredictionDetailButton2Active]"></div>
+        	<div id="prediction_detail_button_3" ng-class="{true: 'prediction_detail_button_3_active', false: 'prediction_detail_button_3_normal'}[isPredictionDetailButton3Active]"></div>
+        	<div id="prediction_detail_button_4" ng-class="{true: 'prediction_detail_button_4_active', false: 'prediction_detail_button_4_normal'}[isPredictionDetailButton4Active]"></div>
+        	<div id="prediction_detail_button_5" ng-class="{true: 'prediction_detail_button_5_active', false: 'prediction_detail_button_5_normal'}[isPredictionDetailButton5Active]"></div>
+        	<div id="prediction_detail_button_6" ng-class="{true: 'prediction_detail_button_6_active', false: 'prediction_detail_button_6_normal'}[isPredictionDetailButton6Active]"></div>
+        </div>
         <div id="footer"></div>
     </body>
 </html>
@@ -248,6 +350,14 @@ var app = angular.module("App", [])
 		$scope.isPredictionActive = false;
 
 		$scope.isEventActive = false;
+
+		$scope.isPredictionDetailButton0Active = false;
+		$scope.isPredictionDetailButton1Active = false;
+		$scope.isPredictionDetailButton2Active = false;
+		$scope.isPredictionDetailButton3Active = false;
+		$scope.isPredictionDetailButton4Active = false;
+		$scope.isPredictionDetailButton5Active = false;
+		$scope.isPredictionDetailButton6Active = false;
 
 		var checkDatetime = function() {
 			var date = new Date();
@@ -492,107 +602,107 @@ var app = angular.module("App", [])
 		$scope.clickPrediction = function() {
 			$("#prediction").animate({
 				bottom: "-97px"
-			});
+			}, "normal", "expoout");
 
 			$("#prediction_detail").animate({
 				bottom: "68px"
-			});
+			}, "normal", "expoout");
 		}
 
 		$scope.clickPredictionDetail = function() {
 			$("#prediction").animate({
 				bottom: "70px"
-			});
+			}, "normal", "expoout");
 
 			$("#prediction_detail").animate({
 				bottom: "-269px"
-			});
+			}, "normal", "expoout");
 		}
 
 		$scope.clickHeader = function() {
 			$("#prediction").animate({
 				bottom: "70px"
-			});
+			}, "normal", "expoout");
 
 			$("#prediction_detail").animate({
 				bottom: "-269px"
-			});
+			}, "normal", "expoout");
 
 			$("#development").animate({
 				left: "-422px"
-			}, 1000);
+			}, "normal", "expoout");
 
 			$("#rescue").animate({
 				left: "-422px"
-			}, 1000);
+			}, "normal", "expoout");
 
 			$("#trend").animate({
 				left: "-422px"
-			}, 1000, function() {
+			}, "normal", "expoout", function() {
 				$("#public").animate({
 					left: "30px"
-				}, 1000);
+				}, "normal", "expoout");
 
 				$("#city").animate({
 					left: "30px"
-				}, 1000);
+				}, "normal", "expoout");
 
 				$("#emergency").animate({
 					left: "30px"
-				}, 1000);
+				}, "normal", "expoout");
 			});
 
 
 			$("#plan").animate({
 				right: "-357px"
-			}, 1000);
+			}, "normal", "expoout");
 
 			$("#tracking").animate({
 				right: "-357px"
-			}, 1000, function() {
+			}, "normal", "expoout", function() {
 				$("#event").animate({
 					right: "15px"
-				}, 1000);
+				}, "normal", "expoout");
 			});
 		}
 
 		$scope.clickEvent = function() {
 			$("#public").animate({
 				left: "-422px"
-			}, 1000);
+			}, "normal", "expoout");
 
 			$("#city").animate({
 				left: "-422px"
-			}, 1000);
+			}, "normal", "expoout");
 
 			$("#emergency").animate({
 				left: "-422px"
-			}, 1000, function() {
+			}, "normal", "expoout", function() {
 				$("#development").animate({
 					left: "30px"
-				}, 1000);
+				}, "normal", "expoout");
 
 				$("#rescue").animate({
 					left: "30px"
-				}, 1000);
+				}, "normal", "expoout");
 
 				$("#trend").animate({
 					left: "30px"
-				}, 1000);
+				}, "normal", "expoout");
 			});
 
 
 
 			$("#event").animate({
 				right: "-357px"
-			}, 1000, function() {
+			}, "normal", "expoout", function() {
 				$("#plan").animate({
 					right: "15px"
-				}, 1000);
+				}, "normal", "expoout");
 
 				$("#tracking").animate({
 					right: "15px"
-				}, 1000);
+				}, "normal", "expoout");
 			});
 		}
 
