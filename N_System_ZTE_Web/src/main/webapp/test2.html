@@ -1,0 +1,340 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>二三维一体化浏览</title>
+<script type="text/javascript" src="SuperMap.Include.js"></script>
+<script type="text/javascript">
+var sceneControl = null;
+var scene = null;
+var map = null;
+var mapLayer = null;
+var center = null;
+//var htmlUrl = "http://122.96.155.202:18129";
+var htmlUrl = "http://10.45.26.42:8090";
+var mapUrl = htmlUrl + "/iserver/services/components-rest/rest/maps/World Map";
+var sceneUrl=htmlUrl + "/iserver/services/3D-RealspaceSample/rest/realspace";
+
+
+function uaMatch(ua) {
+    ua = ua.toLowerCase();
+
+    var match = /(webkit)[ \/]([\w.]+)/.exec(ua) ||
+            /(opera)(?:.*version)?[ \/]([\w.]+)/.exec(ua) ||
+            /(msie) ([\w.]+)/.exec(ua) ||
+            !/compatible/.test(ua) && /(mozilla)(?:.*? rv:([\w.]+))?/.exec(ua) || [];
+
+    return { browser: match[1] || "", version: match[2] || "0" };
+}
+function initMap() {
+    map = new SuperMap.Map("mapDiv", {controls: [
+        new SuperMap.Control.Navigation({
+            dragPanOptions: {
+                enableKinetic: true
+            }
+        })]});
+    baseLayer = new SuperMap.Layer.TiledDynamicRESTLayer("World", mapUrl, {transparent: true, cacheEnabled: true}, {maxResolution: "auto"});
+    baseLayer.events.on({"layerInitialized": addMapLayer});
+}
+
+function addMapLayer() {
+    map.addLayer(baseLayer);
+    map.setCenter(new SuperMap.LonLat(116, 39), 2);
+    map.allOverlays = true;
+}
+function onPageLoad() {
+    try {
+        //初始化二维地图
+        initMap();
+
+        //初始化三维场景控件实例,参数为包含控件的HTML元素
+        sceneControl = new SuperMap.Web.UI.Controls.SceneControl($get("sceneControlDiv"), initCallback, failedCallback);
+    }
+    catch (e) {
+        //若没有安装插件，则抛出该异常
+        if (e.name == SuperMap.Web.Realspace.ExceptionName.PlugInNotInstalled) {
+            var url = htmlUrl + "/iserver/iClient/for3D/Setup.exe";
+            document.write("<a href='" + url + "'>未检测到 SuperMap iClient3D for  Plugin 插件，请单击此处下载并安装插件。</a>");
+            return;
+        }
+        //若使用非IE浏览器，则抛出该异常
+        else if (e.name == SuperMap.Web.Realspace.ExceptionName.BrowserNotSupport) {
+            document.write("<p>SuperMap iClient3D for  Plugin 目前仅支持 InternetExplorer 浏览器，请更换浏览器后重新尝试加载本页面。</p>");
+            return;
+        }
+        //抛出其他异常
+        else {
+            alert(e.message);
+        }
+
+    }
+}
+
+//控件初始化完成后的回调函数，初始化完成之后才能进行数据加载
+function initCallback() {
+    //获取Realspace控件的场景，控件和场景是一对一的捆绑关系
+   // scene = sceneControl.get_scene();
+
+
+
+
+    //将场景的视点移动到中国区域
+    //var bound = new SuperMap.Web.Core.Rectangle2D(73, 4, 136, 54);
+ //   var bound = new SuperMap.Bounds(116.203953, 39.523575, 116.212675, 39.535796);
+  //  scene.get_flyingOperator().flyToBounds(bound);
+        //三维场景加载全球影像的数据
+     SceneLoad();
+    //scene.get_layer3Ds().add(sceneUrl, "World Map", "World Map", SuperMap.Web.Realspace.Layer3DType.Map);
+
+
+}
+ function SceneLoad()
+ {
+
+    scene = sceneControl.get_scene();
+	//指定场景的服务器地址
+	var sceneAddress = sceneUrl;
+
+	//指定图层名称
+	var sceneName = "scene";
+
+	//打开场景
+	scene.open(sceneAddress, sceneName);
+	//获取场景中的图层
+
+ //var bound = new SuperMap.Bounds(116.203953, 39.523575, 116.212675, 39.535796);
+   //  scene.get_flyingOperator().flyToBounds(bound);
+	var layer3D = scene.get_layer3Ds().get_item("RoadLine@rapidmodeling");
+
+	if (layer3D != null)
+	{
+
+		//获取图层的地理范围，并飞行到该范围
+		var geobound = layer3D.get_bounds();
+		scene.get_flyingOperator().flyToBounds(geobound);
+	}
+ }
+//控件初始化失败后的回调函数
+function failedCallback() {
+    alert("Realspace initialized failed!");
+}
+
+
+//通过继承SceneAction的方式来扩展用户的Action，继承方式采用框架提供的格式
+//扩展Action的构造函数
+SuperMap.Web.UI.Action3Ds.IntegratedPan = function (sceneControl, ajaxMap) {
+    ///<param name="sceneControl" type="SuperMap.Web.UI.Controls.SceneControl"></param>
+    SuperMap.Web.UI.Action3Ds.IntegratedPan.initializeBase(this);
+
+    this._name = "IntegratedPan";
+
+    this._sceneControl = sceneControl;
+
+    this._map = ajaxMap;
+
+    // this._center = new SuperMap.Web.Core.Point2D();
+    this._center = new SuperMap.LonLat();
+
+    //对应的场景操作类型为漫游
+    this._type = SuperMap.Web.UI.Action3Ds.SceneActionType.PAN;
+
+    this._camera = this._sceneControl.get_scene().get_camera();
+    this._camera.set_heading(0);
+    this._camera.set_tilt(0);
+    this._sceneControl.get_scene().set_camera(this._camera);
+
+};
+
+//扩展Action的属性和方法
+SuperMap.Web.UI.Action3Ds.IntegratedPan.prototype = {
+    /*
+     * 析构方法
+     */
+    dispose: function () {
+        ///<returns type="void"></returns>
+        this._sceneControl = null;
+        this._map = null;
+    },
+
+    onMouseWheel: function (e) {
+        //获取场景相机
+        var camera = scene.get_camera();
+        //获取场景高度
+        var altitude = camera.get_altitude();
+        //获取经度
+        var longitude = camera.get_longitude();
+        //获取纬度
+        var latitude = camera.get_latitude();
+        //根据给定的场景高度计算地图中显示范围的宽度
+        var size = _calculateSizeFromAltitude(altitude);
+        size = size * 0.5;
+        //设置地图显示范围
+        var bounds = new SuperMap.Bounds(longitude - size, latitude - size, longitude + size, latitude + size);
+        map.zoomToExtent(bounds, false);
+
+        camera.set_heading(0);
+        sceneControl.get_scene().set_camera(camera);
+    },
+
+
+    /*
+     * 鼠标移动操作，负责平移二维地图和三维场景
+     */
+    onMouseMove: function (e) {
+
+        //获取场景相机
+        var camera = scene.get_camera();
+        //获取场景高度
+        var altitude = camera.get_altitude();
+        //获取经度
+        var longitude = camera.get_longitude();
+        //获取纬度
+        var latitude = camera.get_latitude();
+        //根据给定的场景高度计算地图中显示范围的宽度
+        var size = _calculateSizeFromAltitude(altitude);
+        size = size * 0.5;
+        //设置地图显示范围
+        var bounds = new SuperMap.Bounds(longitude - size, latitude - size, longitude + size, latitude + size);
+        map.zoomToExtent(bounds, false);
+
+        camera.set_heading(0);
+        sceneControl.get_scene().set_camera(camera);
+
+    },
+
+    /*
+     * 鼠标抬起操作
+     */
+    onMouseUp: function (e) {
+        //获取场景相机
+        var camera = scene.get_camera();
+        //获取场景高度
+        var altitude = camera.get_altitude();
+        //获取经度
+        var longitude = camera.get_longitude();
+        //获取纬度
+        var latitude = camera.get_latitude();
+        //根据给定的场景高度计算地图中显示范围的宽度
+        var size = _calculateSizeFromAltitude(altitude);
+        size = size * 0.5;
+        //设置地图显示范围
+        var bounds = new SuperMap.Bounds(longitude - size, latitude - size, longitude + size, latitude + size);
+        map.zoomToExtent(bounds, false);
+
+        camera.set_heading(0);
+        sceneControl.get_scene().set_camera(camera);
+    }
+};
+SuperMap.Web.UI.Action3Ds.IntegratedPan.registerClass('SuperMap.Web.UI.Action3Ds.IntegratedPan', SuperMap.Web.UI.Action3Ds.SceneAction, Sys.IDisposable);
+
+
+//二维map的viewBoundsChanged事件的回调函数
+function viewBoundsChangedHandler() {
+    ///<param name="e" type="EventObject"></param>
+    ///<returns type="void"></returns>
+    var viewBounds = map.get_viewBounds();
+    var altitude = _calculateAltitudeFromBounds(viewBounds);
+    var camera = sceneControl.get_scene().get_camera();
+    camera.set_altitude(altitude);
+    sceneControl.get_scene().set_camera(camera);
+}
+
+/// <summary>
+/// 根据给定的地图范围计算场景的高度
+/// </summary>
+/// <param name="bounds">地图范围</param>
+/// <returns>场景高度</returns>
+function _calculateAltitudeFromBounds(bounds) {
+    var _PI = 3.1415926;
+    var _earthRadius = 6378137;
+    var altitude = _earthRadius;
+    var boundsWidth = bounds.right - bounds.left;
+    if (boundsWidth >= 120) {
+        altitude = _earthRadius * boundsWidth / 60 - _earthRadius;
+    }
+    else if (boundsWidth != 0) {
+        var angle1 = (boundsWidth / 360) * _PI;
+        var height = Math.sin(angle1) * _earthRadius;
+        var a = height / Math.tan(angle1);
+        var b = height / Math.tan(_PI / 6);
+        altitude = a + b - _earthRadius;
+    }
+    return altitude;
+}
+
+
+/// <summary>
+/// 根据给定的场景高度计算地图中显示范围的宽度
+/// </summary>
+/// <param name="altitude">场景高度</param>
+/// <returns>地图显示范围尺寸</returns>
+function _calculateSizeFromAltitude(altitude) {
+    var _PI = 3.1415926;
+    var _earthRadius = 6378137;
+    var size;
+    if (altitude >= _earthRadius) {//当场景高度大于可全幅显示整球的高度时
+        var ratio = (altitude + _earthRadius) * 0.5;
+        size = 120 * ratio / _earthRadius
+    }
+    else {//当场景高度小于可全幅显示整球的高度时，即无法看到整球时
+        var tan30 = Math.tan(_PI / 6);
+        //设置方程组的a,b,c
+        var a = (Math.pow(tan30, 2) + 1) * Math.pow(_earthRadius, 2);
+        var b = -2 * (_earthRadius + altitude) * _earthRadius * Math.pow(tan30, 2);
+        var c = Math.pow(tan30, 2) * Math.pow(_earthRadius + altitude, 2) - Math.pow(_earthRadius, 2.0);
+        //解一元二次方程，取锐角，因此余弦值较大
+        var cosd = (-b + Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a);
+        var d = Math.acos(cosd);
+        var widthd = 2 * d * _earthRadius;
+        size = (widthd / (_PI * _earthRadius)) * 180;
+    }
+    return size;
+}
+
+function mapPan() {
+    baseLayer.events.on({"moveend": MaptoScene});
+
+}
+
+function scenePan() {
+    //注销地图监听事件
+    baseLayer.events.unregister("moveend", undefined, MaptoScene);
+    //将三维场景鼠标事件切换为自定义鼠标事件
+    var scenePanAction = new SuperMap.Web.UI.Action3Ds.IntegratedPan(sceneControl, map);
+    sceneControl.set_sceneAction(scenePanAction);
+}
+function MaptoScene() {
+    //获取当前地图范围
+    var bounds = map.getExtent();
+    //根据给定的地图范围计算场景的高度
+    var altitude = _calculateAltitudeFromBounds(bounds);
+    //获取地图中心点
+    var center = map.getCenter();
+    //设置场景相机
+    var camera = new SuperMap.Web.Realspace.Camera(center.lon, center.lat, altitude);
+    camera.set_heading(0);
+    sceneControl.get_scene().set_camera(camera);
+
+}
+
+</script>
+</head>
+
+<body onLoad="onPageLoad()">
+<div id="toolsets" style="position:absolute;top:1%; left:1%;  width:98%; height:5%;">
+    <input id="MapPan" type="button" value="二维漫游" style="" onClick="mapPan()"/>
+    <input id="ScenePan" type="button" value="三维漫游" style="" onClick="scenePan()"/>
+
+</div>
+<div id="mapDiv" style="position:absolute; left:1%; top:5%; width:49%; height:93%;">
+</div>
+<div id="sceneControlDiv" style="position:absolute; left:50%; top:5%; width:49%; height:93%;">
+</div>
+
+<iframe id="infoWindow"  style="position: absolute;top: 50px; left:50%;height:500px;width:500px" frameborder="0" scrolling="auto" src="caidan1.html" >
+          </iframe>
+
+</body>
+
+</html>

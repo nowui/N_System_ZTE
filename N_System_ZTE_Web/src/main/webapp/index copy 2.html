@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>ZTE SECURITY CLOUD</title>
+    	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    	<link rel="stylesheet" href="css/app.css">
+        <script src="js/angular.min.js"></script>
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <script src="js/jquery.easing.min.js"></script>
+        <script src="js/jquery.easing.compatibility.js"></script>
+        <script src="js/echarts-all.js"></script>
+        <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="js/app.js"></script>
+		<script type="text/javascript" src="SuperMap.Include.js" ></script>
+        <!--<script src='http://10.45.26.42:8090/iserver/iClient/forJavaScript/libs/SuperMap.Include.js'></script>
+        <script src='http://support.supermap.com.cn:8090/iserver/iClient/forJavaScript/libs/SuperMap.Include.js'></script>-->
+		<script type="text" id="cartoCssStr">
+		/*此处定义不同的颜色变量，在后面可以重复用这些颜色值*/
+
+		@waterColor:rgb(2,16,25);
+		@roadColora:rgb(18,117,142);
+		@roadColorb:rgb(0,0,0);
+		@railwayColora:rgb(0,0,0);
+		@railwayColorb:rgb(0,0,0);
+		@vegetationColor:rgb(2,16,25);
+		@continentColor:rgb(8,48,75);
+		@provinceLineColor:rgb(30,30,30);
+
+
+		#China_Railway_L__China400::a{
+
+		/*每一段的长度为15px,间隔也是15px*/
+		line-color:@railwayColora;
+		line-width:1.5;
+		}
+		#China_Railway_L__China400::b{
+
+		/*每一段的长度为15px,间隔也是15px*/
+		line-dasharray:18,18;
+		line-color:@railwayColorb;
+		line-width:1.5;
+		}
+		/*底下的地图背景图层*/
+
+		#World_Division__China400{
+		polygon-fill:@waterColor;
+		}
+
+		/*中国除外的其他国家的图层*/
+
+		#World_Continent__China400{
+		polygon-fill:@continentColor;
+			line-width:1;
+			line-color:@continentColor;
+		}
+		#China_Province_R__China400{
+			polygon-fill:@continentColor;
+			line-color:rgba(0,0,0,0);
+		}
+
+		#China_Road_L__China400::one{
+			line-color:@roadColora;
+			line-width:4;
+		}
+		#China_Road_L__China400::two{
+			line-color:@roadColorb;
+			line-width:1;
+		}
+
+		#China_Road_L__China400__1::a{
+			line-color:@roadColora;
+			line-width:4;
+		}
+		#China_Road_L__China400__1::b{
+			line-color:@roadColorb;
+			line-width:1;
+		}
+
+		#China_Hyd_R__China400{
+			polygon-fill:@waterColor;
+			line-color:@waterColor;
+		}
+
+		#China_Vegetation_R__China400{
+			polygon-fill:@vegetationColor;
+			line-color:@vegetationColor;
+		}
+		#China_Hydside_R__China400{
+			polygon-fill:@waterColor;
+			line-color:@waterColor;
+		}
+
+		#China_Provinces_L__China400{
+			line-dasharray:10,10;
+			line-color:@provinceLineColor;
+			line-width:1;
+		}
+
+		#World_Division__China400{
+			polygon-fill:@waterColor;
+		}
+
+		#Hydside_Area_pl__Hydside::symbol0{
+			polygon-fill:@waterColor;
+			line-color:@waterColor;
+		}
+		</script>
+        <script type="text/javascript">
+            var map, layer, marker, markers, markerlayer;
+            function init() {
+            	return;
+                map = new SuperMap.Map("map", { controls:[
+                    new SuperMap.Control.Navigation({
+                        dragPanOptions: {
+                            enableKinetic: true
+                        }
+                    })]
+                });
+
+				cartoCss=document.getElementById("cartoCssStr").text;
+				layer = new SuperMap.Layer.TiledVectorLayer("China", "http://10.45.26.42:8090/iserver/services/map-china400/rest/maps/China", {cacheEnabled:true}, {useLocalStorage:true, cartoCss:cartoCss});
+				//layer = new SuperMap.Layer.TiledVectorLayer("China", "http://support.supermap.com.cn:8090/iserver/services/map-china400/rest/maps/China", {cacheEnabled:true}, {useLocalStorage:true, cartoCss:cartoCss});
+				layer.events.on({"layerInitialized": function() {
+					addLayer();
+
+                	//addMarker();
+
+                	//markerlayer = new  SuperMap.Layer.Markers("markerLayer");
+
+                	addData();
+				}});
+            }
+
+            function addLayer() {
+               	markerlayer = new  SuperMap.Layer.Markers("markerLayer");
+				map.addLayers([layer, markerlayer]);
+
+                map.setCenter(new SuperMap.LonLat(11339634.286396, 4588716.5813769), 4.5);
+            }
+
+            function addMarker() {
+	            size = new SuperMap.Size(21,25);
+	            offset = new SuperMap.Pixel(-(size.w/2), -size.h);
+	            icon = new SuperMap.Icon('images/markerbig_select.png', size, offset);
+	            //初始化标记覆盖物类
+	            marker = new SuperMap.Marker(new SuperMap.LonLat(116.38810,39.90602),icon);
+
+	            markers = new SuperMap.Layer.Markers("Markers");
+
+
+	            //添加覆盖物到标记图层
+	            markers.addMarker(marker);
+	            //注册 click 事件,触发 mouseClickHandler()方法
+	            marker.events.on({"click":mouseClickHandler,
+					"touchstart":mouseClickHandler    //假如要在移动端的浏览器也实现点击弹框，则在注册touch类事件
+				});
+	        }
+			function addData() {
+				markerlayer.removeMarker(marker);
+	            var size = new SuperMap.Size(44,33);
+	            var offset = new SuperMap.Pixel(-(size.w/2), -size.h);
+	            var icon = new SuperMap.Icon('http://support.supermap.com.cn:8090/iserver/iClient/forJavaScript/theme/images/marker.png', size, offset);
+	            marker =new SuperMap.Marker(new SuperMap.LonLat(11339634.286396, 4588716.5813769),icon) ;
+	            markerlayer.addMarker(marker);
+	        }
+	        function removeData() {
+				markerlayer.removeMarker(marker);
+	        }
+
+        </script>
+		<script type="text/javascript">
+			var scene = null;
+			var sceneControl = null;
+			var htmlUrl = "http://10.45.26.42:8090";
+			var sceneUrl= htmlUrl + "/iserver/services/3D-RealspaceSample/rest/realspace";
+
+			function onPageLoad()
+			{
+            	return;
+				//初始化三维场景控件
+				try
+				{
+				    //初始化三维场景控件实例,参数为包含控件的HTML元素
+				    sceneControl = new SuperMap.Web.UI.Controls.SceneControl($get("sceneControlDiv"), initCallback, failedCallback);
+				}
+				catch(e)
+                {
+                    //若没有安装插件，则抛出该异常
+                    if (e.name == SuperMap.Web.Realspace.ExceptionName.PlugInNotInstalled)
+                    {
+                        var url = htmlUrl + "/iserver/iClient/for3D/Setup.exe";
+                        document.write("<a href='"+url+"'>未检测到 SuperMap iClient3D for  Plugin 插件，请单击此处下载并安装插件。</a>");
+                        return;
+                    }
+                    //若使用非IE浏览器，则抛出该异常
+                    else if (e.name == SuperMap.Web.Realspace.ExceptionName.BrowserNotSupport)
+                    {
+                        document.write("<p>SuperMap iClient3D for  Plugin 目前仅支持 InternetExplorer 浏览器，请更换浏览器后重新尝试加载本页面。</p>");
+                        return;
+                    }
+                    //抛出其他异常
+                    else
+                    {
+                        alert(e.message);
+                    }
+
+                }
+
+			}
+
+			//控件初始化完成后的回调函数，初始化完成之后才能进行数据加载
+			function initCallback()
+			{
+				scene = sceneControl.get_scene();
+				//指定场景的服务器地址
+				var sceneAddress = sceneUrl;
+
+				//指定图层名称
+				var sceneName = "scene";
+
+				//打开场景
+				scene.open(sceneAddress, sceneName);
+				//获取场景中的图层
+
+			 //var bound = new SuperMap.Bounds(116.203953, 39.523575, 116.212675, 39.535796);
+			   //  scene.get_flyingOperator().flyToBounds(bound);
+
+			}
+
+			//控件初始化失败后的回调函数
+			function failedCallback()
+			{
+			    alert("Realspace initialized failed!");
+			}
+			function fly()
+			{
+				//从页面获取相机的经纬度和高程值
+				var longitude = 116.38822222222223;
+				var latitude = 39.99008055555556;
+				var altitude = 1000;
+
+				//从页面获取飞行的时间
+				var time = 2;
+                time *= 1000;
+
+				var mode = SuperMap.Web.Realspace.FlyingMode.CAMERA_NORMAL;
+
+                //新建相机对象
+                var camera = new SuperMap.Web.Realspace.Camera(longitude, latitude,altitude);
+
+                //调用飞行操作器进行飞行
+                scene.get_flyingOperator().flyTo(camera,time,mode);
+			}
+			</script>
+    </head>
+    <body ng-app="App" ng-controller="Controller" onload="init();onPageLoad();">
+    	<!--<div id="map"></div>
+	    <div id="flyWindow" style="position:absolute;top:5px;float:left">
+			<input id="fly" type="button" value="飞行" onClick="fly()" />
+		</div>
+		<div id="sceneControlDiv" style="position:absolute;top:60px;bottom:5px;left:5px;right:5px;float:left">
+		</div>-->
+		<!--<iframe src="aaa.html" style="position:absolute; top:200px; left:500px; width:100%; height:200px; z-index=10;" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>-->
+        <div id="header" ng-click="clickHeader()">
+        	<div id="weather_icon"><img src="image/weather.png" ></div>
+        	<div id="temperature">{{temperature}}</div>
+        	<div id="weather_data">
+				<div id="wind">CLEAR TO OVERCAST</div>
+				<div id="location">BEIJING</div>
+        	</div>
+        	<div id="time">{{time}}</div>
+        	<div id="date">
+        		<div class="day">{{day}}</div>
+        		<div class="week">{{week}}</div>
+        	</div>
+        </div>
+        <div id="public" ng-class="{true: 'public_active', false: 'public_normal'}[isPublicActive]" ng-mouseenter="isPublicActive = true" ng-mouseleave="isPublicActive = false">
+        	<div class="title">PUBLIC SAFETY AND SECURITY INDEX</div>
+        	<div id="public_chart"></div>
+        	<div id="public_button_0" ng-class="{true: 'public_button_0_active', false: 'public_button_0_normal'}[isPublicButton0Active]" ng-click="clickPublic0()">
+        		<div>serious</div>
+        	</div>
+        	<div id="public_button_1" ng-class="{true: 'public_button_1_active', false: 'public_button_1_normal'}[isPublicButton1Active]" ng-click="clickPublic1()">
+        		<div>ordinary</div>
+        	</div>
+        	<div id="public_button_2" ng-class="{true: 'public_button_2_active', false: 'public_button_2_normal'}[isPublicButton2Active]" ng-click="clickPublic2()">
+        		<div>considerable</div>
+        	</div>
+        	<div id="public_button_3" ng-class="{true: 'public_button_3_active', false: 'public_button_3_normal'}[isPublicButton3Active]" ng-click="clickPublic3()">
+        		<div>tremendous devastating</div>
+        	</div>
+        </div>
+        <div id="city" ng-class="{true: 'city_active', false: 'city_normal'}[isCityActive]" ng-mouseenter="isCityActive = true" ng-mouseleave="isCityActive = false">
+        	<div class="title">CITY SECURITY INDEX</div>
+        </div>
+        <div id="emergency" ng-class="{true: 'emergency_active', false: 'emergency_normal'}[isEmergencyActive]" ng-mouseenter="isEmergencyActive = true" ng-mouseleave="isEmergencyActive = false">
+        	<div class="title">EMERGENCY RESOURCES</div>
+        	<div style="height: 50px;"></div>
+        	<div id="emergency_button_0" ng-class="{true: 'emergency_button_0_active', false: 'emergency_button_0_normal'}[isEmergencyButtonActive == 0]" ng-click="clickEmergency0()">
+        		<div>police<br/>strength</div>
+        	</div>
+        	<div id="emergency_button_1" ng-class="{true: 'emergency_button_1_active', false: 'emergency_button_1_normal'}[isEmergencyButtonActive == 1]" ng-click="clickEmergency1()">
+        		<div>the primary agency</div>
+        	</div>
+        	<div id="emergency_button_2" ng-class="{true: 'emergency_button_2_active', false: 'emergency_button_2_normal'}[isEmergencyButtonActive == 2]" ng-click="clickEmergency2()">
+        		<div>supporting agency</div>
+        	</div>
+        	<div id="emergency_button_3" ng-class="{true: 'emergency_button_3_active', false: 'emergency_button_3_normal'}[isEmergencyButtonActive == 3]" ng-click="clickEmergency3()">
+        		<div>The Oil and Hazardous Materials</div>
+        	</div>
+        	<div id="emergency_button_4" ng-class="{true: 'emergency_button_4_active', false: 'emergency_button_4_normal'}[isEmergencyButtonActive == 4]" ng-click="clickEmergency4()">
+        		<div>surveillance unit</div>
+        	</div>
+        	<div id="emergency_button_5" ng-class="{true: 'emergency_button_5_active', false: 'emergency_button_5_normal'}[isEmergencyButtonActive == 5]" ng-click="clickEmergency5()">
+        		<div>the life-saving assistance</div>
+        	</div>
+        	<div id="emergency_button_6" ng-class="{true: 'emergency_button_6_active', false: 'emergency_button_6_normal'}[isEmergencyButtonActive == 6]" ng-click="clickEmergency6()">
+        		<div>mass<br/>care</div>
+        	</div>
+        	<div id="emergency_button_7" ng-class="{true: 'emergency_button_7_active', false: 'emergency_button_7_normal'}[isEmergencyButtonActive == 7]" ng-click="clickEmergency7()">
+        		<div> relief goods & resource support</div>
+        	</div>
+        	<div id="emergency_button_8" ng-class="{true: 'emergency_button_8_active', false: 'emergency_button_8_normal'}[isEmergencyButtonActive == 8]" ng-click="clickEmergency8()">
+        		<div>emergency agencies</div>
+        	</div>
+        	<div id="emergency_button_9" ng-class="{true: 'emergency_button_9_active', false: 'emergency_button_9_normal'}[isEmergencyButtonActive == 9]" ng-click="clickEmergency9()">
+        		<div>The scenario commander center</div>
+        	</div>
+        </div>
+        <div id="development" ng-class="{true: 'development_active', false: 'development_normal'}[isDevelopmentActive]" ng-mouseenter="isDevelopmentActive = true" ng-mouseleave="isDevelopmentActive = false">
+        	<div class="title">LATEST DEVELOPMENTS</div>
+        </div>
+        <div id="rescue" ng-class="{true: 'rescue_active', false: 'rescue_normal'}[isRescueActive]" ng-mouseenter="isRescueActive = true" ng-mouseleave="isRescueActive = false">
+        	<div class="title">THE OPTIMAL TIME FOR RESCUE</div>
+        </div>
+        <div id="trend" ng-class="{true: 'trend_active', false: 'trend_normal'}[isTrendActive]" ng-mouseenter="isTrendActive = true" ng-mouseleave="isTrendActive = false">
+        	<div class="title">EVENT TTEND</div>
+        </div>
+        <div id="event" ng-class="{true: 'event_active', false: 'event_normal'}[isEventActive]" ng-mouseenter="isEventActive = true" ng-mouseleave="isEventActive = false">
+        	<div class="title">EVENT BRIEFING</div>
+        	<div id="event_list">
+        		<div class="event_item" ng-click="clickEvent()">
+        			<div class="number">NO.01 road accident</div>
+        			<div>2015.12.25  12.30</div>
+        			<div><img src="image/event_list_image.png"/></div>
+        			<div>Location: N22°12.13”°23 N22°12.13”°23</div>
+        			<div>Event name: pile-ups</div>
+        			<div>Events: sanhuan traffic paralysis</div>
+        			<div>Processing units: futian district fu bao team</div>
+        			<div>Processing: processing</div>
+        			<div>Loss of anticipation: 5 casualties, direct economic loss of 20 million yuan</div>
+        		</div>
+        		<div class="event_item">
+        			<div class="number">NO.01 road accident</div>
+        			<div>2015.12.25  12.30</div>
+        			<div><img src="image/event_list_image.png"/></div>
+        			<div>Location: N22°12.13”°23 N22°12.13”°23</div>
+        			<div>Event name: pile-ups</div>
+        			<div>Events: sanhuan traffic paralysis</div>
+        			<div>Processing units: futian district fu bao team</div>
+        			<div>Processing: processing</div>
+        			<div>Loss of anticipation: 5 casualties, direct economic loss of 20 million yuan</div>
+        		</div>
+        		<div class="event_item">
+        			<div class="number">NO.01 road accident</div>
+        			<div>2015.12.25  12.30</div>
+        			<div><img src="image/event_list_image.png"/></div>
+        			<div>Location: N22°12.13”°23 N22°12.13”°23</div>
+        			<div>Event name: pile-ups</div>
+        			<div>Events: sanhuan traffic paralysis</div>
+        			<div>Processing units: futian district fu bao team</div>
+        			<div>Processing: processing</div>
+        			<div>Loss of anticipation: 5 casualties, direct economic loss of 20 million yuan</div>
+        		</div>
+        		<div class="event_item">
+        			<div class="number">NO.01 road accident</div>
+        			<div>2015.12.25  12.30</div>
+        			<div><img src="image/event_list_image.png"/></div>
+        			<div>Location: N22°12.13”°23 N22°12.13”°23</div>
+        			<div>Event name: pile-ups</div>
+        			<div>Events: sanhuan traffic paralysis</div>
+        			<div>Processing units: futian district fu bao team</div>
+        			<div>Processing: processing</div>
+        			<div>Loss of anticipation: 5 casualties, direct economic loss of 20 million yuan</div>
+        		</div>
+        		<div class="event_item">
+        			<div class="number">NO.01 road accident</div>
+        			<div>2015.12.25  12.30</div>
+        			<div><img src="image/event_list_image.png"/></div>
+        			<div>Location: N22°12.13”°23 N22°12.13”°23</div>
+        			<div>Event name: pile-ups</div>
+        			<div>Events: sanhuan traffic paralysis</div>
+        			<div>Processing units: futian district fu bao team</div>
+        			<div>Processing: processing</div>
+        			<div>Loss of anticipation: 5 casualties, direct economic loss of 20 million yuan</div>
+        		</div>
+        	</div>
+        </div>
+        <div id="plan" ng-class="{true: 'plan_active', false: 'plan_normal'}[isPlanActive]" ng-mouseenter="isPlanActive = true" ng-mouseleave="isPlanActive = false">
+        	<div class="title">DISPOSAL PLAN</div>
+        </div>
+        <div id="tracking" ng-class="{true: 'tracking_active', false: 'tracking_normal'}[isTrackingActive]" ng-mouseenter="isTrackingActive = true" ng-mouseleave="isTrackingActive = false">
+        	<div class="title">EVENT TRACKING</div>
+        </div>
+        <!--<div id="prediction" ng-click="clickPrediction()" ng-class="{true: 'prediction_active', false: 'prediction_normal'}[isPredictionActive]" ng-mouseenter="isPredictionActive = true" ng-mouseleave="isPredictionActive = false">PREDICTION</div>
+        <div id="prediction_detail" ng-click="clickPredictionDetail()">
+        	<div id="prediction_detail_button_0" ng-class="{true: 'prediction_detail_button_0_active', false: 'prediction_detail_button_0_normal'}[isPredictionDetailButton0Active]"></div>
+        	<div id="prediction_detail_button_1" ng-class="{true: 'prediction_detail_button_1_active', false: 'prediction_detail_button_1_normal'}[isPredictionDetailButton1Active]"></div>
+        	<div id="prediction_detail_button_2" ng-class="{true: 'prediction_detail_button_2_active', false: 'prediction_detail_button_2_normal'}[isPredictionDetailButton2Active]"></div>
+        	<div id="prediction_detail_button_3" ng-class="{true: 'prediction_detail_button_3_active', false: 'prediction_detail_button_3_normal'}[isPredictionDetailButton3Active]"></div>
+        	<div id="prediction_detail_button_4" ng-class="{true: 'prediction_detail_button_4_active', false: 'prediction_detail_button_4_normal'}[isPredictionDetailButton4Active]"></div>
+        	<div id="prediction_detail_button_5" ng-class="{true: 'prediction_detail_button_5_active', false: 'prediction_detail_button_5_normal'}[isPredictionDetailButton5Active]"></div>
+        	<div id="prediction_detail_button_6" ng-class="{true: 'prediction_detail_button_6_active', false: 'prediction_detail_button_6_normal'}[isPredictionDetailButton6Active]"></div>
+        </div>-->
+        <div id="footer"></div>
+    </body>
+</html>
+<script>
+var app = angular.module("App", [])
+	.controller('Controller', function($scope, $http, $timeout) {
+		new Image().src = 'image/public_background_active.png';
+		new Image().src = 'image/public_button_0_active.png';
+		new Image().src = 'image/public_button_1_active.png';
+		new Image().src = 'image/public_button_2_active.png';
+		new Image().src = 'image/public_button_3_active.png';
+		new Image().src = 'image/city_background_active.png';
+		new Image().src = 'image/city_button_0_active.png';
+		new Image().src = 'image/city_button_1_active.png';
+		new Image().src = 'image/city_button_2_active.png';
+		new Image().src = 'image/city_button_3_active.png';
+		new Image().src = 'image/emergency_background_active.png';
+		new Image().src = 'image/emergency_button_0_active.png';
+		new Image().src = 'image/emergency_button_1_active.png';
+		new Image().src = 'image/emergency_button_2_active.png';
+		new Image().src = 'image/emergency_button_3_active.png';
+		new Image().src = 'image/emergency_button_4_active.png';
+		new Image().src = 'image/emergency_button_5_active.png';
+		new Image().src = 'image/emergency_button_6_active.png';
+		new Image().src = 'image/emergency_button_7_active.png';
+		new Image().src = 'image/emergency_button_8_active.png';
+		new Image().src = 'image/emergency_button_9_active.png';
+		new Image().src = 'image/development_background_active.png';
+		new Image().src = 'image/rescue_background_active.png';
+		new Image().src = 'image/trend_background_active.png';
+		new Image().src = 'image/prediction_background_active.png';
+		new Image().src = 'image/event_background_active.png';
+		new Image().src = 'image/plan_background_active.png';
+		new Image().src = 'image/tracking_background_active.png';
+
+		$scope.temperature = "7~12℃";
+
+		$scope.isPublicActive = false;
+		$scope.isPublicButton0Active = true;
+		$scope.isPublicButton1Active = true;
+		$scope.isPublicButton2Active = true;
+		$scope.isPublicButton3Active = true;
+
+		$scope.isEmergencyActive = false;
+		$scope.isEmergencyButtonActive = 0;
+
+		$scope.isCityActive = false;
+		$scope.isCityButtonActive = 0;
+
+		$scope.isDevelopmentActive = false;
+
+		$scope.isRescueActive = false;
+
+		$scope.isTrendActive = false;
+
+		$scope.isPlanActive = false;
+
+		$scope.isTrackingActive = false;
+
+		$scope.isPredictionActive = false;
+
+		$scope.isEventActive = false;
+
+		$scope.isPredictionDetailButton0Active = false;
+		$scope.isPredictionDetailButton1Active = false;
+		$scope.isPredictionDetailButton2Active = false;
+		$scope.isPredictionDetailButton3Active = false;
+		$scope.isPredictionDetailButton4Active = false;
+		$scope.isPredictionDetailButton5Active = false;
+		$scope.isPredictionDetailButton6Active = false;
+
+		$("body").addClass("dark");
+		$.mCustomScrollbar.defaults.scrollButtons.enable=true;
+		$.mCustomScrollbar.defaults.axis="yx";
+		$("#event_list").mCustomScrollbar({theme:"dark"});
+
+		var checkDatetime = function() {
+			var date = new Date();
+			var year = date.getFullYear();
+			var month = date.getMonth();
+			var day = date.getDate();
+			var week = date.getDay();
+			var hour = date.getHours();
+			var minute = date.getMinutes();
+			var second = date.getSeconds();
+
+			month++;
+			if(month < 10) {
+				month = "0" + month;
+			}
+
+			if(day < 10) {
+				day = "0" + day;
+			}
+
+			if(hour < 10) {
+				hour = "0" + hour;
+			}
+
+			if(minute < 10) {
+				minute = "0" + minute;
+			}
+
+			$scope.day = year + "." + month + "." + day;
+			switch(week) {
+				case 1:
+					$scope.week = "MONDAY";
+					break;
+				case 2:
+					$scope.week = "TUESDAY";
+					break;
+				case 3:
+					$scope.week = "WEDNESDAY";
+					break;
+				case 4:
+					$scope.week = "THURSDAY";
+					break;
+				case 5:
+					$scope.week = "FRIDAY";
+					break;
+				case 6:
+					$scope.week = "SATURDAY";
+					break;
+				case 0:
+					$scope.week = "SUNDAY";
+					break;
+			}
+			$scope.time = hour + ":" + minute;
+
+			$timeout(function() {
+	            checkDatetime();
+	        }, 1000);
+		}
+
+		checkDatetime();
+
+		/*$http.jsonp('http://api.k780.com:88/?app=weather.today&weaid=1&&appkey=10003&sign=b59bc3ef6191eb9f747dd4e83c99f2a4&format=json&jsoncallback=JSON_CALLBACK').success(function(data) {
+			$scope.temperature = data.result.temperature;
+		});*/
+
+		var public_chart = echarts.init(document.getElementById('public_chart'), theme);
+
+		var setPublicOption = function() {
+			public_chart_option = {
+			    legend: {
+			    	show: false,
+			        orient : 'vertical',
+			        x : 'right',
+			        y : 'bottom',
+			        data:["a", "b", "c", "d"],
+			        selected: {
+			        	"a": $scope.isPublicButton0Active,
+			        	"b": $scope.isPublicButton1Active,
+			        	"c": $scope.isPublicButton2Active,
+			        	"d": $scope.isPublicButton3Active
+			        }
+			    },
+			    polar : [
+			       {
+			           indicator : [
+			               { text: 'public health and medical service', max: 6000},
+			               { text: 'social security', max: 16000},
+			               { text: 'accident disaster', max: 30000},
+			               { text: 'Natural disaster', max: 38000}
+			            ]
+			        }
+			    ],
+			    calculable : true,
+			    series : [
+			        {
+			            type: 'radar',
+			            data : [
+			                {
+			                    value : [4300, 10000, 28000, 35000],
+			                    name : "a",
+								itemStyle:{
+					            	normal:{color: "#2950f8"}
+					            }
+			                }, {
+			                    value : [5000, 14000, 28000, 31000],
+			                    name : "b",
+								itemStyle:{
+					            	normal:{color: "#9414b9"}
+					            }
+			                }, {
+			                    value : [3000, 12000, 26000, 11000],
+			                    name : "c",
+								itemStyle:{
+					            	normal:{color: "#bf6210"}
+					            }
+			                }, {
+			                    value : [2000, 11000, 25000, 21000],
+			                    name : "d",
+								itemStyle:{
+					            	normal:{color: "#a80c10"}
+					            }
+			                }
+			            ]
+			        }
+			    ]
+			};
+
+			public_chart.setOption(public_chart_option);
+		}
+
+		setPublicOption();
+
+		$scope.clickPublic0 = function() {
+			$scope.isPublicButton0Active = !$scope.isPublicButton0Active;
+
+			public_chart.chart['radar'].component.legend.setSelected("a", $scope.isPublicButton0Active);
+		}
+
+		$scope.clickPublic1 = function() {
+			$scope.isPublicButton1Active = !$scope.isPublicButton1Active;
+
+			public_chart.chart['radar'].component.legend.setSelected("b", $scope.isPublicButton1Active);
+		}
+
+		$scope.clickPublic2 = function() {
+			$scope.isPublicButton2Active = !$scope.isPublicButton2Active;
+
+			public_chart.chart['radar'].component.legend.setSelected("c", $scope.isPublicButton2Active);
+		}
+
+		$scope.clickPublic3 = function() {
+			$scope.isPublicButton3Active = !$scope.isPublicButton3Active;
+
+			public_chart.chart['radar'].component.legend.setSelected("d", $scope.isPublicButton3Active);
+		}
+
+		//var city_chart = echarts.init(document.getElementById('city_chart'), theme);
+
+		var setCityOption = function(color, data) {
+			var city_chart_option = {
+			    grid: {
+			    	borderWidth: 0,
+			    	x: 130,
+			    	y: 30,
+			    	y2: 20
+			    },
+			    xAxis : [
+			        {
+			            type : 'value',
+			            show: false
+			        }
+			    ],
+			    yAxis : [
+			        {
+			            type : 'category',
+			            axisLine: {show: false},
+			            splitLine: {show: false},
+			            data : ['police strength', 'risk control', 'firefighting', 'transportation', 'medical care service', 'government affairs', 'army']
+			        }
+			    ],
+			    series : [
+			        {
+			            name:'2011年',
+			            type:'bar',
+				                itemStyle:{
+					            	normal: {color: color}
+					            },
+			            data: data
+			        }
+			    ]
+			};
+
+			city_chart.setOption(city_chart_option);
+		}
+
+		//setCityOption("#2950f8", [58203, 43489, 39034, 14970, 21744, 38203, 23489]);
+
+		$scope.clickCity0 = function() {
+			$scope.isCityButtonActive = 0;
+
+		    setCityOption("#2950f8", [58203, 43489, 39034, 14970, 21744, 38203, 23489]);
+		}
+
+		$scope.clickCity1 = function() {
+			$scope.isCityButtonActive = 1;
+
+		    setCityOption("#9414b9", [38203, 13489, 29034, 54970, 31744, 18203, 33489]);
+		}
+
+		$scope.clickCity2 = function() {
+			$scope.isCityButtonActive = 2;
+
+		    setCityOption("#bf6210", [28203, 33489, 49034, 34970, 11744, 58203, 13489]);
+		}
+
+		$scope.clickCity3 = function() {
+			$scope.isCityButtonActive = 3;
+
+		    setCityOption("#a80c10", [18203, 23489, 29034, 14970, 31744, 18203, 23489]);
+		}
+
+		$scope.clickEmergency0 = function() {
+			$scope.isEmergencyButtonActive = 0;
+		}
+
+		$scope.clickEmergency1 = function() {
+			$scope.isEmergencyButtonActive = 1;
+
+			removeData();
+		}
+
+		$scope.clickEmergency2 = function() {
+			$scope.isEmergencyButtonActive = 2;
+
+			addData();
+		}
+
+		$scope.clickEmergency3 = function() {
+			$scope.isEmergencyButtonActive = 3;
+		}
+
+		$scope.clickEmergency4 = function() {
+			$scope.isEmergencyButtonActive = 4;
+		}
+
+		$scope.clickEmergency5 = function() {
+			$scope.isEmergencyButtonActive = 5;
+		}
+
+		$scope.clickEmergency6 = function() {
+			$scope.isEmergencyButtonActive = 6;
+		}
+
+		$scope.clickEmergency7 = function() {
+			$scope.isEmergencyButtonActive = 7;
+		}
+
+		$scope.clickEmergency8 = function() {
+			$scope.isEmergencyButtonActive = 8;
+		}
+
+		$scope.clickEmergency9 = function() {
+			$scope.isEmergencyButtonActive = 9;
+		}
+
+		$scope.clickPrediction = function() {
+			$("#prediction").animate({
+				bottom: "-97px"
+			}, "normal", "expoout");
+
+			$("#prediction_detail").animate({
+				bottom: "68px"
+			}, "normal", "expoout");
+		}
+
+		$scope.clickPredictionDetail = function() {
+			$("#prediction").animate({
+				bottom: "70px"
+			}, "normal", "expoout");
+
+			$("#prediction_detail").animate({
+				bottom: "-269px"
+			}, "normal", "expoout");
+		}
+
+		$scope.clickHeader = function() {
+			$("#prediction").animate({
+				bottom: "70px"
+			}, "normal", "expoout");
+
+			$("#prediction_detail").animate({
+				bottom: "-269px"
+			}, "normal", "expoout");
+
+			$("#development").animate({
+				left: "-422px"
+			}, "normal", "expoout");
+
+			$("#rescue").animate({
+				left: "-422px"
+			}, "normal", "expoout");
+
+			$("#trend").animate({
+				left: "-422px"
+			}, "normal", "expoout", function() {
+				$("#public").animate({
+					left: "15px"
+				}, "normal", "expoout");
+
+				$("#city").animate({
+					left: "15px"
+				}, "normal", "expoout");
+
+				$("#emergency").animate({
+					left: "15px"
+				}, "normal", "expoout");
+			});
+
+
+			$("#plan").animate({
+				right: "-357px"
+			}, "normal", "expoout");
+
+			$("#tracking").animate({
+				right: "-357px"
+			}, "normal", "expoout", function() {
+				$("#event").animate({
+					right: "5px"
+				}, "normal", "expoout");
+			});
+		}
+
+		$scope.clickEvent = function() {
+			$("#public").animate({
+				left: "-422px"
+			}, "normal", "expoout");
+
+			$("#city").animate({
+				left: "-422px"
+			}, "normal", "expoout");
+
+			$("#emergency").animate({
+				left: "-422px"
+			}, "normal", "expoout", function() {
+				$("#development").animate({
+					left: "15px"
+				}, "normal", "expoout");
+
+				$("#rescue").animate({
+					left: "15px"
+				}, "normal", "expoout");
+
+				$("#trend").animate({
+					left: "15px"
+				}, "normal", "expoout");
+			});
+
+
+
+			$("#event").animate({
+				right: "-357px"
+			}, "normal", "expoout", function() {
+				$("#plan").animate({
+					right: "5px"
+				}, "normal", "expoout");
+
+				$("#tracking").animate({
+					right: "5px"
+				}, "normal", "expoout");
+			});
+		}
+
+
+	});
+</script>

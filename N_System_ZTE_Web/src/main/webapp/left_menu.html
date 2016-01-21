@@ -1,0 +1,287 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ZTE</title>
+<link rel="stylesheet" href="css/app.css">
+<script src="js/jquery-1.9.1.min.js"></script>
+</head>
+
+
+<body class="left_menu">
+<div id="public_safety_and_security_index" class="public_safety_and_security_index_normal">
+	<div class="title"></div>
+	<div class="chart background"></div>
+	<div class="menu"></div>
+</div>
+<div id="monitoring_of_the_cloud" class="monitoring_of_the_cloud_normal">
+	<div class="title"></div>
+	<div class="tab"></div>
+</div>
+<div id="emergency_resources" class="emergency_resources_normal">
+	<div class="title"></div>
+    <div class="menu"></div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+	$(function() {
+		left_menu_select = -1;
+		public_safety_and_security_index_list = [];
+		monitoring_of_the_cloud_tab = [];
+		emergency_resources_list = [];
+
+		var checkLeftMenuSelect = function(value) {
+			if(left_menu_select == value) {
+				return;
+			}
+
+			left_menu_select = value;
+
+			$("#public_safety_and_security_index").removeClass("public_safety_and_security_index_active");
+			$("#monitoring_of_the_cloud").removeClass("monitoring_of_the_cloud_active");
+			$("#emergency_resources").removeClass("emergency_resources_active");
+
+			if(value == 0) {
+				$("#public_safety_and_security_index").addClass("public_safety_and_security_index_active");
+			} else if(value == 1) {
+				$("#monitoring_of_the_cloud").addClass("monitoring_of_the_cloud_active");
+			} else if(value == 2) {
+			$("#emergency_resources").addClass("emergency_resources_active");
+			}
+		}
+
+		var checkPublicSafetyAndSecurityIndexList = function(value) {
+			var select = -1;
+
+			for(var i = 0; i < public_safety_and_security_index_list.length; i++) {
+				if(public_safety_and_security_index_list[i] == value) {
+					select = i;
+					break;
+				}
+			}
+
+			if(select > -1) {
+				public_safety_and_security_index_list.splice(select, 1);
+			} else {
+				if(value > -1) {
+					public_safety_and_security_index_list.push(value);
+				}
+			}
+
+			$("#public_safety_and_security_index .button").each(function() {
+				var isExit = false;
+
+				for(var i = 0; i < public_safety_and_security_index_list.length; i++) {
+					if($(this).attr("value") == public_safety_and_security_index_list[i]) {
+						isExit = true;
+						break;
+					}
+				}
+
+				if(isExit) {
+					$(this).addClass("public_safety_and_security_index_button_" + $(this).attr("value") + "_active");
+					$(this).removeClass("public_safety_and_security_index_button_" + $(this).attr("value") + "_normal");
+
+					$("#public_safety_and_security_index_line_" + $(this).attr("value") + "").show();
+				} else {
+					$(this).addClass("public_safety_and_security_index_button_" + $(this).attr("value") + "_normal");
+					$(this).removeClass("public_safety_and_security_index_button_" + $(this).attr("value") + "_active");
+
+					$("#public_safety_and_security_index_line_" + $(this).attr("value") + "").hide();
+				}
+			});
+		}
+
+		$("#public_safety_and_security_index .title").click(function() {
+			if(left_menu_select != 0) {
+				checkLeftMenuSelect(0);
+
+				return;
+			}
+
+			if(public_safety_and_security_index_list.length > 0) {
+				public_safety_and_security_index_list = [];
+			} else {
+				$("#public_safety_and_security_index .button").each(function() {
+					public_safety_and_security_index_list.push($(this).attr("value"));
+				});
+			}
+
+			checkPublicSafetyAndSecurityIndexList(-1);
+		});
+
+		var checkMonitoringOfTheCloudTab = function(value) {
+			var select = -1;
+
+			if(monitoring_of_the_cloud_tab.length > 0 && monitoring_of_the_cloud_tab[0] == value) {
+				return;
+			}
+
+			monitoring_of_the_cloud_tab = [];
+
+			for(var i = 0; i < monitoring_of_the_cloud_tab.length; i++) {
+				if(monitoring_of_the_cloud_tab[i] == value) {
+					select = i;
+					break;
+				}
+			}
+
+			if(select > -1) {
+				monitoring_of_the_cloud_tab.splice(select, 1);
+			} else {
+				if(value > -1) {
+					monitoring_of_the_cloud_tab.push(value);
+				}
+			}
+
+			$("#monitoring_of_the_cloud .tab div").each(function() {
+				var isExit = false;
+
+				for(var i = 0; i < monitoring_of_the_cloud_tab.length; i++) {
+					if($(this).attr("value") == monitoring_of_the_cloud_tab[i]) {
+						isExit = true;
+						break;
+					}
+				}
+
+				if(isExit) {
+					$(this).addClass("monitoring_of_the_cloud_tab_" + $(this).attr("value") + "_active");
+					$(this).removeClass("monitoring_of_the_cloud_tab_" + $(this).attr("value") + "_normal");
+				} else {
+					$(this).addClass("monitoring_of_the_cloud_tab_" + $(this).attr("value") + "_normal");
+					$(this).removeClass("monitoring_of_the_cloud_tab_" + $(this).attr("value") + "_active");
+				}
+			});
+		}
+
+		$("#monitoring_of_the_cloud .title").click(function() {
+			if(left_menu_select != 1) {
+				checkLeftMenuSelect(1);
+
+				return;
+			}
+
+			checkMonitoringOfTheCloudTab(-1);
+		});
+
+		var checkEmergencyResourcesList = function(value) {
+			var select = -1;
+
+			for(var i = 0; i < emergency_resources_list.length; i++) {
+				if(emergency_resources_list[i] == value) {
+					select = i;
+					break;
+				}
+			}
+
+			if(select > -1) {
+				emergency_resources_list.splice(select, 1);
+			} else {
+				if(value > -1) {
+					emergency_resources_list.push(value);
+				}
+			}
+
+			$("#emergency_resources .button").each(function() {
+				var isExit = false;
+
+				for(var i = 0; i < emergency_resources_list.length; i++) {
+					if($(this).attr("value") == emergency_resources_list[i]) {
+						isExit = true;
+						break;
+					}
+				}
+
+				if(isExit) {
+					$(this).addClass("emergency_resources_button_" + $(this).attr("value") + "_active");
+					$(this).removeClass("emergency_resources_button_" + $(this).attr("value") + "_normal");
+				} else {
+					$(this).addClass("emergency_resources_button_" + $(this).attr("value") + "_normal");
+					$(this).removeClass("emergency_resources_button_" + $(this).attr("value") + "_active");
+				}
+			});
+		}
+
+		$("#emergency_resources .title").click(function() {
+			if(left_menu_select != 2) {
+				checkLeftMenuSelect(2);
+
+				return;
+			}
+
+			if(emergency_resources_list.length > 0) {
+				emergency_resources_list = [];
+			} else {
+				$("#emergency_resources .button").each(function() {
+					emergency_resources_list.push($(this).attr("value"));
+				});
+			}
+
+			checkEmergencyResourcesList(-1);
+		});
+
+		$.getJSON("data/app.json",function(json) {
+			$("#public_safety_and_security_index .title").html(json.public_safety_and_security_index.title);
+
+			$("#monitoring_of_the_cloud .title").html(json.monitoring_of_the_cloud.title);
+
+			$("#emergency_resources .title").html(json.emergency_resources.title);
+
+			var public_safety_and_security_index_chart = json.public_safety_and_security_index.chart;
+			var public_safety_and_security_index_chart_html = "";
+			for(var i = 0; i < public_safety_and_security_index_chart.length; i++) {
+				public_safety_and_security_index_chart_html += "<div id=\"public_safety_and_security_index_name_" + i + "\">" + public_safety_and_security_index_chart[i].name + "</div>";
+				public_safety_and_security_index_chart_html += "<div id=\"public_safety_and_security_index_line_" + i + "\" class=\"\"></div>";
+			}
+			$("#public_safety_and_security_index .chart").append(public_safety_and_security_index_chart_html);
+
+			var public_safety_and_security_index_button = json.public_safety_and_security_index.button;
+			var public_safety_and_security_index_button_html = "";
+			for(var i = 0; i < public_safety_and_security_index_button.length; i++) {
+				public_safety_and_security_index_list.push(i);
+
+				public_safety_and_security_index_button_html += "<div value=\"" + i + "\" class=\"button public_safety_and_security_index_button_" + i + "_active\">";
+				public_safety_and_security_index_button_html += "<div class=\"name\">" + public_safety_and_security_index_button[i].name + "</div>";
+				public_safety_and_security_index_button_html += "</div>";
+			}
+			$("#public_safety_and_security_index .menu").html(public_safety_and_security_index_button_html);
+
+			$("#public_safety_and_security_index .button").click(function() {
+				checkLeftMenuSelect(0);
+
+				checkPublicSafetyAndSecurityIndexList($(this).attr("value"));
+			});
+
+			var monitoring_of_the_cloud_tab = json.monitoring_of_the_cloud.tab;
+			var monitoring_of_the_cloud_tab_html = "";
+			for(var i = 0; i < monitoring_of_the_cloud_tab.length; i++) {
+				monitoring_of_the_cloud_tab_html += "<div value=\"" + i + "\" class=\"monitoring_of_the_cloud_tab_" + i + "_normal\">" + monitoring_of_the_cloud_tab[i].name + "</div>";
+			}
+			$("#monitoring_of_the_cloud .tab").html(monitoring_of_the_cloud_tab_html);
+
+			$("#monitoring_of_the_cloud .tab div").click(function() {
+				checkLeftMenuSelect(1);
+
+				checkMonitoringOfTheCloudTab($(this).attr("value"));
+			});
+
+			var emergency_resources_button = json.emergency_resources.button;
+			var emergency_resources_button_html = "";
+			for(var i = 0; i < emergency_resources_button.length; i++) {
+				emergency_resources_list.push(i);
+
+				emergency_resources_button_html += "<div value=\"" + i + "\" class=\"button emergency_resources_button_" + i + "_active\">";
+				emergency_resources_button_html += "<div class=\"name\">" + emergency_resources_button[i].name + "</div>";
+				emergency_resources_button_html += "</div>";
+			}
+			$("#emergency_resources .menu").html(emergency_resources_button_html);
+
+			$("#emergency_resources .button").click(function() {
+				checkLeftMenuSelect(2);
+
+				checkEmergencyResourcesList($(this).attr("value"));
+			});
+		});
+	});
+</script>

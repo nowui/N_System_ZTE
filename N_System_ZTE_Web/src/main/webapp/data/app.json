@@ -1,0 +1,81 @@
+{
+	"weather": {
+		"temperature": "7~12℃",
+		"wind": "CLEAR TO OVERCAST",
+		"location": "BEIJING"
+	},
+	"public_safety_and_security_index": {
+		"title": "PUBLIC SAFETY AND SECURITY INDEX",
+		"chart": [{
+			"name": "Natural disaster"
+		}, {
+			"name": "Public health and<br/> medical service"
+		}, {
+			"name": "Social security"
+		}, {
+			"name": "Accident disaster"
+		}],
+		"button": [{
+			"name": "Ordinary"
+		}, {
+			"name": "Serious"
+		}, {
+			"name": "Considerable"
+		}, {
+			"name": "Tremendous devastating"
+		}]
+	},
+	"monitoring_of_the_cloud": {
+		"title": "MONITORING OF THE CLOUD",
+		"tab": [{
+			"name": "Integrated pipeline"
+		}, {
+			"name": "The key infrastructure"
+		}, {
+			"name": "Mobile monitoring"
+		}]
+	},
+	"emergency_resources": {
+		"title": "EMERGENCY RESOURCES",
+		"button": [{
+			"name": "Police strength"
+		},{
+			"name": "The primary agency"
+		},{
+			"name": "Supporting agency"
+		},{
+			"name": "The oil and hazardous materials"
+		},{
+			"name": "Surveillance unit"
+		},{
+			"name": "The lif e-saving assistance"
+		},{
+			"name": "Mass care"
+		},{
+			"name": "Relief goods & resource support"
+		},{
+			"name": "Emergency agencies"
+		},{
+			"name": "The scenario commander center"
+		}]
+	},
+	"event_briefing": {
+		"title": "EVENT BRIEFING",
+		"list": [{
+			"name": "The series of attacks in Paris",
+			"time": "2015.12.25  12.30",
+			"image": "image/event_briefing_item_image.png",
+			"content": "Paris in the local time in the evening of 13 attacks, including seven shooting, six explosions, the tower crane theater hostage incident. Police launched a rescue and killed three of the attackers, but media reports say the incident resulted in 100 deaths.direct economic loss of 20 million yuan"
+		},{
+			"name": "The series of attacks in Paris",
+			"time": "2015.12.25  12.30",
+			"image": "image/event_briefing_item_image.png",
+			"content": "Paris in the local time in the evening of 13 attacks, including seven shooting, six explosions, the tower crane theater hostage incident. Police launched a rescue and killed three of the attackers, but media reports say the incident resulted in 100 deaths.direct economic loss of 20 million yuan"
+		},{
+			"name": "The series of attacks in Paris",
+			"time": "2015.12.25  12.30",
+			"image": "image/event_briefing_item_image.png",
+			"content": "Paris in the local time in the evening of 13 attacks, including seven shooting, six explosions, the tower crane theater hostage incident. Police launched a rescue and killed three of the attackers, but media reports say the incident resulted in 100 deaths.direct economic loss of 20 million yuan"
+		}]
+	}
+}

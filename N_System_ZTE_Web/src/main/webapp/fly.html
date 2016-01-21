@@ -1,0 +1,103 @@
+﻿<!DOCTYPE>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>飞行</title>
+		<script type="text/javascript" src="SuperMap.Include.js" ></script>
+		<script type="text/javascript">
+			var scene = null;
+			var sceneControl = null;
+			var htmlUrl = "http://122.96.155.202:18129";
+			var sceneUrl= htmlUrl + "/iserver/services/3D-RealspaceSample/rest/realspace";
+
+			function onPageLoad()
+			{
+				//初始化三维场景控件
+				try
+				{
+				    //初始化三维场景控件实例,参数为包含控件的HTML元素
+				    sceneControl = new SuperMap.Web.UI.Controls.SceneControl($get("sceneControlDiv"), initCallback, failedCallback);
+				}
+				catch(e)
+                {
+                    //若没有安装插件，则抛出该异常
+                    if (e.name == SuperMap.Web.Realspace.ExceptionName.PlugInNotInstalled)
+                    {
+                        var url = htmlUrl + "/iserver/iClient/for3D/Setup.exe";
+                        document.write("<a href='"+url+"'>未检测到 SuperMap iClient3D for  Plugin 插件，请单击此处下载并安装插件。</a>");
+                        return;
+                    }
+                    //若使用非IE浏览器，则抛出该异常
+                    else if (e.name == SuperMap.Web.Realspace.ExceptionName.BrowserNotSupport)
+                    {
+                        document.write("<p>SuperMap iClient3D for  Plugin 目前仅支持 InternetExplorer 浏览器，请更换浏览器后重新尝试加载本页面。</p>");
+                        return;
+                    }
+                    //抛出其他异常
+                    else
+                    {
+                        alert(e.message);
+                    }
+
+                }
+
+			}
+
+			//控件初始化完成后的回调函数，初始化完成之后才能进行数据加载
+			function initCallback()
+			{
+				scene = sceneControl.get_scene();
+				//指定场景的服务器地址
+				var sceneAddress = sceneUrl;
+
+				//指定图层名称
+				var sceneName = "scene";
+
+				//打开场景
+				scene.open(sceneAddress, sceneName);
+				//获取场景中的图层
+
+			 //var bound = new SuperMap.Bounds(116.203953, 39.523575, 116.212675, 39.535796);
+			   //  scene.get_flyingOperator().flyToBounds(bound);
+
+				setTimeout(fly(), 10000);
+
+			}
+
+			//控件初始化失败后的回调函数
+			function failedCallback()
+			{
+			    alert("Realspace initialized failed!");
+			}
+			function fly()
+			{
+				//从页面获取相机的经纬度和高程值
+				var longitude = 116.38822222222223;
+				var latitude = 39.99008055555556;
+				var altitude = 1000;
+
+				//从页面获取飞行的时间
+				var time = 2;
+                time *= 1000;
+
+				var mode = SuperMap.Web.Realspace.FlyingMode.CAMERA_NORMAL;
+
+                //新建相机对象
+                var camera = new SuperMap.Web.Realspace.Camera(longitude, latitude,altitude);
+
+                //调用飞行操作器进行飞行
+                scene.get_flyingOperator().flyTo(camera,time,mode);
+			}
+			</script>
+	</head>
+
+	<body onLoad="onPageLoad()">
+		<!--<div id="flyWindow" style="position:absolute;top:5px;float:left">
+			<input id="fly" type="button" value="飞行" onClick="fly()" />
+		</div>-->
+		<div id="sceneControlDiv" style="position:absolute;top:0px;bottom:0px;left:0px;right:0px;float:left">
+		</div>
+	</body>
+
+</html>
