@@ -11,36 +11,25 @@
 
 
 <body class="right_menu">
-<div id="event_briefing">
+<div id="event_briefing" class="event_briefing_normal">
 	<div class="title"></div>
-	<div class="list">
-		<div class="item">
-			<div class="item_name">The series of attacks in Paris</div>
-			<div class="item_time">2015.12.25  12.30</div>
-        	<div class="item_image"><img src="image/event_briefing_item_image.png"/></div>
-        	<div class="item_content"></div>
-		</div>
-		<div class="item">
-			<div class="item_name">The series of attacks in Paris</div>
-			<div class="item_time">2015.12.25  12.30</div>
-        	<div class="item_image"><img src="image/event_briefing_item_image.png"/></div>
-        	<div class="item_content">Paris in the local time in the evening of 13 attacks, including seven shooting, six explosions, the tower crane theater hostage incident. Police launched a rescue and killed three of the attackers, but media reports say the incident resulted in 100 deaths.direct economic loss of 20 million yuan</div>
-		</div>
-		<div class="item">
-			<div class="item_name">The series of attacks in Paris</div>
-			<div class="item_time">2015.12.25  12.30</div>
-        	<div class="item_image"><img src="image/event_briefing_item_image.png"/></div>
-        	<div class="item_content">Paris in the local time in the evening of 13 attacks, including seven shooting, six explosions, the tower crane theater hostage incident. Police launched a rescue and killed three of the attackers, but media reports say the incident resulted in 100 deaths.direct economic loss of 20 million yuan</div>
-		</div>
-	</div>
+	<div class="list"></div>
 </div>
 </body>
 </html>
 <script type="text/javascript">
 	$(function() {
 		$("body").addClass("dark");
-		$.mCustomScrollbar.defaults.scrollButtons.enable=true;
-		$.mCustomScrollbar.defaults.axis="yx";
+		$.mCustomScrollbar.defaults.scrollButtons.enable = true;
+		$.mCustomScrollbar.defaults.axis="y";
+
+		var reset = function() {
+			$("#event_briefing").removeClass("event_briefing_active");
+		}
+
+		var checkEventBriefing = function(value) {
+			$("#event_briefing").addClass("event_briefing_active");
+		}
 
 		$.getJSON("data/app.json",function(json) {
 			$("#event_briefing .title").html(json.event_briefing.title);
@@ -48,7 +37,7 @@
 			var list = json.event_briefing.list;
 			var html = "";
 			for(var i = 0; i < list.length; i++) {
-				html += "<div class=\"item\">";
+				html += "<div class=\"item\" value=\"" + i + "\">";
 				html += "<div class=\"item_name\">" + list[i].name + "</div>";
 				html += "<div class=\"item_time\">" + list[i].time + "</div>";
 				html += "<div class=\"item_image\"><img src=\"" + list[i].image + "\"/></div>";
@@ -58,6 +47,12 @@
 			$("#event_briefing .list").html(html);
 
 			$("#event_briefing .list").mCustomScrollbar({theme:"dark"});
+
+			$("#event_briefing .item").click(function() {
+				//alert($(this).attr("value"));
+				//checkEventBriefing();
+				window.parent.clickRightMenu($(this).attr("value"));
+			});
 		});
 	});
 </script>

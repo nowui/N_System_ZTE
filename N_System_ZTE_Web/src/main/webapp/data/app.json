@@ -28,11 +28,41 @@
 	"monitoring_of_the_cloud": {
 		"title": "MONITORING OF THE CLOUD",
 		"tab": [{
-			"name": "Integrated pipeline"
+			"name": "Integrated pipeline",
+			"button": [{
+				"name": "Natural gas",
+				"line_height": "30px"
+			}, {
+				"name": "Water supply",
+				"line_height": "30px"
+			}, {
+				"name": "Oil pipeline",
+				"line_height": "30px"
+			}]
 		}, {
-			"name": "The key infrastructure"
+			"name": "The key infrastructure",
+			"button": [{
+				"name": "Nuclear power plant",
+				"line_height": "14px"
+			}, {
+				"name": "The three gorges dam",
+				"line_height": "14px"
+			}, {
+				"name": "Nanjing yangtze river bridge",
+				"line_height": "14px"
+			}]
 		}, {
-			"name": "Mobile monitoring"
+			"name": "Mobile monitoring",
+			"button": [{
+				"name": "Unmanned plane",
+				"line_height": "30px"
+			}, {
+				"name": "Helicopter",
+				"line_height": "30px"
+			}, {
+				"name": "Unmanned airship",
+				"line_height": "30px"
+			}]
 		}]
 	},
 	"emergency_resources": {

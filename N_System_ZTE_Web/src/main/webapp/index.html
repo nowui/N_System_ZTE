@@ -14,6 +14,13 @@
 </head>
 
 <body onLoad="onPageLoad()">
+    <div id="map"></div>
+    <iframe id="left_navigation" frameborder="0" scrolling="no" src="left_navigation.html" ></iframe>
+    <iframe id="left_menu" frameborder="0" scrolling="no" src="left_menu.html" ></iframe>
+    <iframe id="left_menu_war_0" frameborder="0" scrolling="no" src="left_menu_war_0.html" ></iframe>
+    <iframe id="right_navigation" ng-click="clickLeftNavigation();" frameborder="0" scrolling="no" src="right_navigation.html" ></iframe>
+    <iframe id="right_menu" frameborder="0" scrolling="no" src="right_menu.html" ></iframe>
+    <iframe id="right_menu_war_0" frameborder="0" scrolling="no" src="right_menu_war_0.html" ></iframe>
     <div id="header">
     	<div id="weather_icon"><img src="image/weather.png" ></div>
     	<div id="temperature"></div>
@@ -27,13 +34,204 @@
     		<div id="week"></div>
     	</div>
     </div>
-    <div id="map"></div>
-    <iframe id="left_navigation" frameborder="0" scrolling="no" src="left_navigation.html" ></iframe>
-    <iframe id="left_menu" frameborder="0" scrolling="no" src="left_menu.html" ></iframe>
-    <iframe id="right_navigation" ng-click="clickLeftNavigation();" frameborder="0" scrolling="no" src="right_navigation.html" ></iframe>
-    <iframe id="right_menu" frameborder="0" scrolling="no" src="right_menu.html" ></iframe>
     <div id="footer"></div>
 </body>
-    <script src="js/app.js"></script>
 
 </html>
+<script type="text/javascript">
+	$(function() {
+		isShowLeft = false;
+		isShowRight = false;
+		selectEvent = -1;
+
+		$.getJSON("data/app.json",function(json) {
+			$("#temperature").html(json.weather.temperature);
+			$("#wind").html(json.weather.wind);
+			$("#location").html(json.weather.location);
+		});
+
+		var checkDatetime = function() {
+			var date = new Date();
+			var year = date.getFullYear();
+			var month = date.getMonth();
+			var day = date.getDate();
+			var week = date.getDay();
+			var hour = date.getHours();
+			var minute = date.getMinutes();
+			var second = date.getSeconds();
+
+			month++;
+			if(month < 10) {
+				month = "0" + month;
+			}
+
+			if(day < 10) {
+				day = "0" + day;
+			}
+
+			if(hour < 10) {
+				hour = "0" + hour;
+			}
+
+			if(minute < 10) {
+				minute = "0" + minute;
+			}
+
+			var dayString = year + "." + month + "." + day;
+			var weekString = "";
+			var timeString = hour + ":" + minute;
+
+			switch(week) {
+				case 1:
+					weekString = "MONDAY";
+					break;
+				case 2:
+					weekString = "TUESDAY";
+					break;
+				case 3:
+					weekString = "WEDNESDAY";
+					break;
+				case 4:
+					weekString = "THURSDAY";
+					break;
+				case 5:
+					weekString = "FRIDAY";
+					break;
+				case 6:
+					weekString = "SATURDAY";
+					break;
+				case 0:
+					weekString = "SUNDAY";
+					break;
+			}
+
+			$("#day").html(dayString);
+			$("#week").html(weekString);
+			$("#time").html(timeString);
+
+			setTimeout(function() {
+	            checkDatetime();
+	        }, 1000);
+		}
+
+		checkDatetime();
+
+		clickLeftNavigation = function(isChange) {
+			if(isChange) {
+				$("#left_navigation").animate({
+					left: "0px"
+				}, "normal", "expoout", function() {
+					isShowLeft = false;
+
+					showLeft();
+				});
+
+				$("#left_menu").animate({
+					left: "-489px"
+				}, "normal", "expoout", function() {
+
+				});
+
+				$("#left_menu_war_0").animate({
+					left: "-489px"
+				}, "normal", "expoout", function() {
+
+				});
+			} else {
+				showLeft();
+			}
+		}
+
+		showLeft = function() {
+			$("#left_navigation")[0].contentWindow.showAcitve(! isShowLeft);
+
+			$("#left_navigation").animate({
+				left: isShowLeft ? "0px" : "489px"
+			}, "normal", "expoout", function() {
+				isShowLeft = !isShowLeft;
+			});
+
+			if(selectEvent == -1) {
+				$("#left_menu").animate({
+					left: isShowLeft ? "-489px" : "0px"
+				}, "normal", "expoout", function() {
+
+				});
+			} else if(selectEvent == 0) {
+				$("#left_menu_war_0").animate({
+					left: isShowLeft ? "-489px" : "0px"
+				}, "normal", "expoout", function() {
+
+				});
+			}
+		}
+
+		clickRightNavigation = function(isChange) {
+			if(isChange) {
+				$("#right_navigation").animate({
+					right: "0px"
+				}, "normal", "expoout", function() {
+					isShowRight = false;
+
+					showRight();
+				});
+
+				$("#right_menu").animate({
+					right: "-409px"
+				}, "normal", "expoout", function() {
+
+				});
+
+				$("#right_menu_war_0").animate({
+					right: "-499px"
+				}, "normal", "expoout", function() {
+
+				});
+			} else {
+				showRight();
+			}
+		}
+
+		showRight = function() {
+			$("#right_navigation")[0].contentWindow.showAcitve(! isShowRight);
+
+			$("#right_navigation").animate({
+				right: isShowRight ? "0px" : (selectEvent == -1 ? "409px" : "499px")
+			}, "normal", "expoout", function() {
+				isShowRight = !isShowRight;
+			});
+
+			if(selectEvent == -1) {
+				$("#right_menu").animate({
+					right: isShowRight ? "-409px" : "0px"
+				}, "normal", "expoout", function() {
+
+				});
+			} else if(selectEvent == 0) {
+				$("#right_menu_war_0").animate({
+					right: isShowRight ? "-499px" : "0px"
+				}, "normal", "expoout", function() {
+
+				});
+			}
+		}
+
+		clickRightMenu = function(value) {
+			selectEvent = value;
+
+			clickLeftNavigation(true);
+
+			clickRightNavigation(true);
+		}
+
+		$("#header").click(function() {
+			if(selectEvent > -1) {
+				selectEvent = -1;
+
+				clickLeftNavigation(true);
+
+				clickRightNavigation(true);
+			}
+		});
+	});
+</script>
