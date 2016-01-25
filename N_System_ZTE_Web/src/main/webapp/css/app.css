@@ -786,10 +786,82 @@ body {
     cursor: pointer;
 }
 
+#the_optimal_time_for_rescue .time {
+	position: absolute;
+	margin-top: 70px;
+	margin-left: 25px;
+	width: 375px;
+	color: #ff3000;
+	font-size: 60px;
+	font-family: "HelveticaNeueLTPro Lt";
+	text-align: center;
+}
+
+#the_optimal_time_for_rescue .content {
+	position: absolute;
+	margin-top: 140px;
+	margin-left: 25px;
+}
+
+#the_optimal_time_for_rescue .button {
+	margin-top: 15px;
+	padding-left: 25px;
+	width: 257px;
+	height: 30px;
+	line-height: 30px;
+}
+
+.the_optimal_time_for_rescue_button_normal {
+    background-image: url("../image/the_optimal_time_for_rescue_button.png");
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+.the_optimal_time_for_rescue_button_active {
+    background-image: url("../image/the_optimal_time_for_rescue_button_active.png");
+    background-repeat: no-repeat;
+    background-position: top center;
+    color: #ffffff;
+}
+
 #event_trend {
 	margin-left: 25px;
 	width: 422px;
 	height: 288px;
+}
+
+#event_trend .content {
+	position: absolute;
+	margin-top: 50px;
+	margin-left: 25px;
+}
+
+#event_trend .text {
+	margin-top: 10px;
+	margin-left: 12px;
+	width: 370px;
+	font-size: 12px;
+}
+
+#event_trend .button {
+	margin-top: 15px;
+	padding-left: 25px;
+	width: 257px;
+	height: 30px;
+	line-height: 30px;
+}
+
+.event_trend_button_normal {
+    background-image: url("../image/event_trend_button.png");
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+.event_trend_button_active {
+    background-image: url("../image/event_trend_button_active.png");
+    background-repeat: no-repeat;
+    background-position: top center;
+    color: #ffffff;
 }
 
 .event_trend_normal {
@@ -812,7 +884,7 @@ body {
 #right_menu_war_0 {
 	position: absolute;
 	top: 0px;
-	right: -499px;
+	//right: -499px;
 	width: 499px;
 	height: 100%;
 }
@@ -824,7 +896,7 @@ body {
 
 #zonghe_chuzhi_fangan {
 	margin-top: 124px;
-	margin-left: 42px;
+	margin-left: 37px;
 	width: 434px;
 	height: 536px;
 }
@@ -846,18 +918,18 @@ body {
 }
 
 #command_requirement {
-	margin-left: 42px;
+	margin-left: 37px;
 	width: 434px;
 	height: 536px;
 }
 
-.command_normal {
+.command_active {
     background-image: url("../image/command.png");
     background-repeat: no-repeat;
 }
 
-.command_active {
-    background-image: url("../image/command_active.png");
+.requirement_active {
+    background-image: url("../image/requirement.png");
     background-repeat: no-repeat;
 }
 
@@ -869,7 +941,7 @@ body {
 
 #command_title {
 	float: left;
-	width: 150px;
+	width: 145px;
     cursor: pointer;
 }
 

@@ -14,7 +14,7 @@
 <div id="zonghe_chuzhi_fangan" class="zonghe_chuzhi_fangan_normal">
 	<div class="title">ZONGHE CHUZHI FANGAN</div>
 </div>
-<div id="command_requirement" class="command_normal">
+<div id="command_requirement" class="command_active">
 	<div class="title">
 		<div id="command_title" class="command_title_active">COMMAND</div>
 		<div id="requirement_title" class="requirement_title_normal">REQUIREMENT</div>
@@ -24,6 +24,22 @@
 </html>
 <script type="text/javascript">
 	$(function() {
+		$("#command_title").click(function() {
+			$("#command_requirement").removeClass("requirement_active");
 
+			$("#command_title").addClass("command_title_active");
+			$("#command_title").removeClass("command_title_normal");
+			$("#requirement_title").addClass("requirement_title_normal");
+			$("#requirement_title").removeClass("requirement_title_active");
+		});
+
+		$("#requirement_title").click(function() {
+			$("#command_requirement").addClass("requirement_active");
+
+			$("#command_title").addClass("command_title_normal");
+			$("#command_title").removeClass("command_title_active");
+			$("#requirement_title").addClass("requirement_title_active");
+			$("#requirement_title").removeClass("requirement_title_normal");
+		});
 	});
 </script>
