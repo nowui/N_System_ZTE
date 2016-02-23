@@ -12,18 +12,61 @@
 
 <body class="right_menu_war_0">
 <div id="zonghe_chuzhi_fangan" class="zonghe_chuzhi_fangan_normal">
-	<div class="title">ZONGHE CHUZHI FANGAN</div>
+	<div class="title"></div>
+	<div class="content"></div>
 </div>
 <div id="command_requirement" class="command_active">
 	<div class="title">
-		<div id="command_title" class="command_title_active">COMMAND</div>
-		<div id="requirement_title" class="requirement_title_normal">REQUIREMENT</div>
+		<div id="command_title" class="command_title_active">
+		</div>
+		<div id="requirement_title" class="requirement_title_normal"></div>
+	</div>
+	<div id="command_content">
+		<div class="list">
+			<div class="image"><img src="/image/people_0.png" /></div>
+			<div class="content">
+				<div>Budui duizhang: 12/19/2015 10:29:52</div>
+				<div>But media reports say incident.Recently, the G15 Shen highway.</div>
+			</div>
+			<div style="font: 0px/0px sans-serif;clear: both;display: block"> </div>
+		</div>
+		<div class="list">
+			<div class="image"></div>
+			<div class="content">
+				<div class="children_image"><img src="/image/people_0.png" /></div>
+				<div class="children_content">
+					<div>Budui duizhang: 12/19/2015 10:29:52</div>
+					<div>But media reports say incident.Recently, the G15 Shen highway.</div>
+				</div>
+			</div>
+			<div style="font: 0px/0px sans-serif;clear: both;display: block"> </div>
+		</div>
+		<div class="list">
+			<div class="image"><img src="/image/people_0.png" /></div>
+			<div class="content">
+				<div>Budui duizhang: 12/19/2015 10:29:52</div>
+				<div>But media reports say incident.Recently, the G15 Shen highway.</div>
+			</div>
+			<div style="font: 0px/0px sans-serif;clear: both;display: block"> </div>
+		</div>
+		<div class="list">
+			<div class="image"><img src="/image/people_0.png" /></div>
+			<div class="content">
+				<div>Budui duizhang: 12/19/2015 10:29:52</div>
+				<div>But media reports say incident.Recently, the G15 Shen highway.</div>
+			</div>
+			<div style="font: 0px/0px sans-serif;clear: both;display: block"> </div>
+		</div>
+	</div>
+	<div id="requirement_content">
 	</div>
 </div>
 </body>
 </html>
 <script type="text/javascript">
 	$(function() {
+		$("#requirement_content").hide();
+
 		$("#command_title").click(function() {
 			$("#command_requirement").removeClass("requirement_active");
 
@@ -31,6 +74,9 @@
 			$("#command_title").removeClass("command_title_normal");
 			$("#requirement_title").addClass("requirement_title_normal");
 			$("#requirement_title").removeClass("requirement_title_active");
+
+			$("#command_content").show();
+			$("#requirement_content").hide();
 		});
 
 		$("#requirement_title").click(function() {
@@ -40,6 +86,18 @@
 			$("#command_title").removeClass("command_title_active");
 			$("#requirement_title").addClass("requirement_title_active");
 			$("#requirement_title").removeClass("requirement_title_normal");
+
+			$("#command_content").hide();
+			$("#requirement_content").show();
+		});
+
+		$.getJSON("data/app.json",function(json) {
+			$("#zonghe_chuzhi_fangan .title").html(json.zonghe_chuzhi_fangan.title);
+			$("#zonghe_chuzhi_fangan .content").html(json.zonghe_chuzhi_fangan.content);
+
+
+			$("#command_title").html(json.command.title);
+			$("#requirement_title").html(json.requirement.title);
 		});
 	});
 </script>

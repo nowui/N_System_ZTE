@@ -1,0 +1,278 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ZTE</title>
+<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/app.js"></script>
+</head>
+
+
+<body class="left_menu_war_0">
+<div id="latest_developments" class="latest_developments_normal">
+	<div class="title"></div>
+	<div class="video">
+		<div class="list">
+		</div>
+	</div>
+	<div class="html">
+		<span style="color:#ffffff;">Yi chuzhi xinxi</span><br/>Paris in the local time in the evening of 13 attacks,including seven shooting, six explosions,theater hostage incident. Police rescue and killed three<br/><span style="color:#ff3000;">Wei chuzhi xinxi</span><br/>Paris in the local time in the evening of 13 attacks,including seven shooting, six explosions, theater hostage incident. Police rescue and killed three<br/><span style="color:#ffc000;">Zaiqing  tongji</span>
+		<table width="100%" border="0" cellspacing="1" cellpadding="0">
+			<tr>
+				<td>casualties</td>
+				<td>casualties</td>
+				<td>casualties</td>
+				<td>casualties</td>
+				<td>casualties</td>
+			</tr>
+			<tr>
+				<td>60</td>
+				<td>80</td>
+				<td>8.000</td>
+				<td>60</td>
+				<td>2.000.000</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div id="the_optimal_time_for_rescue" class="the_optimal_time_for_rescue_normal">
+	<div class="title"></div>
+	<div id="fnTimeCountDown" class="time">
+        <span class="hour">00</span>:
+        <span class="mini">00</span>:
+        <span class="sec">00</span>.
+        <span class="hm">00</span>
+    </div>
+	<div class="content">
+		<div>The rescue agencies:</div>
+	</div>
+</div>
+<div id="event_trend" class="event_trend_normal">
+	<div class="title"></div>
+	<div class="content">
+	</div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+	$(function() {
+		left_menu_war_0_select = -1;
+		the_optimal_time_for_rescue_button = [];
+		event_trend_button = [];
+
+		reset = function() {
+			checkLeftWar0MenuSelect(-1);
+		}
+
+		var checkLeftWar0MenuSelect = function(value) {
+			if(left_menu_war_0_select == value) {
+				return;
+			}
+
+			left_menu_war_0_select = value;
+
+			$("#latest_developments").removeClass("latest_developments_active");
+			$("#the_optimal_time_for_rescue").removeClass("the_optimal_time_for_rescue_active");
+			$("#event_trend").removeClass("event_trend_active");
+
+			if(value == 0) {
+				$("#latest_developments").addClass("latest_developments_active");
+			} else if(value == 1) {
+				$("#the_optimal_time_for_rescue").addClass("the_optimal_time_for_rescue_active");
+			} else if(value == 2) {
+				$("#event_trend").addClass("event_trend_active");
+			}
+		}
+
+		var checkTheOptimalTimeForRescue = function(value) {
+			var select = -1;
+
+			the_optimal_time_for_rescue_button = [];
+
+			for(var i = 0; i < the_optimal_time_for_rescue_button.length; i++) {
+				if(the_optimal_time_for_rescue_button[i] == value) {
+					select = i;
+					break;
+				}
+			}
+
+			if(select > -1) {
+				the_optimal_time_for_rescue_button.splice(select, 1);
+			} else {
+				if(value > -1) {
+					the_optimal_time_for_rescue_button.push(value);
+				}
+			}
+
+			//checkEmergencyResourcesIcon();
+
+			$("#the_optimal_time_for_rescue .button").each(function() {
+				var isExit = false;
+
+				for(var i = 0; i < the_optimal_time_for_rescue_button.length; i++) {
+					if($(this).attr("value") == the_optimal_time_for_rescue_button[i]) {
+						isExit = true;
+						break;
+					}
+				}
+
+				if(isExit) {
+					$(this).addClass("the_optimal_time_for_rescue_button_active");
+					$(this).removeClass("the_optimal_time_for_rescue_button_normal");
+				} else {
+					$(this).addClass("the_optimal_time_for_rescue_button_normal");
+					$(this).removeClass("the_optimal_time_for_rescue_button_active");
+				}
+			});
+		}
+
+		var checkEventTrend = function(value) {
+			var select = -1;
+
+			event_trend_button = [];
+
+			for(var i = 0; i < event_trend_button.length; i++) {
+				if(event_trend_button[i] == value) {
+					select = i;
+					break;
+				}
+			}
+
+			if(select > -1) {
+				event_trend_button.splice(select, 1);
+			} else {
+				if(value > -1) {
+					event_trend_button.push(value);
+				}
+			}
+
+			//checkEmergencyResourcesIcon();
+
+			$("#event_trend .button").each(function() {
+				var isExit = false;
+
+				for(var i = 0; i < event_trend_button.length; i++) {
+					if($(this).attr("value") == event_trend_button[i]) {
+						isExit = true;
+						break;
+					}
+				}
+
+				if(isExit) {
+					$(this).addClass("event_trend_button_active");
+					$(this).removeClass("event_trend_button_normal");
+				} else {
+					$(this).addClass("event_trend_button_normal");
+					$(this).removeClass("event_trend_button_active");
+				}
+			});
+		}
+
+		$("body").addClass("dark");
+		$.mCustomScrollbar.defaults.scrollButtons.enable = true;
+		$.mCustomScrollbar.defaults.axis="x";
+
+		$("#latest_developments .video").mCustomScrollbar({theme:"dark"});
+
+		//2018/07/08 18:45:13
+		//2016/01/19 22:07:39
+		var d = new Date();
+		d.setMonth(d.getMonth() + 1);
+		d.setHours(d.getHours() + 72);
+		//alert(d.getFullYear() + "/" + d.getMonth() + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + "");
+
+		$("#fnTimeCountDown").fnTimeCountDown(d.getFullYear() + "/" + d.getMonth() + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + "");
+
+
+
+		$("#the_optimal_time_for_rescue .title").click(function() {
+			if(left_menu_war_0_select != 1) {
+				checkLeftWar0MenuSelect(1);
+
+				//checkEmergencyResourcesIcon();
+
+				return;
+			}
+		});
+
+		$("#latest_developments .title").click(function() {
+			if(left_menu_war_0_select != 0) {
+				checkLeftWar0MenuSelect(0);
+
+				//checkEmergencyResourcesIcon();
+
+				return;
+			}
+		});
+
+		$("#event_trend .title").click(function() {
+			if(left_menu_war_0_select != 2) {
+				checkLeftWar0MenuSelect(2);
+
+				//checkEmergencyResourcesIcon();
+
+				return;
+			}
+		});
+
+		$.getJSON("data/app.json",function(json) {
+			$("#latest_developments .title").html(json.latest_developments.title);
+
+			var latest_developments_video_json = json.latest_developments.video;
+			var latest_developments_video_json_html = "";
+			for(var i = 0; i < latest_developments_video_json.length; i++) {
+				latest_developments_video_json_html += "<div class=\"item\" value=\"" + latest_developments_video_json[i].value + "\"><img src=\"" + latest_developments_video_json[i].image + "\" />";
+				latest_developments_video_json_html += "</div>";
+			}
+			$("#latest_developments .list").append(latest_developments_video_json_html);
+
+			$("#latest_developments .item").click(function() {
+				window.parent.showVideo($(this).attr("value"));
+			})
+
+			$("#the_optimal_time_for_rescue .title").html(json.the_optimal_time_for_rescue.title);
+
+			var the_optimal_time_for_rescue_button_json = json.the_optimal_time_for_rescue.button;
+			var the_optimal_time_for_rescue_button_json_html = "";
+			for(var i = 0; i < the_optimal_time_for_rescue_button_json.length; i++) {
+				the_optimal_time_for_rescue_button.push(i);
+
+				the_optimal_time_for_rescue_button_json_html += "<div value=\"" + i + "\" class=\"button the_optimal_time_for_rescue_button_normal\">";
+				the_optimal_time_for_rescue_button_json_html += the_optimal_time_for_rescue_button_json[i].name;
+				the_optimal_time_for_rescue_button_json_html += "</div>";
+			}
+			$("#the_optimal_time_for_rescue .content").append(the_optimal_time_for_rescue_button_json_html);
+
+			$("#the_optimal_time_for_rescue .button").click(function() {
+				checkLeftWar0MenuSelect(1);
+
+				checkTheOptimalTimeForRescue($(this).attr("value"));
+			});
+
+			$("#event_trend .title").html(json.event_trend.title);
+
+			var event_trend_button_json = json.event_trend.button;
+			var event_trend_button_json_html = "";
+			for(var i = 0; i < event_trend_button_json.length; i++) {
+				event_trend_button.push(i);
+
+				event_trend_button_json_html += "<div value=\"" + i + "\" class=\"button event_trend_button_normal\">";
+				event_trend_button_json_html += event_trend_button_json[i].name;
+				event_trend_button_json_html += "</div>";
+				event_trend_button_json_html += "<div class=\"text\">";
+				event_trend_button_json_html += event_trend_button_json[i].text;
+				event_trend_button_json_html += "</div>";
+			}
+			$("#event_trend .content").append(event_trend_button_json_html);
+
+			$("#event_trend .button").click(function() {
+				checkLeftWar0MenuSelect(2);
+
+				checkEventTrend($(this).attr("value"));
+			});
+		});
+	});
+</script>

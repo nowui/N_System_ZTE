@@ -4,13 +4,15 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=8" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>三维场景浏览</title>
+    <title>PUBLIC SAFETY DASHBOARD</title>
+    <link rel="stylesheet" href="css/video-js.css">
     <link rel="stylesheet" href="css/app.css">
 	<script src="js/jquery-1.9.1.min.js"></script>
     <script src="js/jquery.easing.min.js"></script>
     <script src="js/jquery.easing.compatibility.js"></script>
     <script type="text/javascript" src="js/SuperMap.Include.js"></script>
     <script src="js/gis.js"></script>
+    <script src="js/app.js"></script>
 </head>
 
 <body onLoad="onPageLoad()">
@@ -18,9 +20,13 @@
     <iframe id="left_navigation" frameborder="0" scrolling="no" src="left_navigation.html" ></iframe>
     <iframe id="left_menu" frameborder="0" scrolling="no" src="left_menu.html" ></iframe>
     <iframe id="left_menu_war_0" frameborder="0" scrolling="no" src="left_menu_war_0.html" ></iframe>
+    <iframe id="left_menu_war_1" frameborder="0" scrolling="no" src="left_menu_war_1.html" ></iframe>
+    <iframe id="left_menu_war_2" frameborder="0" scrolling="no" src="left_menu_war_2.html" ></iframe>
     <iframe id="right_navigation" ng-click="clickLeftNavigation();" frameborder="0" scrolling="no" src="right_navigation.html" ></iframe>
     <iframe id="right_menu" frameborder="0" scrolling="no" src="right_menu.html" ></iframe>
     <iframe id="right_menu_war_0" frameborder="0" scrolling="no" src="right_menu_war_0.html" ></iframe>
+    <iframe id="right_menu_war_1" frameborder="0" scrolling="no" src="right_menu_war_1.html" ></iframe>
+    <iframe id="right_menu_war_2" frameborder="0" scrolling="no" src="right_menu_war_2.html" ></iframe>
     <div id="header">
     	<div id="weather_icon"><img src="image/weather.png" ></div>
     	<div id="temperature"></div>
@@ -33,8 +39,11 @@
     		<div id="day"></div>
     		<div id="week"></div>
     	</div>
+    	<div id="title"></div>
     </div>
     <div id="footer"></div>
+    <iframe id="mask" style="-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);filter:alpha(opacity=50);position: absolute;top:0px;left:0px;height:100%;width:100%;"  frameborder="0" scrolling="no" src="mask.html"></iframe>
+    <iframe id="video" style="position: absolute; width: 640px; height: 264px; top: 50%; left: 50%; margin-top: -132px; margin-left: -320px;"  frameborder="0" scrolling="no" src=""></iframe>
 </body>
 
 </html>
@@ -43,6 +52,9 @@
 		isShowLeft = false;
 		isShowRight = false;
 		selectEvent = -1;
+
+		$("#mask").hide();
+		$("#video").hide();
 
 		$.getJSON("data/app.json",function(json) {
 			$("#temperature").html(json.weather.temperature);
@@ -116,6 +128,25 @@
 
 		checkDatetime();
 
+		checkHeaderText = function(value) {
+			$("#title").removeClass("header_title_0");
+			$("#title").removeClass("header_title_1");
+			$("#title").removeClass("header_title_2");
+			$("#title").removeClass("header_title_3");
+
+			if(value == -1) {
+				$("#title").addClass("header_title_0");
+			} else if(value == 0) {
+				$("#title").addClass("header_title_1");
+			} else if(value == 1) {
+				$("#title").addClass("header_title_2");
+			} else if(value == 2) {
+				$("#title").addClass("header_title_3");
+			}
+		}
+
+		checkHeaderText(-1);
+
 		clickLeftNavigation = function(isChange) {
 			if(isChange) {
 				$("#left_navigation").animate({
@@ -133,6 +164,18 @@
 				});
 
 				$("#left_menu_war_0").animate({
+					left: "-489px"
+				}, "normal", "expoout", function() {
+
+				});
+
+				$("#left_menu_war_1").animate({
+					left: "-489px"
+				}, "normal", "expoout", function() {
+
+				});
+
+				$("#left_menu_war_2").animate({
 					left: "-489px"
 				}, "normal", "expoout", function() {
 
@@ -163,6 +206,18 @@
 				}, "normal", "expoout", function() {
 
 				});
+			} else if(selectEvent == 1) {
+				$("#left_menu_war_1").animate({
+					left: isShowLeft ? "-489px" : "0px"
+				}, "normal", "expoout", function() {
+
+				});
+			} else if(selectEvent == 2) {
+				$("#left_menu_war_2").animate({
+					left: isShowLeft ? "-489px" : "0px"
+				}, "normal", "expoout", function() {
+
+				});
 			}
 		}
 
@@ -183,6 +238,18 @@
 				});
 
 				$("#right_menu_war_0").animate({
+					right: "-499px"
+				}, "normal", "expoout", function() {
+
+				});
+
+				$("#right_menu_war_1").animate({
+					right: "-499px"
+				}, "normal", "expoout", function() {
+
+				});
+
+				$("#right_menu_war_2").animate({
 					right: "-499px"
 				}, "normal", "expoout", function() {
 
@@ -213,25 +280,108 @@
 				}, "normal", "expoout", function() {
 
 				});
+			} else if(selectEvent == 1) {
+				$("#right_menu_war_1").animate({
+					right: isShowRight ? "-499px" : "0px"
+				}, "normal", "expoout", function() {
+
+				});
+			} else if(selectEvent == 2) {
+				$("#right_menu_war_2").animate({
+					right: isShowRight ? "-499px" : "0px"
+				}, "normal", "expoout", function() {
+
+				});
 			}
 		}
 
 		clickRightMenu = function(value) {
+			removeAllLayer();
+
+			$("#left_menu")[0].contentWindow.reset();
+
 			selectEvent = value;
+
+			checkHeaderText(value);
 
 			clickLeftNavigation(true);
 
 			clickRightNavigation(true);
 		}
 
+		showVideo = function(value) {
+			$("#video").attr("src", "video.html?id=" + value);
+			$("#video").show();
+
+			showMask(true);
+		}
+
+		showMask = function(value) {
+			if(value) {
+				$("#mask").show();
+			} else {
+				$("#mask").hide();
+
+				$("#video")[0].contentWindow.pause();
+				$("#video").hide();
+				$("#video").attr("src", "");
+			}
+		}
+
+		removeAllLayer = function() {
+			var trackingLayer = scene.get_trackingLayer3D();
+			trackingLayer.removeAll();
+		}
+
+		checkLeftMenuSelect = function(value, array) {
+			removeAllLayer();
+
+			for(var i = 0; i < array.length; i++) {
+				var list = array[i].list;
+
+				for(var k = 0; k < list.length; k++) {
+					var geometry = new SuperMap.Web.Core.GeoPoint3D(new SuperMap.Web.Core.Point3D(list[k].longitude, list[k].latitude, list[k].altitude));
+		            var feature3D = new SuperMap.Web.Core.Feature3D();
+
+		            //设置feature3D中的style3D属性
+		            var style = new SuperMap.Web.Core.Style3D();
+					var pictureurl = serverUrl + list[k].image;
+		            style.set_markerFile(pictureurl);
+
+
+		            //创建Geoplacemark
+		            var geoPlacemark = new SuperMap.Web.Core.GeoPlacemark();
+		            //geoPlacemark.set_name("my place");
+		            geoPlacemark.set_geometry(geometry);
+		            feature3D.set_geometry(geoPlacemark);
+					feature3D.set_style3D(style);
+
+		            var trackingLayer = scene.get_trackingLayer3D();
+		            //跟踪图层设置为可见
+		            trackingLayer.set_isVisible(true);
+		            trackingLayer.add(feature3D, "hello");
+				}
+			}
+
+		}
+
 		$("#header").click(function() {
+			play();
 			if(selectEvent > -1) {
 				selectEvent = -1;
+
+				checkHeaderText(-1);
+
+				$("#left_menu_war_0")[0].contentWindow.reset();
 
 				clickLeftNavigation(true);
 
 				clickRightNavigation(true);
 			}
 		});
+
+
+
+
 	});
 </script>

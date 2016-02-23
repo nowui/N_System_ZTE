@@ -1,0 +1,55 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ZTE</title>
+<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+</head>
+
+
+<body class="right_menu_war_0">
+<div id="zonghe_chuzhi_fangan" class="zonghe_chuzhi_fangan_normal">
+	<div class="title"></div>
+	<div class="content"></div>
+</div>
+<div id="command_requirement" class="command_active">
+	<div class="title">
+		<div id="command_title" class="command_title_active"></div>
+		<div id="requirement_title" class="requirement_title_normal"></div>
+	</div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+	$(function() {
+		$("#command_title").click(function() {
+			$("#command_requirement").removeClass("requirement_active");
+
+			$("#command_title").addClass("command_title_active");
+			$("#command_title").removeClass("command_title_normal");
+			$("#requirement_title").addClass("requirement_title_normal");
+			$("#requirement_title").removeClass("requirement_title_active");
+		});
+
+		$("#requirement_title").click(function() {
+			$("#command_requirement").addClass("requirement_active");
+
+			$("#command_title").addClass("command_title_normal");
+			$("#command_title").removeClass("command_title_active");
+			$("#requirement_title").addClass("requirement_title_active");
+			$("#requirement_title").removeClass("requirement_title_normal");
+		});
+
+		$.getJSON("data/app.json",function(json) {
+			$("#zonghe_chuzhi_fangan .title").html(json.zonghe_chuzhi_fangan.title);
+			$("#zonghe_chuzhi_fangan .content").html(json.zonghe_chuzhi_fangan.content);
+
+
+			$("#command_title").html(json.command.title);
+			$("#requirement_title").html(json.requirement.title);
+		});
+	});
+</script>

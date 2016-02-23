@@ -1,0 +1,26 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8,chrome=1" />
+<title>ZTE</title>
+</head>
+
+
+<body style="cursor: pointer;">
+	<video id="video" autoplay="autoplay" ></video>
+</body>
+
+<script>
+function GetQueryString(name) {
+	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	var r = window.location.search.substr(1).match(reg);
+	if(r!=null)return  unescape(r[2]); return null;
+}
+var video_element = document.getElementById('video');
+video_element.src = "/video/" + GetQueryString("id") + ".mp4";
+
+function pause() {
+	video_element.pause();
+}
+</script>

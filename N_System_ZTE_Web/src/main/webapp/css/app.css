@@ -78,6 +78,36 @@ body {
 	margin-right: 30px;
 }
 
+#title {
+	position: absolute;
+	width: 707px;
+	height: 59px;
+	top: 50%;
+	left: 50%;
+	margin-top: -30px;
+	margin-left: -354px;
+}
+
+.header_title_0 {
+    background-image: url("../image/header_text_0.png");
+    background-repeat: no-repeat;
+}
+
+.header_title_1 {
+    background-image: url("../image/header_text_1.png");
+    background-repeat: no-repeat;
+}
+
+.header_title_2 {
+    background-image: url("../image/header_text_2.png");
+    background-repeat: no-repeat;
+}
+
+.header_title_3 {
+    background-image: url("../image/header_text_3.png");
+    background-repeat: no-repeat;
+}
+
 #map {
 	position: absolute;
 	top: 114px;
@@ -689,6 +719,22 @@ body {
 	height: 100%;
 }
 
+#left_menu_war_1 {
+	position: absolute;
+	top: 0px;
+	left: -489px;
+	width: 489px;
+	height: 100%;
+}
+
+#left_menu_war_2 {
+	position: absolute;
+	top: 0px;
+	left: -489px;
+	width: 489px;
+	height: 100%;
+}
+
 .left_menu_war_0 {
     background-image: url("../image/left_menu.png");
     background-repeat: repeat-y;
@@ -737,6 +783,7 @@ body {
 	width: 88px;
 	height: 53px;
 	margin-right: 3px;
+    cursor: pointer;
 }
 
 #latest_developments .html {
@@ -789,10 +836,10 @@ body {
 #the_optimal_time_for_rescue .time {
 	position: absolute;
 	margin-top: 70px;
-	margin-left: 25px;
+	margin-left: 15px;
 	width: 375px;
 	color: #ff3000;
-	font-size: 60px;
+	font-size: 50px;
 	font-family: "HelveticaNeueLTPro Lt";
 	text-align: center;
 }
@@ -809,6 +856,7 @@ body {
 	width: 257px;
 	height: 30px;
 	line-height: 30px;
+    cursor: pointer;
 }
 
 .the_optimal_time_for_rescue_button_normal {
@@ -849,6 +897,7 @@ body {
 	width: 257px;
 	height: 30px;
 	line-height: 30px;
+    cursor: pointer;
 }
 
 .event_trend_button_normal {
@@ -884,7 +933,24 @@ body {
 #right_menu_war_0 {
 	position: absolute;
 	top: 0px;
-	//right: -499px;
+	right: -499px;
+	//right: 0px;
+	width: 499px;
+	height: 100%;
+}
+
+#right_menu_war_1 {
+	position: absolute;
+	top: 0px;
+	right: -499px;
+	width: 499px;
+	height: 100%;
+}
+
+#right_menu_war_2 {
+	position: absolute;
+	top: 0px;
+	right: -499px;
 	width: 499px;
 	height: 100%;
 }
@@ -915,6 +981,12 @@ body {
 	position: absolute;
 	margin-top: 5px;
 	margin-left: 15px;
+}
+
+#zonghe_chuzhi_fangan .content {
+	position: absolute;
+	margin-top: 70px;
+	margin-left: 25px;
 }
 
 #command_requirement {
@@ -967,4 +1039,37 @@ body {
 .requirement_title_active {
 	padding-top: 2px;
 	font-size: 16px;
+}
+
+#command_content {
+	position: absolute;
+	margin-top: 70px;
+	margin-left: 35px;
+	font-size: 12px;
+	width: 390px;
+}
+
+#command_content .list {
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+#command_content .image {
+	float: left;
+	width: 40px;
+}
+
+#command_content .content {
+	float: right;
+	width: 350px;
+}
+
+#command_content .children_image {
+	float: left;
+	width: 40px;
+}
+
+#command_content .children_content {
+	float: right;
+	width: 310px;
 }

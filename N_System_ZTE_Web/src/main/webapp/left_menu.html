@@ -32,15 +32,22 @@
 <script type="text/javascript">
 	$(function() {
 		left_menu_select = -1;
+		public_safety_and_security_index_icon = [];
 		public_safety_and_security_index_button = [];
 		monitoring_of_the_cloud_tab = [];
 		monitoring_of_the_cloud_button = [];
+		emergency_resources_icon = [];
 		emergency_resources_button = [];
+
+		reset = function() {
+			checkLeftMenuSelect(-1);
+		}
 
 		var checkLeftMenuSelect = function(value) {
 			if(left_menu_select == value) {
 				return;
 			}
+
 
 			left_menu_select = value;
 
@@ -53,7 +60,7 @@
 			} else if(value == 1) {
 				$("#monitoring_of_the_cloud").addClass("monitoring_of_the_cloud_active");
 			} else if(value == 2) {
-			$("#emergency_resources").addClass("emergency_resources_active");
+				$("#emergency_resources").addClass("emergency_resources_active");
 			}
 		}
 
@@ -74,6 +81,8 @@
 					public_safety_and_security_index_button.push(value);
 				}
 			}
+
+			checkPublicSafetyAndSecurityIndexIcon();
 
 			$("#public_safety_and_security_index .button").each(function() {
 				var isExit = false;
@@ -99,9 +108,19 @@
 			});
 		}
 
+		checkPublicSafetyAndSecurityIndexIcon = function() {
+			var list = [];
+			for(var i = 0; i < public_safety_and_security_index_button.length; i++) {
+				list.push(public_safety_and_security_index_icon[public_safety_and_security_index_button[i]]);
+			}
+			window.parent.checkLeftMenuSelect(0, list);
+		}
+
 		$("#public_safety_and_security_index .title").click(function() {
 			if(left_menu_select != 0) {
 				checkLeftMenuSelect(0);
+
+				checkPublicSafetyAndSecurityIndexIcon();
 
 				return;
 			}
@@ -141,6 +160,8 @@
 				}
 			}
 
+			checkMonitoringOfTheCloudIcon();
+
 			$("#monitoring_of_the_cloud .tab div").each(function() {
 				var isExit = false;
 
@@ -170,9 +191,19 @@
 			});
 		}
 
+		checkMonitoringOfTheCloudIcon = function() {
+			var list = [];
+			/*for(var i = 0; i < public_safety_and_security_index_button.length; i++) {
+				list.push(public_safety_and_security_index_icon[public_safety_and_security_index_button[i]]);
+			}*/
+			window.parent.checkLeftMenuSelect(1, []);
+		}
+
 		$("#monitoring_of_the_cloud .title").click(function() {
 			if(left_menu_select != 1) {
 				checkLeftMenuSelect(1);
+
+				checkMonitoringOfTheCloudIcon();
 
 				return;
 			}
@@ -198,6 +229,8 @@
 				}
 			}
 
+			checkEmergencyResourcesIcon();
+
 			$("#emergency_resources .button").each(function() {
 				var isExit = false;
 
@@ -218,9 +251,19 @@
 			});
 		}
 
+		checkEmergencyResourcesIcon = function() {
+			var list = [];
+			for(var i = 0; i < emergency_resources_button.length; i++) {
+				list.push(emergency_resources_icon[emergency_resources_button[i]]);
+			}
+			window.parent.checkLeftMenuSelect(2, list);
+		}
+
 		$("#emergency_resources .title").click(function() {
 			if(left_menu_select != 2) {
 				checkLeftMenuSelect(2);
+
+				checkEmergencyResourcesIcon();
 
 				return;
 			}
@@ -262,6 +305,8 @@
 			}
 			$("#public_safety_and_security_index .menu").html(public_safety_and_security_index_json_html);
 
+			public_safety_and_security_index_icon = json.public_safety_and_security_index.icon;
+
 			$("#public_safety_and_security_index .button").click(function() {
 				checkLeftMenuSelect(0);
 
@@ -291,6 +336,8 @@
 				emergency_resources_json_html += "</div>";
 			}
 			$("#emergency_resources .menu").html(emergency_resources_json_html);
+
+			emergency_resources_icon = json.emergency_resources.icon;
 
 			$("#emergency_resources .button").click(function() {
 				checkLeftMenuSelect(2);

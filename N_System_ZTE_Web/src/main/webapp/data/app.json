@@ -23,6 +23,40 @@
 			"name": "Considerable"
 		}, {
 			"name": "Tremendous devastating"
+		}],
+		"icon": [{
+			"list": [{
+				"image": "/image/latest_developments_icon_0.png",
+				"longitude": "104.5081483443767",
+				"latitude": "29.77683204893914",
+				"altitude": "0"
+			}, {
+				"image": "/image/latest_developments_icon_0.png",
+				"longitude": "105.5081483443767",
+				"latitude": "30.77683204893914",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/latest_developments_icon_1.png",
+				"longitude": "106.5081483443767",
+				"latitude": "31.77683204893914",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/latest_developments_icon_2.png",
+				"longitude": "107.5081483443767",
+				"latitude": "32.77683204893914",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/latest_developments_icon_3.png",
+				"longitude": "108.5081483443767",
+				"latitude": "33.77683204893914",
+				"altitude": "0"
+			}]
 		}]
 	},
 	"monitoring_of_the_cloud": {
@@ -87,6 +121,72 @@
 			"name": "Emergency agencies"
 		},{
 			"name": "The scenario commander center"
+		}],
+		"icon": [{
+			"list": [{
+				"image": "/image/emergency_resources_icon_0.png",
+				"longitude": "104.5081483443767",
+				"latitude": "29.77683204893914",
+				"altitude": "0"
+			}, {
+				"image": "/image/emergency_resources_icon_0.png",
+				"longitude": "105.5081483443767",
+				"latitude": "30.77683204893914",
+				"altitude": "0"
+			}]
+		}, {
+			"list": []
+		}, {
+			"list": [{
+				"image": "/image/emergency_resources_icon_2.png",
+				"longitude": "107.5081483443767",
+				"latitude": "32.77683204893914",
+				"altitude": "0"
+			}]
+		}, {
+			"list": []
+		}, {
+			"list": [{
+				"image": "/image/emergency_resources_icon_4.png",
+				"longitude": "106.5081483443767",
+				"latitude": "31.77683204893914",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/emergency_resources_icon_5.png",
+				"longitude": "108.5081483443767",
+				"latitude": "33.77683204893914",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/emergency_resources_icon_6.png",
+				"longitude": "108.5081483443767",
+				"latitude": "34.77683204893914",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/emergency_resources_icon_7.png",
+				"longitude": "109.5081483443767",
+				"latitude": "35.77683204893914",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/emergency_resources_icon_8.png",
+				"longitude": "110.5081483443767",
+				"latitude": "36.77683204893914",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/emergency_resources_icon_9.png",
+				"longitude": "111.5081483443767",
+				"latitude": "37.77683204893914",
+				"altitude": "0"
+			}]
 		}]
 	},
 	"event_briefing": {
@@ -107,5 +207,92 @@
 			"image": "image/event_briefing_item_image.png",
 			"content": "Paris in the local time in the evening of 13 attacks, including seven shooting, six explosions, the tower crane theater hostage incident. Police launched a rescue and killed three of the attackers, but media reports say the incident resulted in 100 deaths.direct economic loss of 20 million yuan"
 		}]
+	},
+	"latest_developments": {
+		"title": "LATEST DEVELOPMENTS",
+		"video": [{
+			"image": "image/latest_developments_video_0.png",
+			"value": "0"
+		},{
+			"image": "image/latest_developments_video_0.png",
+			"value": "1"
+		},{
+			"image": "image/latest_developments_video_0.png",
+			"value": "0"
+		},{
+			"image": "image/latest_developments_video_0.png",
+			"value": "1"
+		},{
+			"image": "image/latest_developments_video_0.png",
+			"value": "0"
+		}]
+	},
+	"the_optimal_time_for_rescue": {
+		"title": "THE OPTIMAL TIME FOR RESCUE",
+		"button": [{
+			"name": "Ambulance"
+		}, {
+			"name": "Hospital"
+		}],
+		"icon": [{
+			"list": [{
+				"image": "/image/latest_developments_icon_0.png",
+				"longitude": "104.5081483443767",
+				"latitude": "29.77683204893914",
+				"altitude": "0"
+			}, {
+				"image": "/image/latest_developments_icon_0.png",
+				"longitude": "105.5081483443767",
+				"latitude": "30.77683204893914",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/latest_developments_icon_1.png",
+				"longitude": "106.5081483443767",
+				"latitude": "31.77683204893914",
+				"altitude": "0"
+			}]
+		}]
+	},
+	"event_trend": {
+		"title": "EVENT TREND",
+		"button": [{
+			"name": "Hospital",
+			"text": "Paris in the local time in the evening of 13 attacks,"
+		}, {
+			"name": "Hospital",
+			"text": "Paris in the local time in the evening of 13 attacks,"
+		}],
+		"icon": [{
+			"list": [{
+				"image": "/image/latest_developments_icon_0.png",
+				"longitude": "104.5081483443767",
+				"latitude": "29.77683204893914",
+				"altitude": "0"
+			}, {
+				"image": "/image/latest_developments_icon_0.png",
+				"longitude": "105.5081483443767",
+				"latitude": "30.77683204893914",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/latest_developments_icon_1.png",
+				"longitude": "106.5081483443767",
+				"latitude": "31.77683204893914",
+				"altitude": "0"
+			}]
+		}]
+	},
+	"zonghe_chuzhi_fangan": {
+		"title": "ZONGHE CHUZHI FANGAN",
+		"content": "Disposal plan:"
+	},
+	"command": {
+		"title": "COMMAND"
+	},
+	"requirement": {
+		"title": "REQUIREMENT"
 	}
 }
