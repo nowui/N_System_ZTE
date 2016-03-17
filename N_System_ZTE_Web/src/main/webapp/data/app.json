@@ -1,298 +1,1015 @@
 {
 	"weather": {
-		"temperature": "7~12℃",
-		"wind": "CLEAR TO OVERCAST",
+		"temperature": "1~7℃",
+		"wind": "Clear to overcast",
 		"location": "BEIJING"
 	},
 	"public_safety_and_security_index": {
-		"title": "PUBLIC SAFETY AND SECURITY INDEX",
+		"title": "Public Safety Index",
 		"chart": [{
-			"name": "Natural disaster"
+			"name": "Natural Disaster"
 		}, {
-			"name": "Public health and<br/> medical service"
+			"name": "Public Health Event"
 		}, {
-			"name": "Social security"
+			"name": "Social Safety Event"
 		}, {
-			"name": "Accident disaster"
+			"name": "Accident"
 		}],
 		"button": [{
-			"name": "Ordinary"
+			"name": "Common (IV)"
 		}, {
-			"name": "Serious"
+			"name": "Minor (III)"
 		}, {
-			"name": "Considerable"
+			"name": "Major (II)"
 		}, {
-			"name": "Tremendous devastating"
+			"name": "Critical (I)"
 		}],
 		"icon": [{
 			"list": [{
-				"image": "/image/latest_developments_icon_0.png",
-				"longitude": "104.5081483443767",
-				"latitude": "29.77683204893914",
+				"image": "/image/public_safety_and_security_index_icon_4.png",
+				"longitude": "123.42764166666667",
+				"latitude": "41.685608333333334",
 				"altitude": "0"
 			}, {
-				"image": "/image/latest_developments_icon_0.png",
-				"longitude": "105.5081483443767",
-				"latitude": "30.77683204893914",
+				"image": "/image/public_safety_and_security_index_icon_4.png",
+				"longitude": "123.42347777777778",
+				"latitude": "41.685833333333335",
+				"altitude": "0"
+			}, {
+				"image": "/image/public_safety_and_security_index_icon_4.png",
+				"longitude": "123.43574444444444",
+				"latitude": "41.68841944444444",
+				"altitude": "0"
+			}, {
+				"image": "/image/public_safety_and_security_index_icon_4.png",
+				"longitude": "123.4295361111111",
+				"latitude": "41.68750277777778",
+				"altitude": "0"
+			}, {
+				"image": "/image/public_safety_and_security_index_icon_4.png",
+				"longitude": "123.43096944444444",
+				"latitude": "41.683455555555554",
 				"altitude": "0"
 			}]
 		}, {
 			"list": [{
-				"image": "/image/latest_developments_icon_1.png",
-				"longitude": "106.5081483443767",
-				"latitude": "31.77683204893914",
+				"image": "/image/public_safety_and_security_index_icon_5.png",
+				"longitude": "123.42785",
+				"latitude": "41.69281388888889",
+				"altitude": "0"
+			}, {
+				"image": "/image/public_safety_and_security_index_icon_5.png",
+				"longitude": "123.4259111111111",
+				"latitude": "41.686883333333334",
+				"altitude": "0"
+			}, {
+				"image": "/image/public_safety_and_security_index_icon_5.png",
+				"longitude": "123.428025",
+				"latitude": "41.684355555555555",
+				"altitude": "0"
+			}, {
+				"image": "/image/public_safety_and_security_index_icon_5.png",
+				"longitude": "123.42337777777777",
+				"latitude": "41.682877777777776",
+				"altitude": "0"
+			}, {
+				"image": "/image/public_safety_and_security_index_icon_5.png",
+				"longitude": "123.43008333333333",
+				"latitude": "41.68081388888889",
 				"altitude": "0"
 			}]
 		}, {
 			"list": [{
-				"image": "/image/latest_developments_icon_2.png",
-				"longitude": "107.5081483443767",
-				"latitude": "32.77683204893914",
+				"image": "/image/public_safety_and_security_index_icon_6.png",
+				"longitude": "123.42588888888889",
+				"latitude": "41.680705555555555",
+				"altitude": "0"
+			}, {
+				"image": "/image/public_safety_and_security_index_icon_6.png",
+				"longitude": "123.42987777777778",
+				"latitude": "41.68197222222222",
+				"altitude": "0"
+			}, {
+				"image": "/image/public_safety_and_security_index_icon_6.png",
+				"longitude": "123.43620277777778",
+				"latitude": "41.68651111111111",
+				"altitude": "0"
+			}, {
+				"image": "/image/public_safety_and_security_index_icon_6.png",
+				"longitude": "123.43008333333333",
+				"latitude": "41.69231388888889",
 				"altitude": "0"
 			}]
 		}, {
 			"list": [{
-				"image": "/image/latest_developments_icon_3.png",
-				"longitude": "108.5081483443767",
-				"latitude": "33.77683204893914",
+				"image": "/image/public_safety_and_security_index_icon_3.png",
+				"longitude": "123.43803333333334",
+				"latitude": "41.69768611111111",
+				"altitude": "0"
+			}, {
+				"image": "/image/public_safety_and_security_index_icon_3.png",
+				"longitude": "123.43932222222222",
+				"latitude": "41.69085277777778",
+				"altitude": "0"
+			}, {
+				"image": "/image/public_safety_and_security_index_icon_3.png",
+				"longitude": "123.43179166666667",
+				"latitude": "41.680680555555554",
+				"altitude": "0"
+			}, {
+				"image": "/image/public_safety_and_security_index_icon_3.png",
+				"longitude": "123.42319444444445",
+				"latitude": "41.69118888888889",
+				"altitude": "0"
+			}, {
+				"image": "/image/public_safety_and_security_index_icon_3.png",
+				"longitude": "123.42830555555555",
+				"latitude": "41.685097222222225",
 				"altitude": "0"
 			}]
 		}]
 	},
 	"monitoring_of_the_cloud": {
-		"title": "MONITORING OF THE CLOUD",
+		"title": "Cloud Monitoring",
 		"tab": [{
-			"name": "Integrated pipeline",
+			"name": "Urban Pipelines",
 			"button": [{
-				"name": "Natural gas",
+				"name": "Natural Gas",
 				"line_height": "30px"
 			}, {
-				"name": "Water supply",
+				"name": "Water Supply",
 				"line_height": "30px"
 			}, {
-				"name": "Oil pipeline",
+				"name": "Petroleum Pipes",
 				"line_height": "30px"
 			}]
 		}, {
-			"name": "The key infrastructure",
+			"name": "Key Infrastructure",
 			"button": [{
-				"name": "Nuclear power plant",
+				"name": "Nuclear Power Station",
 				"line_height": "14px"
 			}, {
-				"name": "The three gorges dam",
+				"name": "Three Gorges<br/> Dam",
 				"line_height": "14px"
 			}, {
-				"name": "Nanjing yangtze river bridge",
+				"name": "Beijing Yangtze River Bridge",
 				"line_height": "14px"
 			}]
 		}, {
-			"name": "Mobile monitoring",
+			"name": "Mobile Monitoring Sites",
 			"button": [{
-				"name": "Unmanned plane",
-				"line_height": "30px"
+				"name": "Unmanned Aerial Vehicle",
+				"line_height": "14px"
 			}, {
 				"name": "Helicopter",
 				"line_height": "30px"
 			}, {
-				"name": "Unmanned airship",
+				"name": "Unmanned Airship",
 				"line_height": "30px"
+			}]
+		}],
+		"icon": [{
+			"list": [{
+				"image": "/image/monitoring_of_the_cloud_icon_0_3.png",
+				"longitude": "123.42623055555555",
+				"latitude": "41.68713888888889",
+				"altitude": "0",
+				"name": "a_0"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_0_3.png",
+				"longitude": "123.43480555555556",
+				"latitude": "41.687038888888885",
+				"altitude": "0",
+				"name": "a_0"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_0_3.png",
+				"longitude": "123.4366388888889",
+				"latitude": "41.69103611111111",
+				"altitude": "0",
+				"name": "a_0"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_0_4.png",
+				"longitude": "123.42862777777778",
+				"latitude": "41.68492777777778",
+				"altitude": "0",
+				"name": "a_1"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_0_4.png",
+				"longitude": "123.42851388888889",
+				"latitude": "41.68921944444445",
+				"altitude": "0",
+				"name": "a_1"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_0_4.png",
+				"longitude": "123.43245",
+				"latitude": "41.69141666666667",
+				"altitude": "0",
+				"name": "a_1"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_0_5.png",
+				"longitude": "123.42381944444445",
+				"latitude": "41.68916388888889",
+				"altitude": "0",
+				"name": "a_9"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_0_5.png",
+				"longitude": "123.42652777777778",
+				"latitude": "41.683236111111114",
+				"altitude": "0",
+				"name": "a_9"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_0_5.png",
+				"longitude": "123.4325638888889",
+				"latitude": "41.681197222222224",
+				"altitude": "0",
+				"name": "a_9"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/monitoring_of_the_cloud_icon_1_0.png",
+				"longitude": "123.42531666666666",
+				"latitude": "41.68733611111111",
+				"altitude": "0",
+				"name": "b_3"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_1_1.png",
+				"longitude": "123.43328055555556",
+				"latitude": "41.687755555555555",
+				"altitude": "0",
+				"name": "b_4"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_1_2.png",
+				"longitude": "123.42960277777777",
+				"latitude": "41.688719444444445",
+				"altitude": "0",
+				"name": "b_5"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/monitoring_of_the_cloud_icon_2_0.png",
+				"longitude": "123.421875",
+				"latitude": "41.69041388888889",
+				"altitude": "0",
+				"name": "c_6"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_2_0.png",
+				"longitude": "123.43322777777777",
+				"latitude": "41.680838888888886",
+				"altitude": "0",
+				"name": "c_6"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_2_0.png",
+				"longitude": "123.43094722222222",
+				"latitude": "41.686675",
+				"altitude": "0",
+				"name": "c_6"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_2_1.png",
+				"longitude": "123.42957222222222",
+				"latitude": "41.69360277777778",
+				"altitude": "0",
+				"name": "c_7"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_2_1.png",
+				"longitude": "123.43527222222222",
+				"latitude": "41.685183333333335",
+				"altitude": "0",
+				"name": "c_7"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_2_1.png",
+				"longitude": "123.42598611111111",
+				"latitude": "41.680144444444444",
+				"altitude": "0",
+				"name": "c_7"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_2_2.png",
+				"longitude": "123.42770277777778",
+				"latitude": "41.68351666666667",
+				"altitude": "0",
+				"name": "c_8"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_2_2.png",
+				"longitude": "123.43561666666666",
+				"latitude": "41.690644444444445",
+				"altitude": "0",
+				"name": "c_8"
+			}, {
+				"image": "/image/monitoring_of_the_cloud_icon_2_2.png",
+				"longitude": "123.42353055555556",
+				"latitude": "41.686",
+				"altitude": "0",
+				"name": "c_8"
 			}]
 		}]
 	},
 	"emergency_resources": {
-		"title": "EMERGENCY RESOURCES",
+		"title": "Emergency Resources",
 		"button": [{
-			"name": "Police strength"
+			"name": "Police<br/> Forces"
 		},{
-			"name": "The primary agency"
+			"name": "Professional Forces"
 		},{
-			"name": "Supporting agency"
+			"name": "Rescue Agency"
 		},{
-			"name": "The oil and hazardous materials"
+			"name": "Protection Targets"
 		},{
-			"name": "Surveillance unit"
+			"name": "Monitoring Sites"
 		},{
-			"name": "The lif e-saving assistance"
+			"name": "Life-saving Operations"
 		},{
-			"name": "Mass care"
+			"name": "Resettlement Place"
 		},{
-			"name": "Relief goods & resource support"
+			"name": "Relief Materials"
 		},{
-			"name": "Emergency agencies"
+			"name": "Emergency Agency"
 		},{
-			"name": "The scenario commander center"
+			"name": "On-site Commanding Center"
 		}],
 		"icon": [{
 			"list": [{
-				"image": "/image/emergency_resources_icon_0.png",
-				"longitude": "104.5081483443767",
-				"latitude": "29.77683204893914",
-				"altitude": "0"
+				"image": "/image/emergency_resources_icon_10.png",
+				"longitude": "123.41928055555556",
+				"latitude": "41.69821666666667",
+				"altitude": "0",
+				"name": "d_0"
 			}, {
-				"image": "/image/emergency_resources_icon_0.png",
-				"longitude": "105.5081483443767",
-				"latitude": "30.77683204893914",
-				"altitude": "0"
-			}]
-		}, {
-			"list": []
-		}, {
-			"list": [{
-				"image": "/image/emergency_resources_icon_2.png",
-				"longitude": "107.5081483443767",
-				"latitude": "32.77683204893914",
-				"altitude": "0"
-			}]
-		}, {
-			"list": []
-		}, {
-			"list": [{
-				"image": "/image/emergency_resources_icon_4.png",
-				"longitude": "106.5081483443767",
-				"latitude": "31.77683204893914",
-				"altitude": "0"
+				"image": "/image/emergency_resources_icon_10.png",
+				"longitude": "123.43010833333334",
+				"latitude": "41.68875555555555",
+				"altitude": "0",
+				"name": "d_0"
+			}, {
+				"image": "/image/emergency_resources_icon_10.png",
+				"longitude": "123.42765",
+				"latitude": "41.683572222222224",
+				"altitude": "0",
+				"name": "d_0"
 			}]
 		}, {
 			"list": [{
-				"image": "/image/emergency_resources_icon_5.png",
-				"longitude": "108.5081483443767",
-				"latitude": "33.77683204893914",
-				"altitude": "0"
+				"image": "/image/emergency_resources_icon_11.png",
+				"longitude": "123.42549166666667",
+				"latitude": "41.69347777777778",
+				"altitude": "0",
+				"name": "d_1"
+			}, {
+				"image": "/image/emergency_resources_icon_11.png",
+				"longitude": "123.43470833333333",
+				"latitude": "41.688386111111114",
+				"altitude": "0",
+				"name": "d_1"
+			}, {
+				"image": "/image/emergency_resources_icon_11.png",
+				"longitude": "123.42745277777777",
+				"latitude": "41.68439444444444",
+				"altitude": "0",
+				"name": "d_1"
 			}]
 		}, {
 			"list": [{
-				"image": "/image/emergency_resources_icon_6.png",
-				"longitude": "108.5081483443767",
-				"latitude": "34.77683204893914",
-				"altitude": "0"
+				"image": "/image/emergency_resources_icon_12.png",
+				"longitude": "123.42327222222222",
+				"latitude": "41.682880555555556",
+				"altitude": "0",
+				"name": "d_2"
+			}, {
+				"image": "/image/emergency_resources_icon_12.png",
+				"longitude": "123.43233611111111",
+				"latitude": "41.68571111111111",
+				"altitude": "0",
+				"name": "d_2"
+			}, {
+				"image": "/image/emergency_resources_icon_12.png",
+				"longitude": "123.44140555555556",
+				"latitude": "41.69074166666667",
+				"altitude": "0",
+				"name": "d_2"
 			}]
 		}, {
 			"list": [{
-				"image": "/image/emergency_resources_icon_7.png",
-				"longitude": "109.5081483443767",
-				"latitude": "35.77683204893914",
-				"altitude": "0"
+				"image": "/image/emergency_resources_icon_13.png",
+				"longitude": "123.44150555555555",
+				"latitude": "41.696266666666666",
+				"altitude": "0",
+				"name": "d_3"
+			}, {
+				"image": "/image/emergency_resources_icon_13.png",
+				"longitude": "123.43567777777778",
+				"latitude": "41.68835833333333",
+				"altitude": "0",
+				"name": "d_3"
+			}, {
+				"image": "/image/emergency_resources_icon_13.png",
+				"longitude": "123.43229722222222",
+				"latitude": "41.67940277777778",
+				"altitude": "0",
+				"name": "d_3"
 			}]
 		}, {
 			"list": [{
-				"image": "/image/emergency_resources_icon_8.png",
-				"longitude": "110.5081483443767",
-				"latitude": "36.77683204893914",
-				"altitude": "0"
+				"image": "/image/emergency_resources_icon_14.png",
+				"longitude": "123.43566111111112",
+				"latitude": "41.680416666666666",
+				"altitude": "0",
+				"name": "d_4"
+			}, {
+				"image": "/image/emergency_resources_icon_14.png",
+				"longitude": "123.42750555555556",
+				"latitude": "41.68358888888889",
+				"altitude": "0",
+				"name": "d_4"
+			}, {
+				"image": "/image/emergency_resources_icon_14.png",
+				"longitude": "123.42480555555555",
+				"latitude": "41.68924444444445",
+				"altitude": "0",
+				"name": "d_4"
 			}]
 		}, {
 			"list": [{
-				"image": "/image/emergency_resources_icon_9.png",
-				"longitude": "111.5081483443767",
-				"latitude": "37.77683204893914",
-				"altitude": "0"
+				"image": "/image/emergency_resources_icon_15.png",
+				"longitude": "123.42958055555556",
+				"latitude": "41.697627777777775",
+				"altitude": "0",
+				"name": "d_5"
+			}, {
+				"image": "/image/emergency_resources_icon_15.png",
+				"longitude": "123.4314888888889",
+				"latitude": "41.69020555555556",
+				"altitude": "0",
+				"name": "d_5"
+			}, {
+				"image": "/image/emergency_resources_icon_15.png",
+				"longitude": "123.43894166666666",
+				"latitude": "41.683527777777776",
+				"altitude": "0",
+				"name": "d_5"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/emergency_resources_icon_16.png",
+				"longitude": "123.42092222222222",
+				"latitude": "41.692997222222225",
+				"altitude": "0",
+				"name": "d_6"
+			}, {
+				"image": "/image/emergency_resources_icon_16.png",
+				"longitude": "123.42973333333333",
+				"latitude": "41.693508333333334",
+				"altitude": "0",
+				"name": "d_6"
+			}, {
+				"image": "/image/emergency_resources_icon_16.png",
+				"longitude": "123.42596388888889",
+				"latitude": "41.68214444444445",
+				"altitude": "0",
+				"name": "d_6"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/emergency_resources_icon_17.png",
+				"longitude": "123.43402222222223",
+				"latitude": "41.68436111111111",
+				"altitude": "0",
+				"name": "d_7"
+			}, {
+				"image": "/image/emergency_resources_icon_17.png",
+				"longitude": "123.42968055555555",
+				"latitude": "41.693475",
+				"altitude": "0",
+				"name": "d_7"
+			}, {
+				"image": "/image/emergency_resources_icon_17.png",
+				"longitude": "123.43848333333334",
+				"latitude": "41.68689444444445",
+				"altitude": "0",
+				"name": "d_7"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/emergency_resources_icon_18.png",
+				"longitude": "123.43435",
+				"latitude": "41.69598333333333",
+				"altitude": "0",
+				"name": "d_8"
+			}, {
+				"image": "/image/emergency_resources_icon_18.png",
+				"longitude": "123.43526388888888",
+				"latitude": "41.68341111111111",
+				"altitude": "0",
+				"name": "d_8"
+			}, {
+				"image": "/image/emergency_resources_icon_18.png",
+				"longitude": "123.43670555555556",
+				"latitude": "41.70031111111111",
+				"altitude": "0",
+				"name": "d_8"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/emergency_resources_icon_19.png",
+				"longitude": "123.43786666666666",
+				"latitude": "41.691855555555556",
+				"altitude": "0",
+				"name": "d_9"
+			}, {
+				"image": "/image/emergency_resources_icon_19.png",
+				"longitude": "123.42949722222222",
+				"latitude": "41.68721111111111",
+				"altitude": "0",
+				"name": "d_9"
+			}, {
+				"image": "/image/emergency_resources_icon_19.png",
+				"longitude": "123.43394444444445",
+				"latitude": "41.68188888888889",
+				"altitude": "0",
+				"name": "d_9"
 			}]
 		}]
 	},
 	"event_briefing": {
-		"title": "EVENT BRIEFING",
+		"title": "Event Briefing",
 		"list": [{
-			"name": "The series of attacks in Paris",
-			"time": "2015.12.25  12.30",
-			"image": "image/event_briefing_item_image.png",
+			"name": "<span style='color:#fe3300;'>A series of attacks in Paris</span>",
+			"time": "2016.03.08  20.30",
+			"image": "/image/event_briefing_item_image_0.png",
+			"content": "In the evening (Local Time), Paris, 13 attacks occurred, including 7 shootings and 6 explosions. For the theater hostage incident, police rescued & 3 attackers were killed. But the media reports said the death toll reached 100 and the direct economic losses reached 20 Million Yuan due to the incident."
+		},{
+			"name": "<span style='color:#00b4ff;'>A car accident occurred on Qingjiang Shenhai Highway</span>",
+			"time": "2016.03.08  16.45",
+			"image": "/image/event_briefing_item_image_1.png",
+			"content": "Recently, a car accident occurred on G15 Qingjiang Shenhai Highway, Yueqing city. The car driver was not dead but injured due to car rolling. After investigation, the car driver had already got off in advance, but passengers still fastened their seat belts."
+		},{
+			"name": "<span style='color:#fe3300;'>The series of attacks in Paris</span>",
+			"time": "2016.03.08  15.10",
+			"image": "/image/event_briefing_item_image_2.png",
 			"content": "Paris in the local time in the evening of 13 attacks, including seven shooting, six explosions, the tower crane theater hostage incident. Police launched a rescue and killed three of the attackers, but media reports say the incident resulted in 100 deaths.direct economic loss of 20 million yuan"
 		},{
-			"name": "The series of attacks in Paris",
-			"time": "2015.12.25  12.30",
-			"image": "image/event_briefing_item_image.png",
-			"content": "Paris in the local time in the evening of 13 attacks, including seven shooting, six explosions, the tower crane theater hostage incident. Police launched a rescue and killed three of the attackers, but media reports say the incident resulted in 100 deaths.direct economic loss of 20 million yuan"
+			"name": "<span style='color:#00b4ff;'>A series of attacks in Paris</span>",
+			"time": "2016.03.08  10.13",
+			"image": "/image/event_briefing_item_image_3.png",
+			"content": "In the evening (Local Time), Paris, 13 attacks occurred, including 7 shootings and 6 explosions. For the theater hostage incident, police rescued & 3 attackers were killed. But the media reports said the death toll reached 100 and the direct economic losses reached 20 Million Yuan due to the incident."
 		},{
-			"name": "The series of attacks in Paris",
-			"time": "2015.12.25  12.30",
-			"image": "image/event_briefing_item_image.png",
+			"name": "<span style='color:#fe3300;'>A car accident occurred on Qingjiang Shenhai Highway</span>",
+			"time": "2016.03.08  08.56",
+			"image": "/image/event_briefing_item_image_4.png",
+			"content": "Recently, a car accident occurred on G15 Qingjiang Shenhai Highway, Yueqing city. The car driver was not dead but injured due to car rolling. After investigation, the car driver had already got off in advance, but passengers still fastened their seat belts."
+		},{
+			"name": "<span style='color:#00b4ff;'>The series of attacks in Paris</span>",
+			"time": "2016.03.08  02.37",
+			"image": "/image/event_briefing_item_image_5.png",
 			"content": "Paris in the local time in the evening of 13 attacks, including seven shooting, six explosions, the tower crane theater hostage incident. Police launched a rescue and killed three of the attackers, but media reports say the incident resulted in 100 deaths.direct economic loss of 20 million yuan"
 		}]
 	},
 	"latest_developments": {
-		"title": "LATEST DEVELOPMENTS",
+		"title": "Latest Developments",
 		"video": [{
-			"image": "image/latest_developments_video_0.png",
-			"value": "0"
+			"image": "/image/video_0.png",
+			"value": "/video/kbxj.flv",
+			"width": "410",
+			"height": "260"
 		},{
-			"image": "image/latest_developments_video_0.png",
-			"value": "1"
+			"image": "/image/video_1.png",
+			"value": "/video/kbxj2_clip.flv",
+			"width": "410",
+			"height": "260"
 		},{
-			"image": "image/latest_developments_video_0.png",
-			"value": "0"
+			"image": "/image/video_2.png",
+			"value": "/video/kbxj3_clip.flv",
+			"width": "410",
+			"height": "260"
 		},{
-			"image": "image/latest_developments_video_0.png",
-			"value": "1"
-		},{
-			"image": "image/latest_developments_video_0.png",
-			"value": "0"
-		}]
-	},
-	"the_optimal_time_for_rescue": {
-		"title": "THE OPTIMAL TIME FOR RESCUE",
-		"button": [{
-			"name": "Ambulance"
-		}, {
-			"name": "Hospital"
+			"image": "/image/video_3.png",
+			"value": "/video/kbxj4_clip.flv",
+			"width": "410",
+			"height": "260"
 		}],
 		"icon": [{
 			"list": [{
-				"image": "/image/latest_developments_icon_0.png",
-				"longitude": "104.5081483443767",
-				"latitude": "29.77683204893914",
-				"altitude": "0"
-			}, {
-				"image": "/image/latest_developments_icon_0.png",
-				"longitude": "105.5081483443767",
-				"latitude": "30.77683204893914",
+				"image": "/image/video_icon_0.png",
+				"longitude": "123.42735277777778",
+				"latitude": "41.681469444444446",
 				"altitude": "0"
 			}]
 		}, {
 			"list": [{
-				"image": "/image/latest_developments_icon_1.png",
-				"longitude": "106.5081483443767",
-				"latitude": "31.77683204893914",
+				"image": "/image/video_icon_0.png",
+				"longitude": "123.42735277777778",
+				"latitude": "41.681469444444446",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/video_icon_0.png",
+				"longitude": "123.42735277777778",
+				"latitude": "41.681469444444446",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/video_icon_0.png",
+				"longitude": "123.42735277777778",
+				"latitude": "41.681469444444446",
+				"altitude": "0"
+			}]
+		}]
+	},
+	"the_optimal_time_for_rescue": {
+		"title": "Optimum Time for Rescue",
+		"button": [{
+			"name": "Rescue Forces"
+		}, {
+			"name": "Resettlement Place"
+		}],
+		"icon": [{
+			"list": [{
+				"image": "/image/the_optimal_time_for_rescue_icon_2.png",
+				"longitude": "123.42327222222222",
+				"latitude": "41.69103888888889",
+				"altitude": "0"
+			}, {
+				"image": "/image/the_optimal_time_for_rescue_icon_3.png",
+				"longitude": "123.42781944444444",
+				"latitude": "41.685811111111114",
+				"altitude": "0"
+			}, {
+				"image": "/image/the_optimal_time_for_rescue_icon_4.png",
+				"longitude": "123.4347138888889",
+				"latitude": "41.69202777777778",
+				"altitude": "0"
+			}, {
+				"image": "/image/the_optimal_time_for_rescue_icon_5.png",
+				"longitude": "123.43768333333334",
+				"latitude": "41.687266666666666",
+				"altitude": "0"
+			}, {
+				"image": "/image/the_optimal_time_for_rescue_icon_6.png",
+				"longitude": "123.42590277777778",
+				"latitude": "41.68077777777778",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/the_optimal_time_for_rescue_icon_20.png",
+				"longitude": "123.42600277777778",
+				"latitude": "41.68567777777778",
+				"altitude": "0"
+			}, {
+				"image": "/image/the_optimal_time_for_rescue_icon_21.png",
+				"longitude": "123.43248611111112",
+				"latitude": "41.68481388888889",
+				"altitude": "0"
+			}, {
+				"image": "/image/the_optimal_time_for_rescue_icon_22.png",
+				"longitude": "123.42832222222222",
+				"latitude": "41.68206388888889",
+				"altitude": "0"
+			}, {
+				"image": "/image/the_optimal_time_for_rescue_icon_23.png",
+				"longitude": "123.43643888888889",
+				"latitude": "41.69076666666667",
+				"altitude": "0"
+			}, {
+				"image": "/image/the_optimal_time_for_rescue_icon_24.png",
+				"longitude": "123.43402222222223",
+				"latitude": "41.682",
+				"altitude": "0"
+			}, {
+				"image": "/image/the_optimal_time_for_rescue_icon_25.png",
+				"longitude": "123.42108055555556",
+				"latitude": "41.69365",
+				"altitude": "0"
+			}, {
+				"image": "/image/the_optimal_time_for_rescue_icon_26.png",
+				"longitude": "123.42886388888888",
+				"latitude": "41.69208611111111",
 				"altitude": "0"
 			}]
 		}]
 	},
 	"event_trend": {
-		"title": "EVENT TREND",
+		"title": "Trend",
 		"button": [{
-			"name": "Hospital",
-			"text": "Paris in the local time in the evening of 13 attacks,"
+			"name": "Military Operations Description",
+			"text": "The security forces started their charge to the Concert Hall; and the Special Forces entered the Concert Hall and killed the terrorists.About 1000 soldiers, 200 policemen"
 		}, {
-			"name": "Hospital",
-			"text": "Paris in the local time in the evening of 13 attacks,"
+			"name": "Development Trend Forecast",
+			"text": "The explosions caused a wide range of fire. According to a preliminary inspection, because the explosives included chemical weapon (biochemical weapon)"
 		}],
 		"icon": [{
 			"list": [{
-				"image": "/image/latest_developments_icon_0.png",
-				"longitude": "104.5081483443767",
-				"latitude": "29.77683204893914",
+				"image": "/image/event_trend_icon_2.png",
+				"longitude": "123.4282",
+				"latitude": "41.68210277777778",
 				"altitude": "0"
 			}, {
-				"image": "/image/latest_developments_icon_0.png",
-				"longitude": "105.5081483443767",
-				"latitude": "30.77683204893914",
+				"image": "/image/event_trend_icon_3.png",
+				"longitude": "123.43620277777778",
+				"latitude": "41.690083333333334",
+				"altitude": "0"
+			}, {
+				"image": "/image/event_trend_icon_4.png",
+				"longitude": "123.43626388888889",
+				"latitude": "41.68103333333333",
+				"altitude": "0"
+			}, {
+				"image": "/image/event_trend_icon_5.png",
+				"longitude": "123.42594166666666",
+				"latitude": "41.68666388888889",
+				"altitude": "0"
+			}, {
+				"image": "/image/event_trend_icon_6.png",
+				"longitude": "123.43518055555556",
+				"latitude": "41.684866666666665",
 				"altitude": "0"
 			}]
 		}, {
 			"list": [{
-				"image": "/image/latest_developments_icon_1.png",
-				"longitude": "106.5081483443767",
-				"latitude": "31.77683204893914",
+				"image": "/image/event_trend_icon_7.png",
+				"longitude": "123.42611666666667",
+				"latitude": "41.68344444444445",
+				"altitude": "0"
+			}, {
+				"image": "/image/event_trend_icon_8.png",
+				"longitude": "123.43518055555556",
+				"latitude": "41.684866666666665",
+				"altitude": "0"
+			}, {
+				"image": "/image/event_trend_icon_9.png",
+				"longitude": "123.43012222222222",
+				"latitude": "41.68063055555555",
+				"altitude": "0"
+			}, {
+				"image": "/image/event_trend_icon_10.png",
+				"longitude": "123.42594166666666",
+				"latitude": "41.68666388888889",
+				"altitude": "0"
+			}, {
+				"image": "/image/event_trend_icon_11.png",
+				"longitude": "123.43825555555556",
+				"latitude": "41.68426111111111",
 				"altitude": "0"
 			}]
 		}]
 	},
 	"zonghe_chuzhi_fangan": {
-		"title": "ZONGHE CHUZHI FANGAN",
+		"title": "Processing Solution",
 		"content": "Disposal plan:"
 	},
 	"command": {
-		"title": "COMMAND"
+		"title": "Command",
+		"icon": [{
+			"list": [{
+				"image": "/image/command_icon_5.png",
+				"longitude": "123.42762777777777",
+				"latitude": "41.684425",
+				"altitude": "0"
+			}]
+		}]
 	},
 	"requirement": {
-		"title": "REQUIREMENT"
+		"title": "Requirement",
+		"icon": [{
+			"list": []
+		}]
+	},
+	"latest_developments_1": {
+		"title": "Latest Developments",
+		"video": [{
+			"image": "/image/video_4.png",
+			"value": "/video/dizhen1.flv",
+			"width": "410",
+			"height": "260"
+		},{
+			"image": "/image/video_5.png",
+			"value": "/video/dizhen2.flv",
+			"width": "410",
+			"height": "260"
+		},{
+			"image": "/image/video_6.png",
+			"value": "/video/dizhen3_clip.flv",
+			"width": "410",
+			"height": "260"
+		},{
+			"image": "/image/video_7.png",
+			"value": "/video/dizhen4.flv",
+			"width": "410",
+			"height": "260"
+		}],
+		"icon": [{
+			"list": [{
+				"image": "/image/video_icon_0.png",
+				"longitude": "123.43230555555556",
+				"latitude": "41.680927777777775",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/video_icon_0.png",
+				"longitude": "123.43230555555556",
+				"latitude": "41.680927777777775",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/video_icon_0.png",
+				"longitude": "123.43230555555556",
+				"latitude": "41.680927777777775",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/video_icon_0.png",
+				"longitude": "123.43230555555556",
+				"latitude": "41.680927777777775",
+				"altitude": "0"
+			}]
+		}]
+	},
+	"the_optimal_time_for_rescue_1": {
+		"title": "Optimum Time for Rescue",
+		"button": [{
+			"name": "Rescue Forces"
+		}, {
+			"name": "Resettlement Place"
+		}],
+		"icon": [{
+			"list": [{
+				"image": "/image/the_optimal_time_for_rescue_icon_19.png",
+				"longitude": "123.42599444444444",
+				"latitude": "41.684352777777775",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/the_optimal_time_for_rescue_icon_16.png",
+				"longitude": "123.4281388888889",
+				"latitude": "41.68204444444444",
+				"altitude": "0"
+			}]
+		}]
+	},
+	"event_trend_1": {
+		"title": "Trend",
+		"button": [{
+			"name": "Military Operations Description",
+			"text": "The security forces started their charge to the Concert Hall; and the Special Forces entered the Concert Hall and killed the terrorists.About 1000 soldiers, 200 policemen"
+		}, {
+			"name": "Development Trend Analysis",
+			"text": "The explosions caused a wide range of fire. According to a preliminary inspection, because the explosives included chemical weapon (biochemical weapon)"
+		}],
+		"icon": [{
+			"list": [{
+				"image": "/image/event_trend_icon_20.png",
+				"longitude": "123.42324166666667",
+				"latitude": "41.679069444444444",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/event_trend_icon_18.png",
+				"longitude": "123.42324166666667",
+				"latitude": "41.679069444444444",
+				"altitude": "0"
+			}]
+		}]
+	},
+	"zonghe_chuzhi_fangan_1": {
+		"title": "Processing Solution",
+		"content": "Disposal plan:"
+	},
+	"command_1": {
+		"title": "Command",
+		"icon": [{
+			"list": [{
+				"image": "/image/command_icon_3.png",
+				"longitude": "123.42762777777777",
+				"latitude": "41.684425",
+				"altitude": "0"
+			}]
+		}]
+	},
+	"requirement_1": {
+		"title": "Requirement",
+		"icon": [{
+			"list": []
+		}]
+	},
+	"latest_developments_2": {
+		"title": "Latest Developments",
+		"video": [{
+			"image": "/image/video_8.png",
+			"value": "/video/baozha1.flv",
+			"width": "410",
+			"height": "260"
+		},{
+			"image": "/image/video_9.png",
+			"value": "/video/baozha2.flv",
+			"width": "410",
+			"height": "260"
+		},{
+			"image": "/image/video_10.png",
+			"value": "/video/baozha3_clip.flv",
+			"width": "410",
+			"height": "260"
+		}],
+		"icon": [{
+			"list": [{
+				"image": "/image/video_icon_0.png",
+				"longitude": "123.42974166666667",
+				"latitude": "41.69291388888889",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/video_icon_0.png",
+				"longitude": "123.42974166666667",
+				"latitude": "41.69291388888889",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/video_icon_0.png",
+				"longitude": "123.42974166666667",
+				"latitude": "41.69291388888889",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/video_icon_0.png",
+				"longitude": "123.42974166666667",
+				"latitude": "41.69291388888889",
+				"altitude": "0"
+			}]
+		}]
+	},
+	"the_optimal_time_for_rescue_2": {
+		"title": "Optimum Time for Rescue",
+		"button": [{
+			"name": "Rescue Forces"
+		}, {
+			"name": "Resettlement Place"
+		}],
+		"icon": [{
+			"list": [{
+				"image": "/image/the_optimal_time_for_rescue_icon_12.png",
+				"longitude": "123.4281388888889",
+				"latitude": "41.68204444444444",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/the_optimal_time_for_rescue_icon_13.png",
+				"longitude": "123.4281388888889",
+				"latitude": "41.68204444444444",
+				"altitude": "0"
+			}]
+		}]
+	},
+	"event_trend_2": {
+		"title": "Trend",
+		"button": [{
+			"name": "Military Operations Description",
+			"text": "The security forces started their charge to the Concert Hall; and the Special Forces entered the Concert Hall and killed the terrorists.About 1000 soldiers, 200 policemen"
+		}, {
+			"name": "Development Trend Analysis",
+			"text": "The explosions caused a wide range of fire. According to a preliminary inspection, because the explosives included chemical weapon (biochemical weapon)"
+		}],
+		"icon": [{
+			"list": [{
+				"image": "/image/event_trend_icon_12.png",
+				"longitude": "123.4281388888889",
+				"latitude": "41.68204444444444",
+				"altitude": "0"
+			}]
+		}, {
+			"list": [{
+				"image": "/image/event_trend_icon_13.png",
+				"longitude": "123.4281388888889",
+				"latitude": "41.68204444444444",
+				"altitude": "0"
+			}]
+		}]
+	},
+	"zonghe_chuzhi_fangan_2": {
+		"title": "Processing Solution",
+		"content": "Disposal plan:"
+	},
+	"command_2": {
+		"title": "Command",
+		"icon": [{
+			"list": [{
+				"image": "/image/command_icon_4.png",
+				"longitude": "123.42762777777777",
+				"latitude": "41.684425",
+				"altitude": "0"
+			}]
+		}]
+	},
+	"requirement_2": {
+		"title": "Requirement",
+		"icon": [{
+			"list": []
+		}]
 	}
 }

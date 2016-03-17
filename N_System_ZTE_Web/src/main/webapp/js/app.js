@@ -1,3 +1,7 @@
+function fix(num, length) {
+	return ('' + num).length < length ? ((new Array(length + 1)).join('0') + num).slice(-length) : '' + num;
+}
+
 $.extend($.fn,{
     fnTimeCountDown:function(d){
         this.each(function(){

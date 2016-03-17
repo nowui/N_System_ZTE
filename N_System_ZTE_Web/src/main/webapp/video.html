@@ -7,20 +7,41 @@
 </head>
 
 
-<body style="cursor: pointer;">
-	<video id="video" autoplay="autoplay" ></video>
+<body style="cursor: pointer;background: #051731;">
+	<div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; border :1px solid #2c9bfa; z-index: 1;">
+
+		<div style="position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px; border :1px solid #104e68; padding:0px;">
+			<div id="flvPlayDiv"></div>
+
+		</div>
+	</div>
+	<!--<iframe id="left_menu" frameborder="0" scrolling="no" src="" style="position: absolute; top: 12px; right: 12px; width: 50px; height: 50px; filter:alpha(opacity=0);opacity:0;-moz-opacity:0; z-index: 9999;"></iframe>-->
+	<img onclick="window.parent.hideVideo();" src="image/video_close.png" style="position: absolute; top: 0px; right: 0px; width: 57px; height: 57px; z-index: 9999;" />
 </body>
+</html>
 
-<script>
-function GetQueryString(name) {
-	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-	var r = window.location.search.substr(1).match(reg);
-	if(r!=null)return  unescape(r[2]); return null;
-}
-var video_element = document.getElementById('video');
-video_element.src = "/video/" + GetQueryString("id") + ".mp4";
+<script type="text/javascript">
+    function PlayFlv(filename) {
+        var div = document.getElementById("flvPlayDiv");
+        div.innerHTML = "";
+        div.style.display = "none";
+        var result = "<object class id='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0' width='375' height='225'>";
+        result += "<param name='movie' value='flvplayer.swf'>";
+        result += "<param name='quality' value='high'>";
+        result += "<param name='wmode' value='transparent'>";
+        result += "<param name='allowFullScreen' value='true'>";
+        result += "<param name='FlashVars' value='vcastr_file=" + filename + "&BufferTime=3&IsAutoPlay=1&IsContinue=1'>";
+        result += "<embed src='flvplayer.swf' allowfullscreen='true' flashvars='vcastr_file=" + filename + "&IsAutoPlay=1&IsContinue=1' quality='high' pluginspage='http://www.macromedia.com/go/getflashplayer' type='application/x-shockwave-flash' width='375' height='225'></embed>";
+        result += "</object>";
+        div.innerHTML = result;
+        div.style.display = "inline";//div显示方式
+    }
 
-function pause() {
-	video_element.pause();
-}
+	function GetQueryString(name) {
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if(r!=null)return  unescape(r[2]); return null;
+	}
+
+    PlayFlv(GetQueryString("value"));
 </script>

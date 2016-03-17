@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="css/app.css">
 <script src="js/jquery-1.9.1.min.js"></script>
 <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/gis.js"></script>
 </head>
 
 
@@ -40,7 +41,7 @@
 				html += "<div class=\"item\" value=\"" + i + "\">";
 				html += "<div class=\"item_name\">" + list[i].name + "</div>";
 				html += "<div class=\"item_time\">" + list[i].time + "</div>";
-				html += "<div class=\"item_image\"><img src=\"" + list[i].image + "\"/></div>";
+				html += "<div class=\"item_image\"><img src=\"" + serverUrl + list[i].image + "\"/></div>";
 				html += "<div class=\"item_content\">" + list[i].content + "</div>";
 				html += "</div>";
 			}

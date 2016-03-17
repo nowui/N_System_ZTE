@@ -41,9 +41,12 @@
     	</div>
     	<div id="title"></div>
     </div>
-    <div id="footer"></div>
-    <iframe id="mask" style="-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);filter:alpha(opacity=50);position: absolute;top:0px;left:0px;height:100%;width:100%;"  frameborder="0" scrolling="no" src="mask.html"></iframe>
-    <iframe id="video" style="position: absolute; width: 640px; height: 264px; top: 50%; left: 50%; margin-top: -132px; margin-left: -320px;"  frameborder="0" scrolling="no" src=""></iframe>
+    <!--<div id="footer"></div>-->
+    <iframe id="center_menu" frameborder="0" scrolling="no" src="center_menu.html" ></iframe>
+    <iframe id="video" frameborder="0" scrolling="no" src=""></iframe>
+    <iframe id="picture" frameborder="0" scrolling="no" src=""></iframe>
+    <iframe id="info" frameborder="0" scrolling="no" src=""></iframe>
+    <iframe id="resource" frameborder="0" scrolling="no" src=""></iframe>
 </body>
 
 </html>
@@ -52,9 +55,16 @@
 		isShowLeft = false;
 		isShowRight = false;
 		selectEvent = -1;
+		isLanch = true;
+		isShowMenu = false;
 
-		$("#mask").hide();
+		$("#center_menu").hide();
 		$("#video").hide();
+		$("#picture").hide();
+		$("#info").hide();
+		$("#resource").hide();
+		$("#left_navigation").hide();
+		$("#right_navigation").hide();
 
 		$.getJSON("data/app.json",function(json) {
 			$("#temperature").html(json.weather.temperature);
@@ -182,6 +192,12 @@
 				});
 			} else {
 				showLeft();
+
+				if(! isShowMenu) {
+					isShowMenu = true;
+
+					clickRightNavigation(false);
+				}
 			}
 		}
 
@@ -256,6 +272,12 @@
 				});
 			} else {
 				showRight();
+
+				if(! isShowMenu) {
+					isShowMenu = true;
+
+					clickLeftNavigation(false);
+				}
 			}
 		}
 
@@ -298,7 +320,17 @@
 		clickRightMenu = function(value) {
 			removeAllLayer();
 
+			hideCenterMenu();
+
+			hideLine();
+
+			resetCamera();
+
 			$("#left_menu")[0].contentWindow.reset();
+
+			if(value > 2) {
+				value -= 3;
+			}
 
 			selectEvent = value;
 
@@ -309,32 +341,48 @@
 			clickRightNavigation(true);
 		}
 
-		showVideo = function(value) {
-			$("#video").attr("src", "video.html?id=" + value);
-			$("#video").show();
+		showVideo = function(value, width, height) {
+			$("#video").css("width", width);
+			$("#video").css("height", height);
 
-			showMask(true);
+			$("#video").attr("src", "video.html?value=" + serverUrl + value);
+			$("#video").show();
 		}
 
-		showMask = function(value) {
-			if(value) {
-				$("#mask").show();
-			} else {
-				$("#mask").hide();
-
-				$("#video")[0].contentWindow.pause();
+		hideVideo = function(value) {
+			try {
 				$("#video").hide();
 				$("#video").attr("src", "");
+			} catch(e) {
+
 			}
 		}
 
 		removeAllLayer = function() {
+			//return;
 			var trackingLayer = scene.get_trackingLayer3D();
 			trackingLayer.removeAll();
+
+			restAction3Ds();
+		}
+
+		restAction3Ds = function() {
+			var panAction = new SuperMap.Web.UI.Action3Ds.Pan(sceneControl);
+		    sceneControl.set_sceneAction(panAction);
 		}
 
 		checkLeftMenuSelect = function(value, array) {
+			//return;
 			removeAllLayer();
+
+			hideCenterMenu();
+
+			hideLine();
+
+			if(selectEvent == -1 && value > 0) {
+				var dranAction = new SuperMap.Web.UI.Action3Ds.DranAction(sceneControl);
+			    sceneControl.set_sceneAction(dranAction);
+			}
 
 			for(var i = 0; i < array.length; i++) {
 				var list = array[i].list;
@@ -359,14 +407,31 @@
 		            var trackingLayer = scene.get_trackingLayer3D();
 		            //跟踪图层设置为可见
 		            trackingLayer.set_isVisible(true);
-		            trackingLayer.add(feature3D, "hello");
+		            trackingLayer.add(feature3D, list[k].name);
 				}
 			}
 
 		}
 
 		$("#header").click(function() {
-			play();
+			removeAllLayer();
+
+			if(isLanch) {
+				isLanch = false;
+
+				play();
+
+
+				$("#left_navigation").show();
+				$("#right_navigation").show();
+			} else {
+				resetCamera();
+			}
+
+			hideVideo();
+
+			hideCenterMenu();
+
 			if(selectEvent > -1) {
 				selectEvent = -1;
 
@@ -380,8 +445,110 @@
 			}
 		});
 
+		resetCamera = function() {
+			//设置相机的经纬度和高程值
+		    var longitude = 123.42899444444444;
+		    var latitude = 41.68733611111111;
+		    var altitude = 2090.1696536242962;
+		    //设置飞行时间
+		    var time = 10;
+		    //设置飞行类型
+		    var mode = SuperMap.Web.Realspace.FlyingMode.JUMP;
+		    //新建相机对象
+		    var camera = new SuperMap.Web.Realspace.Camera(longitude, latitude, altitude);
+		    camera.set_tilt(44.988600935067616);
+		    //调用飞行操作器进行飞行
+		    scene.get_flyingOperator().flyTo(camera,time,mode);
+		}
 
+		checkLeftOrRightMenuSelect = function(value) {
+			$("#left_menu_war_0")[0].contentWindow.reset(value);
+			$("#right_menu_war_0")[0].contentWindow.reset(value);
 
+			$("#left_menu_war_1")[0].contentWindow.reset(value);
+			$("#right_menu_war_1")[0].contentWindow.reset(value);
 
+			$("#left_menu_war_2")[0].contentWindow.reset(value);
+			$("#right_menu_war_2")[0].contentWindow.reset(value);
+
+			hideVideo();
+		}
+
+		checkCenterMenu = function(value, index) {
+			$("#picture").hide();
+			$("#picture").attr("src", "");
+
+			$("#info").hide();
+			$("#info").attr("src", "");
+
+			if(value == 0) {
+				$("#picture").attr("src", "picture.html?index=" + index);
+				$("#picture").show();
+			} else {
+				$("#info").attr("src", "info.html?index=" + index);
+				$("#info").show();
+			}
+		}
+
+		showCenterMenu = function(value, index) {
+			hideCenterMenu();
+
+			if(value == "c") {
+				checkCenterMenu(0, index);
+			} else if(value == "d") {
+				$("#resource").attr("src", "resource.html?index=" + index);
+				$("#resource").show();
+			} else {
+				$("#center_menu").attr("src", "center_menu.html?index=" + index);
+				$("#center_menu").show();
+			}
+		}
+
+		hideCenterMenu = function() {
+			$("#center_menu").hide();
+			$("#center_menu").attr("src", "");
+
+			hideCenterMenuWindows();
+		}
+
+		hideCenterMenuWindows = function() {
+			$("#picture").hide();
+			$("#picture").attr("src", "");
+
+			$("#info").hide();
+			$("#info").attr("src", "");
+
+			$("#resource").hide();
+			$("#resource").attr("src", "");
+		}
+
+		showLine = function() {
+			layer3Ds = scene.get_layer3Ds();
+			layer3Ds.get_item(0).set_isVisible(true);
+			layer3Ds.get_item(1).set_isVisible(true);
+			layer3Ds.get_item(2).set_isVisible(true);
+			layer3Ds.get_item(3).set_isVisible(true);
+			layer3Ds.get_item(4).set_isVisible(true);
+			layer3Ds.get_item(5).set_isVisible(true);
+			layer3Ds.get_item(6).set_isVisible(true);
+			layer3Ds.get_item(7).set_isVisible(true);
+			scene.refresh();
+		}
+
+		hideLine = function() {
+			layer3Ds = scene.get_layer3Ds();
+			layer3Ds.get_item(0).set_isVisible(false);
+			layer3Ds.get_item(1).set_isVisible(false);
+			layer3Ds.get_item(2).set_isVisible(false);
+			layer3Ds.get_item(3).set_isVisible(false);
+			layer3Ds.get_item(4).set_isVisible(false);
+			layer3Ds.get_item(5).set_isVisible(false);
+			layer3Ds.get_item(6).set_isVisible(false);
+			layer3Ds.get_item(7).set_isVisible(false);
+			scene.refresh();
+		}
+
+		//$("#resource").attr("src", "resource.html?index=" + 1);
+		//$("#resource").show();
 	});
 </script>
