@@ -1,0 +1,382 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ZTE</title>
+<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="js/jquery-1.9.1.min.js"></script>
+<!--<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>-->
+<script src="js/jQuery-jcMarquee.js"></script>
+<script src="js/gis.js"></script>
+<script src="js/app.js"></script>
+</head>
+
+
+<body class="left_menu_war_0">
+<div id="latest_developments" class="latest_developments_normal">
+	<div class="title"></div>
+	<div class="video">
+		<div class="list">
+		</div>
+	</div>
+
+	<div id="Marquee_x">
+		<ul>
+      		<li></li>
+    	</ul>
+  	</div>
+
+	<div class="html">
+		<span style="color:#ffffff;">Real-time Information</span><br/>
+		Paris in the local time in the evening of 13 attacks,including seven shooting, six explosions,theater hostage incident. Police rescue and killed three<br/>
+		<span style="color:#ff3000;">Processed Information</span><br/>Paris in the local time in the evening of 13 attacks,including seven shooting, six explosions, theater hostage incident. Police rescue and killed three<br/>
+		<span style="color:#ffc000;">Disaster Information Statistics</span>
+		<table width="100%" border="0" cellspacing="1" cellpadding="0">
+			<tr>
+				<td>death</td>
+				<td>wounded</td>
+				<td>arranged</td>
+				<td>financial lose</td>
+			</tr>
+			<tr>
+				<td>9</td>
+				<td>27</td>
+				<td>97</td>
+				<td>550,000</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div id="the_optimal_time_for_rescue" class="the_optimal_time_for_rescue_normal">
+	<div class="title"></div>
+	<div id="fnTimeCountDown" class="time">
+        <span class="hour">00</span>:
+        <span class="mini">00</span>:
+        <span class="sec">00</span>.
+        <span class="hm">00</span>
+    </div>
+	<div class="content">
+		<div style="height: 10px;"></div>
+	</div>
+</div>
+<div id="event_trend" class="event_trend_normal">
+	<div class="title"></div>
+	<div class="content">
+	</div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+	$(function() {
+		name = "left_war_2";
+		left_menu_war_0_select = -1;
+		latest_developments_icon = [];
+		latest_developments_button = [];
+		the_optimal_time_for_rescue_icon = [];
+		the_optimal_time_for_rescue_button = [];
+		event_trend_icon = [];
+		event_trend_button = [];
+
+		reset = function(value) {
+			if(value == name) {
+
+			} else {
+				checkLeftWar0MenuSelect(-1);
+			}
+		}
+
+		var checkLeftWar0MenuSelect = function(value) {
+			if(left_menu_war_0_select == value) {
+				return;
+			}
+
+			window.parent.checkLeftOrRightMenuSelect(name);
+
+			left_menu_war_0_select = value;
+
+			$("#latest_developments").removeClass("latest_developments_active");
+			$("#the_optimal_time_for_rescue").removeClass("the_optimal_time_for_rescue_active");
+			$("#event_trend").removeClass("event_trend_active");
+
+			if(value == 0) {
+				$("#latest_developments").addClass("latest_developments_active");
+			} else if(value == 1) {
+				$("#the_optimal_time_for_rescue").addClass("the_optimal_time_for_rescue_active");
+			} else if(value == 2) {
+				$("#event_trend").addClass("event_trend_active");
+			}
+		}
+
+		checkLatestDevelopmentsIcon = function(value) {
+			var list = [];
+
+			list.push(latest_developments_icon[value]);
+
+			window.parent.checkLeftMenuSelect(0, list);
+		}
+
+		var checkTheOptimalTimeForRescue = function(value) {
+			var select = -1;
+
+			the_optimal_time_for_rescue_button = [];
+
+			for(var i = 0; i < the_optimal_time_for_rescue_button.length; i++) {
+				if(the_optimal_time_for_rescue_button[i] == value) {
+					select = i;
+					break;
+				}
+			}
+
+			if(select > -1) {
+				the_optimal_time_for_rescue_button.splice(select, 1);
+			} else {
+				if(value > -1) {
+					the_optimal_time_for_rescue_button.push(value);
+				}
+			}
+
+			checkTheOptimalTimeForRescueIcon();
+
+			$("#the_optimal_time_for_rescue .button").each(function() {
+				var isExit = false;
+
+				for(var i = 0; i < the_optimal_time_for_rescue_button.length; i++) {
+					if($(this).attr("value") == the_optimal_time_for_rescue_button[i]) {
+						isExit = true;
+						break;
+					}
+				}
+
+				if(isExit) {
+					$(this).addClass("the_optimal_time_for_rescue_button_active");
+					$(this).removeClass("the_optimal_time_for_rescue_button_normal");
+				} else {
+					$(this).addClass("the_optimal_time_for_rescue_button_normal");
+					$(this).removeClass("the_optimal_time_for_rescue_button_active");
+				}
+			});
+		}
+
+		checkTheOptimalTimeForRescueIcon = function() {
+			var list = [];
+			for(var i = 0; i < the_optimal_time_for_rescue_button.length; i++) {
+				list.push(the_optimal_time_for_rescue_icon[the_optimal_time_for_rescue_button[i]]);
+			}
+			window.parent.checkLeftMenuSelect(1, list);
+		}
+
+		var checkEventTrend = function(value) {
+			var select = -1;
+
+			event_trend_button = [];
+
+			for(var i = 0; i < event_trend_button.length; i++) {
+				if(event_trend_button[i] == value) {
+					select = i;
+					break;
+				}
+			}
+
+			if(select > -1) {
+				event_trend_button.splice(select, 1);
+			} else {
+				if(value > -1) {
+					event_trend_button.push(value);
+				}
+			}
+
+			checkEventTrendIcon();
+
+			$("#event_trend .button").each(function() {
+				var isExit = false;
+
+				for(var i = 0; i < event_trend_button.length; i++) {
+					if($(this).attr("value") == event_trend_button[i]) {
+						isExit = true;
+						break;
+					}
+				}
+
+				if(isExit) {
+					$(this).addClass("event_trend_button_active");
+					$(this).removeClass("event_trend_button_normal");
+				} else {
+					$(this).addClass("event_trend_button_normal");
+					$(this).removeClass("event_trend_button_active");
+				}
+			});
+		}
+
+		checkEventTrendIcon = function() {
+			var list = [];
+			for(var i = 0; i < event_trend_button.length; i++) {
+				list.push(event_trend_icon[event_trend_button[i]]);
+			}
+			window.parent.checkLeftMenuSelect(2, list);
+		}
+
+		//$("body").addClass("dark");
+		//$.mCustomScrollbar.defaults.scrollButtons.enable = true;
+		//$.mCustomScrollbar.defaults.axis="x";
+
+		//$("#latest_developments .video").mCustomScrollbar({theme:"dark"});
+
+		/*var d = new Date();
+		d.setMonth(d.getMonth() + 1);
+		d.setHours(d.getHours() + 24);*/
+
+		//$("#fnTimeCountDown").fnTimeCountDown(d.getFullYear() + "/" + d.getMonth() + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + "");
+		//$("#fnTimeCountDown").fnTimeCountDown("2016/02/19 22:07:39");
+
+		var hour = 0;
+		var minute = 35;
+		var second = 0;
+		var hm = 0;
+
+		var checkDatetime = function() {
+			hm++;
+
+			if(hm > 99) {
+				hm = 0;
+
+				second++;
+			}
+
+			if(parseInt(second) > 59) {
+				second = 0;
+
+				minute++;
+			}
+
+			if(parseInt(minute) > 59) {
+				minute = 0;
+
+				hour++;
+			}
+
+			hour = fix(hour, 2);
+
+			minute = fix(minute, 2);
+
+			second = fix(second, 2);
+
+			hm = fix(hm, 2);
+
+			$(".hour").html(hour);
+			$(".mini").html(minute);
+			$(".sec").html(second);
+			$(".hm").html(hm);
+
+			setTimeout(function() {
+	            checkDatetime();
+	        }, 1);
+		}
+
+		checkDatetime();
+
+		$("#the_optimal_time_for_rescue .title").click(function() {
+			if(left_menu_war_0_select != 1) {
+				checkLeftWar0MenuSelect(1);
+
+				checkTheOptimalTimeForRescueIcon();
+
+				return;
+			}
+		});
+
+		$("#latest_developments .title").click(function() {
+			if(left_menu_war_0_select != 0) {
+				checkLeftWar0MenuSelect(0);
+
+				//checkEmergencyResourcesIcon();
+
+				return;
+			}
+		});
+
+		$("#event_trend .title").click(function() {
+			if(left_menu_war_0_select != 2) {
+				checkLeftWar0MenuSelect(2);
+
+				checkEventTrendIcon();
+
+				return;
+			}
+		});
+
+		$.getJSON("data/app.json",function(json) {
+			$("#latest_developments .title").html(json.latest_developments_2.title);
+
+			latest_developments_icon = json.latest_developments_2.icon;
+			var latest_developments_video_json = json.latest_developments_2.video;
+			var latest_developments_video_json_html = "";
+			/*for(var i = 0; i < latest_developments_video_json.length; i++) {
+				latest_developments_video_json_html += "<div class=\"item\" value=\"" + latest_developments_video_json[i].value + "\" width=\"" + latest_developments_video_json[i].width + "\" height=\"" + latest_developments_video_json[i].height + "\"><img src=\"" + latest_developments_video_json[i].image + "\" />";
+				latest_developments_video_json_html += "</div>";
+			}
+			$("#latest_developments .list").append(latest_developments_video_json_html);*/
+
+			for(var i = 0; i < latest_developments_video_json.length; i++) {
+				latest_developments_video_json_html += "<div class=\"item\" value=\"" + latest_developments_video_json[i].value + "\" width=\"" + latest_developments_video_json[i].width + "\" height=\"" + latest_developments_video_json[i].height + "\"><img height=\"53\" width=\"88\" src=\"" + serverUrl + latest_developments_video_json[i].image + "\" /></div>";
+			}
+			$("#Marquee_x ul li").append(latest_developments_video_json_html);
+
+			$('#Marquee_x').jcMarquee({ 'marquee':'x','margin_right':'5px','speed':50 });
+
+			$("#latest_developments .item").click(function() {
+				latest_developments_button = [];
+				latest_developments_button.push($(this).attr("value"));
+
+				checkLatestDevelopmentsIcon($(this).index());
+
+				window.parent.showVideo($(this).attr("value"), $(this).attr("width"), $(this).attr("height"));
+			})
+
+			$("#the_optimal_time_for_rescue .title").html(json.the_optimal_time_for_rescue_2.title);
+
+			the_optimal_time_for_rescue_icon = json.the_optimal_time_for_rescue_2.icon;
+
+			var the_optimal_time_for_rescue_button_json = json.the_optimal_time_for_rescue_2.button;
+			var the_optimal_time_for_rescue_button_json_html = "";
+			for(var i = 0; i < the_optimal_time_for_rescue_button_json.length; i++) {
+				the_optimal_time_for_rescue_button.push(i);
+
+				the_optimal_time_for_rescue_button_json_html += "<div value=\"" + i + "\" class=\"button the_optimal_time_for_rescue_button_normal\">";
+				the_optimal_time_for_rescue_button_json_html += the_optimal_time_for_rescue_button_json[i].name;
+				the_optimal_time_for_rescue_button_json_html += "</div>";
+			}
+			$("#the_optimal_time_for_rescue .content").append(the_optimal_time_for_rescue_button_json_html);
+
+			$("#the_optimal_time_for_rescue .button").click(function() {
+				checkLeftWar0MenuSelect(1);
+
+				checkTheOptimalTimeForRescue($(this).attr("value"));
+			});
+
+			$("#event_trend .title").html(json.event_trend_2.title);
+
+			event_trend_icon = json.event_trend_2.icon;
+
+			var event_trend_button_json = json.event_trend_2.button;
+			var event_trend_button_json_html = "";
+			for(var i = 0; i < event_trend_button_json.length; i++) {
+				event_trend_button.push(i);
+
+				event_trend_button_json_html += "<div value=\"" + i + "\" class=\"button event_trend_button_normal\">";
+				event_trend_button_json_html += event_trend_button_json[i].name;
+				event_trend_button_json_html += "</div>";
+				event_trend_button_json_html += "<div class=\"text\">";
+				event_trend_button_json_html += event_trend_button_json[i].text;
+				event_trend_button_json_html += "</div>";
+			}
+			$("#event_trend .content").append(event_trend_button_json_html);
+
+			$("#event_trend .button").click(function() {
+				checkLeftWar0MenuSelect(2);
+
+				checkEventTrend($(this).attr("value"));
+			});
+		});
+	});
+</script>

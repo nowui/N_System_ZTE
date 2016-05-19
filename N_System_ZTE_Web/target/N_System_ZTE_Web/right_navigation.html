@@ -1,0 +1,25 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ZTE</title>
+<link rel="stylesheet" href="css/app.css">
+<script src="js/jquery-1.9.1.min.js"></script>
+</head>
+
+
+<body style="cursor: pointer;">
+	<img id="right_navigation_button" src="image/right_navigation.png" />
+</body>
+</html>
+<script type="text/javascript">
+	$(function() {
+		$("#right_navigation_button").click(function() {
+			window.parent.clickRightNavigation(false);
+		});
+
+		showAcitve = function(isShow) {
+			$("#right_navigation_button").attr("src", isShow ? "image/right_navigation_active.png" : "image/right_navigation.png");
+		}
+	});
+</script>

@@ -1,0 +1,65 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8,chrome=1" />
+<title>ZTE</title>
+<link rel="stylesheet" href="css/app.css">
+</head>
+
+
+<body style="cursor: pointer;background: #051731;">
+	<div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; border :1px solid #2c9bfa; z-index: 1;">
+
+		<div style="position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px; border :1px solid #104e68; padding:0px;">
+			<div id="flvPlayDiv" class="info">
+
+			</div>
+		</div>
+	</div>
+	<img onclick="window.parent.hideCenterMenuWindows();" src="image/video_close.png" style="position: absolute; top: 0px; right: 0px; width: 57px; height: 57px; z-index: 9999;" />
+</body>
+</html>
+
+<script type="text/javascript">
+    function PlayFlv(index) {
+    	var a = "0." + parseInt(10*Math.random());
+    	var b = "2." + parseInt(10*Math.random());
+    	var c = "0." + parseInt(10*Math.random());
+    	var d = "2." + parseInt(10*Math.random());
+
+
+
+        var div = document.getElementById("flvPlayDiv");
+        div.innerHTML = "";
+        div.style.display = "none";
+        var result = "<div id=\"flvPlayDiv\" class=\"info\">";
+        result += "<div class=\"info_0\">Inner Wall Pressure</div>";
+        result += "<div class=\"info_1\">" + a + "</div>";
+        result += "<div class=\"info_2\">mpa</div>";
+        result += "<div class=\"info_3\">Flow/-t/h—Ton/Hour</div>";
+        result += "<div class=\"info_4\">" + b + "</div>";
+        result += "<div class=\"info_5\">t</div>";
+        result += "<div class=\"info_6\">Temperature/℃</div>";
+        result += "<div class=\"info_7\">" + c + "</div>";
+        result += "<div class=\"info_8\">℃</div>";
+        result += "<div class=\"info_9\">Liquid Level/Unit</div>";
+        result += "<div class=\"info_10\">" + d + "</div>";
+        result += "<div class=\"info_11\">Unit</div>";
+        div.innerHTML = result;
+        div.style.display = "inline";//div显示方式
+
+
+	    setTimeout(function() {
+	    	PlayFlv(GetQueryString("index"));
+	    }, 1000);
+    }
+
+	function GetQueryString(name) {
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if(r!=null)return  unescape(r[2]); return null;
+	}
+
+    PlayFlv(GetQueryString("index"));
+</script>

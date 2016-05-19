@@ -1,0 +1,76 @@
+﻿<!DOCTYPE>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>三维场景浏览</title>
+		<script type="text/javascript" src="SuperMap.Include.js" ></script>
+		<script type="text/javascript" src="menu.js" ></script>
+
+		<script type="text/javascript">
+            var sceneControl = null;
+            var scene = null;
+            var htmlUrl = document.location.host;
+            //判断网页的打开方式是本地打开还是通过网络打开
+			//不同的打开方式url赋值不同
+			if(htmlUrl == "")
+			{
+				htmlUrl = "http://localhost:8090";
+			}
+			else
+			{
+				htmlUrl = "http://" + htmlUrl;
+			}
+
+			function onPageLoad()
+			{
+			    //初始化三维场景控件
+
+				    sceneControl = new SuperMap.Web.UI.Controls.SceneControl($get("sceneControlDiv"), initCallback, failedCallback);
+
+
+			}
+
+			//控件初始化完成后的回调函数，初始化完成之后才能进行数据加载
+			function initCallback()
+			{
+
+			    //获取Realspace控件的场景，控件和场景是一对一的捆绑关系
+			    scene = sceneControl.get_scene();
+
+				if(!!window.ActiveXObject)
+				{
+					var t=document.getElementById("infoWindow");
+					var t2=document.getElementById("infoWindow2");
+					t.onblur=function()
+					{
+						t.src = "caidan1.html" ;
+					};
+					t2.onblur=function()
+					{
+						t2.src = "aaa.html" ;
+					};
+				}
+
+
+			}
+
+			//控件初始化失败后的回调函数
+			function failedCallback()
+			{
+			    alert("Realspace initialized failed!");
+			}
+
+		</script>
+	</head>
+
+	<body onLoad="onPageLoad()">
+		<div id="sceneControlDiv" style="position:absolute;top:5px;bottom:5px;left:5px;right:5px;height:95%;">
+		</div>
+		<iframe id="infoWindow"  style="position: absolute;top: 50px;height:500px;width:500px" frameborder="0" scrolling="auto" src="caidan1.html" >
+          </iframe>
+		<iframe id="infoWindow2"  style="position: absolute;left:50%;top: 50px;height:500px;width:500px" frameborder="0" scrolling="auto" src="aaa.html" >
+          </iframe>
+	</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ZTE</title>
+<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" href="css/app.css">
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/gis.js"></script>
+</head>
+
+
+<body class="right_menu">
+<div id="event_briefing" class="event_briefing_normal">
+	<div class="title"></div>
+	<div class="list"></div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+	$(function() {
+		$("body").addClass("dark");
+		$.mCustomScrollbar.defaults.scrollButtons.enable = true;
+		$.mCustomScrollbar.defaults.axis="y";
+
+		var reset = function() {
+			$("#event_briefing").removeClass("event_briefing_active");
+		}
+
+		var checkEventBriefing = function(value) {
+			$("#event_briefing").addClass("event_briefing_active");
+		}
+
+		$.getJSON("data/app.json",function(json) {
+			$("#event_briefing .title").html(json.event_briefing.title);
+
+			var list = json.event_briefing.list;
+			var html = "";
+			for(var i = 0; i < list.length; i++) {
+				html += "<div class=\"item\" value=\"" + i + "\">";
+				html += "<div class=\"item_name\">" + list[i].name + "</div>";
+				html += "<div class=\"item_time\">" + list[i].time + "</div>";
+				html += "<div class=\"item_image\"><img src=\"" + serverUrl + list[i].image + "\"/></div>";
+				html += "<div class=\"item_content\">" + list[i].content + "</div>";
+				html += "</div>";
+			}
+			$("#event_briefing .list").html(html);
+
+			$("#event_briefing .list").mCustomScrollbar({theme:"dark"});
+
+			$("#event_briefing .item").click(function() {
+				//checkEventBriefing();
+				window.parent.clickRightMenu($(this).attr("value"));
+			});
+		});
+	});
+</script>

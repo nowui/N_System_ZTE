@@ -1,0 +1,114 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=8,chrome=1" />
+<title>ZTE</title>
+<link rel="stylesheet" href="css/app.css">
+</head>
+
+
+<body style="cursor: pointer;background: #051731;">
+	<div style="position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; border :1px solid #2c9bfa; z-index: 1;">
+
+		<div style="position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px; border :1px solid #104e68; padding:0px;">
+			<div id="flvPlayDiv">
+
+			</div>
+		</div>
+	</div>
+	<img onclick="window.parent.hideCenterMenuWindows();" src="image/video_close.png" style="position: absolute; top: 0px; right: 0px; width: 57px; height: 57px; z-index: 9999;" />
+</body>
+</html>
+
+<script type="text/javascript">
+    function PlayFlv(index) {
+    	var a = "";
+    	var b = "";
+    	var c = "";
+    	var d = "+86-25-66678417";
+
+		if(index == 0) {
+			a = "Police Forces";
+			b = "20";
+			c = "Building 7, Tsinghua University, Haidian District, Beijing";
+		} else if(index == 1) {
+			a = "Professional Forces";
+			b = "100";
+			c = "No.88, Building 1, Jinyinxin Village, Honghuagang District, Beijing";
+		} else if(index == 2) {
+			a = "Rescue Agency";
+			b = "0";
+			c = "Television Estate, Shiwei North Road, Shanyang District, Beijing";
+		} else if(index == 3) {
+			a = "Protection Targets";
+			b = "0";
+			c = "No.4-101, Zhongyang North Street, Linghe District, Beijing";
+		} else if(index == 4) {
+			a = "Monitoring Sites";
+			b = "0";
+			d = "";
+			c = "No.888 Zhengfang Road, Jiangning District, Beijing";
+		} else if(index == 5) {
+			a = "Life-saving Operations";
+			c = "Building 7, Tsinghua University, Haidian District, Beijing";
+		} else if(index == 6) {
+			a = "Resettlement Place";
+			b = "0";
+			c = "No.88, Building 1, Jinyinxin Village, Honghuagang District, Beijing";
+		} else if(index == 7) {
+			a = "Relief Materials";
+			b = "500";
+			c = "Television Estate, Shiwei North Road, Shanyang District, Beijing";
+		} else if(index == 8) {
+			a = "Emergency Agency";
+			b = "0";
+			c = "No.4-101, Zhongyang North Street, Linghe District, Beijing";
+		} else if(index == 9) {
+			a = "On-site Commanding Center";
+			b = "0";
+			c = "No.888 Zhengfang Road, Jiangning District, Beijing";
+		}
+
+		var imageTop = 170;
+
+
+        var div = document.getElementById("flvPlayDiv");
+        div.innerHTML = "";
+        div.style.display = "none";
+        var result = "<div id=\"flvPlayDiv\" style=\"padding: 15px;\">";
+        result += "<div><span style=\"font-size: 18px; font-weight: bold;\">Resource:</span> " + a + " <br/><br/></div>";
+        if(b > 0) {
+        	result += "<div><span style=\"font-size: 18px; font-weight: bold;\">Number:</span> " + b + " <br/><br/></div>";
+        } else {
+        	imageTop = 130;
+        }
+        result += "<div style=\"height: 63px;\">";
+        result += "<div style=\"float: left;\"><span style=\"font-size: 18px; font-weight: bold;\">Address:</span></div>";
+        result += "<div style=\"float: right; width: 280px;\">" + c + "</div>";
+        result += "</div>";
+        if(d != "") {
+	        result += "<div><span style=\"font-size: 18px; font-weight: bold;\">Phone:</span> +86-25-66678417</div>";
+	        result += "<img src=\"image/phone.png\" style=\"position: absolute; top: " + imageTop + "px; left: 230px; width: 20px;\" />";
+	        result += "</div>";
+        }
+        result += "";
+        result += "";
+        result += "";
+        div.innerHTML = result;
+        div.style.display = "inline";//div显示方式
+
+
+	    /*setTimeout(function() {
+	    	PlayFlv(GetQueryString("index"));
+	    }, 1000);*/
+    }
+
+	function GetQueryString(name) {
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if(r!=null)return  unescape(r[2]); return null;
+	}
+
+    PlayFlv(GetQueryString("index"));
+</script>
